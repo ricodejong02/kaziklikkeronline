@@ -32,11 +32,11 @@ function clickBtn() {
 
 function checkMoney() {
     if (money >= clickingPowerPrice) {
-        document.getElementById('clickerPowerBtn').disabled = false;
+        document.getElementById('clickingPowerBtn').disabled = false;
     }
 
     if (money < clickingPowerPrice) {
-        document.getElementById('clickerPowerBtn').disabled = true;
+        document.getElementById('clickingPowerBtn').disabled = true;
     }
 
     if (money >= clicker.price) {
