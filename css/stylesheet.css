@@ -13,6 +13,7 @@
 }
 .header{
     background: #00BCD4;
+    margin-bottom: 25px;
 }
 .container-fluid{
     padding: 0 !important;
