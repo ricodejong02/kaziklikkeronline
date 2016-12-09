@@ -4,6 +4,7 @@
 }
 .container-fluid{
     text-align: center;
+    margin-bottom: 25px;
 }
 #klikker{
     font-size: 40px;
