@@ -4,6 +4,10 @@ var timerEnabled = false;
 var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4 };
 var farm = { name: "Boerderij", price: 125, speed: 3, increase: 8 };
 var mine = { name: "Mijn", price: 250, speed: 5, increase: 11 };
+var village = { name: "Dorp", price: 750, speed: 10, increase: 19 };
+var city = { name: "Stad", price: 1500, speed: 20, increase: 27 };
+var country = { name: "Land", price: 2500, speed: 35, increase: 35 };
+var Planet = { name: "Planeet", price }
 
 function setMoney(_money) {
     money = _money;
