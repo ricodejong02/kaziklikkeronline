@@ -7,7 +7,8 @@ var mine = { name: "Mijn", price: 250, speed: 5, increase: 11 };
 var village = { name: "Dorp", price: 750, speed: 10, increase: 19 };
 var city = { name: "Stad", price: 1500, speed: 20, increase: 27 };
 var country = { name: "Land", price: 2500, speed: 35, increase: 35 };
-var Planet = { name: "Planeet", price }
+var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79 };
+var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122 };
 
 function setMoney(_money) {
     money = _money;
@@ -95,4 +96,62 @@ function buyMine() {
     console.log("buyMine()");
 }
 
+function buyVillage() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= village.price);
+    setMps(mps + village.speed);
+    village.price += village.increase;
+    document.getElementById('villageBtn').innerHTML = "Koop dorp (" + village.price + ")";
+    console.log("buyVillage()");
+}
 
+function buyCity() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= city.price);
+    setMps(mps + city.speed);
+    city.price += city.increase;
+    document.getElementById('cityBtn').innerHTML = "Koop stad (" + city.price + ")";
+    console.log("buyCity()");
+}
+
+function buyCountry() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= country.price);
+    setMps(mps + country.speed);
+    country.price += country.increase;
+    document.getElementById('countryBtn').innerHTML = "Koop land (" + country.price + ")";
+    console.log("buyCountry()");
+}
+
+function buyPlanet() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= planet.price);
+    setMps(mps + planet.speed);
+    planet.price += planet.increase;
+    document.getElementById('planetBtn').innerHTML = "Koop planeet (" + planet.price + ")";
+    console.log("buyPlanet()");
+}
+
+function buyGalaxy() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= galaxy.price);
+    setMps(mps + galaxy.speed);
+    galaxy.price += galaxy.increase;
+    document.getElementById('galaxyBtn').innerHTML = "Koop melkweg (" + galaxy.price + ")";
+    console.log("buyGalaxy()");
+}
