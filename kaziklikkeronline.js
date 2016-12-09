@@ -27,6 +27,10 @@ function setMps(_mps) {
 }
 
 function clickBtn() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
     setMoney(money += clickingPower);
     console.log("clickBtn()");
 }
@@ -134,10 +138,6 @@ function buyClickingPower() {
 }
 
 function buyClicker() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= clicker.price);
     setMps(mps + clicker.speed);
     clicker.price += clicker.increase;
@@ -147,10 +147,6 @@ function buyClicker() {
 }
 
 function buyFarm() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= farm.price);
     setMps(mps + farm.speed);
     farm.price += farm.increase;
@@ -160,10 +156,6 @@ function buyFarm() {
 }
 
 function buyMine() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= mine.price);
     setMps(mps + mine.speed);
     mine.price += mine.increase;
@@ -173,10 +165,6 @@ function buyMine() {
 }
 
 function buyVillage() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= village.price);
     setMps(mps + village.speed);
     village.price += village.increase;
@@ -186,10 +174,6 @@ function buyVillage() {
 }
 
 function buyCity() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= city.price);
     setMps(mps + city.speed);
     city.price += city.increase;
@@ -198,10 +182,6 @@ function buyCity() {
 }
 
 function buyCountry() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= country.price);
     setMps(mps + country.speed);
     country.price += country.increase;
@@ -211,10 +191,6 @@ function buyCountry() {
 }
 
 function buyPlanet() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= planet.price);
     setMps(mps + planet.speed);
     planet.price += planet.increase;
@@ -224,10 +200,6 @@ function buyPlanet() {
 }
 
 function buyGalaxy() {
-    if (!timerEnabled) {
-        timerEnabled = true;
-        setInterval(mpsLoop, 1000)
-    }
     setMoney(money -= galaxy.price);
     setMps(mps + galaxy.speed);
     galaxy.price += galaxy.increase;
@@ -240,10 +212,12 @@ function buyProvince() {
     setMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
+    console.log("buyProvince()");
 }
 
 function buySatelitte() {
     setMoney(money * 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
+    console.log("buySatelitte()");
 }
