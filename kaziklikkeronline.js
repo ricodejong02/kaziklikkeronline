@@ -3,6 +3,7 @@ var mps = 0;
 var clickingPower = 1;
 var clickingPowerPrice = 250;
 var timerEnabled = false;
+var recharge = 120;
 var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
 var farm = { name: "Boerderij", price: 125, speed: 3, increase: 8, amount: 0 };
 var mine = { name: "Mijn", price: 250, speed: 5, increase: 11, amount: 0 };
@@ -102,15 +103,29 @@ function checkMoney() {
     if (money < galaxy.price) {
         document.getElementById('galaxyBtn').disabled = true;
     }
+
+    if (recharge > 0) {
+        document.getElementById('provinceBtn').disabled = true;
+        document.getElementById('satelliteBtn').disabled = true;
+    }
+
+    if (recharge == 0) {
+        document.getElementById('provinceBtn').disabled = false;
+        document.getElementById('satelliteBtn').disabled = false;
+    }
     console.log("checkMoney()");
 }
 
 function mpsLoop() {
     setMoney(money + mps);
+    if ((recharge <= 0) == false) {
+        recharge--;
+    }
+    document.getElementById('countdown').innerHTML = "Recharge: " + recharge;
     console.log("mpsLoop()");
 }
 
-function buyClickingPower(){
+function buyClickingPower() {
     clickingPower *= 2;
     setMoney(money -= clickingPowerPrice);
     clickingPowerPrice *= 2;
@@ -219,4 +234,16 @@ function buyGalaxy() {
     galaxy.amount++;
     document.getElementById('galaxyBtn').innerHTML = "Koop melkweg (" + galaxy.price + ")";
     console.log("buyGalaxy()");
+}
+
+function buyProvince() {
+    setMoney(Math.round(money / 3));
+    setMps(mps * 2);
+    recharge = 120;
+}
+
+function buySatelitte() {
+    setMoney(money * 2);
+    setMps(Math.round(mps / 3));
+    recharge = 120;
 }
