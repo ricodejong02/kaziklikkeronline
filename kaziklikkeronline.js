@@ -26,7 +26,7 @@ function setMps(_mps) {
 }
 
 function clickBtn() {
-    setMoney(money -= clickingPower);
+    setMoney(money += clickingPower);
     console.log("clickBtn()");
 }
 
