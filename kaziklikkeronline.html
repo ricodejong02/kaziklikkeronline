@@ -1,46 +1,222 @@
-<!DOCTYPE html>
-<html>
+var money = 0;
+var mps = 0;
+var clickingPower = 1;
+var clickingPowerPrice = 250;
+var timerEnabled = false;
+var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
+var farm = { name: "Boerderij", price: 125, speed: 3, increase: 8, amount: 0 };
+var mine = { name: "Mijn", price: 250, speed: 5, increase: 11, amount: 0 };
+var village = { name: "Dorp", price: 750, speed: 10, increase: 19, amount: 0 };
+var city = { name: "Stad", price: 1500, speed: 20, increase: 27, amount: 0 };
+var country = { name: "Land", price: 2500, speed: 35, increase: 35, amount: 0 };
+var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79, amount: 0 };
+var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122, amount: 0 };
 
-<head>
-    <title>Kaziklikker online</title>
-    <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
-    <meta charset="UTF-8">
-    <meta name="description" content="Rico de Jong">
-    <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
-    <meta name="author" content="Rico de Jong">
-    <script src="kaziklikkeronline.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
-    <link rel="stylesheet" href="css/stylesheet.css">
-    <link rel="stylesheet" href="css/bootstrap.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
-</head>
+function setMoney(_money) {
+    money = _money;
+    checkMoney();
+    document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
+    console.log("setMoney()");
+}
 
-<body>
-    <meta charset="utf-8">
-    <meta http-equiv="X-UA-Compatible" content="IE=edge">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
+function setMps(_mps) {
+    mps = _mps;
+    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
+    console.log("setMps()");
+}
 
-    <div class="container-fluid">
-        <h1>Kaziklikker online</h1>
-        <h2 id="moneyLbl">Geld: 0</h2>
-        <h2 id="MPSLbl">Geld per seconde: 0</h2>
-        <h2 id="clickingPowerLbl">Klikkracht: 1</h2>
-        <hr>
-        <button class="btn btn-default btn-lg" onmousedown="clickBtn()">Klik!</button>
-        <br>
-        <hr>
-        <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">Koop meer klikkracht (250)</button>
-        <br>
-        <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled">Koop klikker (25)</button>
-        <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled">Koop boerderij (125)</button>
-        <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled">Koop mijn (250)</button>
-        <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled">Koop dorp (750)</button>
-        <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled">Koop stad (1500)</button>
-        <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled">Koop land (2500)</button>
-        <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled">Koop planeet (12500)</button>
-        <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled">Koop melkweg (25000)</button>
-    </div>
-</body>
+function clickBtn() {
+    setMoney(money += clickingPower);
+    console.log("clickBtn()");
+}
 
-</html>
+function checkMoney() {
+    if (money >= clickingPowerPrice) {
+        document.getElementById('clickingPowerBtn').disabled = false;
+    }
+
+    if (money < clickingPowerPrice) {
+        document.getElementById('clickingPowerBtn').disabled = true;
+    }
+
+    if (money >= clicker.price) {
+        document.getElementById('clickerBtn').disabled = false;
+    }
+
+    if (money < clicker.price) {
+        document.getElementById('clickerBtn').disabled = true;
+    }
+
+    if (money >= farm.price) {
+        document.getElementById('farmBtn').disabled = false;
+    }
+
+    if (money < farm.price) {
+        document.getElementById('farmBtn').disabled = true;
+    }
+
+    if (money >= mine.price) {
+        document.getElementById('mineBtn').disabled = false;
+    }
+
+    if (money < mine.price) {
+        document.getElementById('mineBtn').disabled = true;
+    }
+
+    if (money >= village.price) {
+        document.getElementById('villageBtn').disabled = false;
+    }
+
+    if (money < village.price) {
+        document.getElementById('villageBtn').disabled = true;
+    }
+
+    if (money >= city.price) {
+        document.getElementById('cityBtn').disabled = false;
+    }
+
+    if (money < city.price) {
+        document.getElementById('cityBtn').disabled = true;
+    }
+
+    if (money >= country.price) {
+        document.getElementById('countryBtn').disabled = false;
+    }
+
+    if (money < country.price) {
+        document.getElementById('countryBtn').disabled = true;
+    }
+
+    if (money >= planet.price) {
+        document.getElementById('planetBtn').disabled = false;
+    }
+
+    if (money < planet.price) {
+        document.getElementById('planetBtn').disabled = true;
+    }
+
+    if (money >= galaxy.price) {
+        document.getElementById('galaxyBtn').disabled = false;
+    }
+
+    if (money < galaxy.price) {
+        document.getElementById('galaxyBtn').disabled = true;
+    }
+    console.log("checkMoney()");
+}
+
+function mpsLoop() {
+    setMoney(money + mps);
+    console.log("mpsLoop()");
+}
+
+function buyClickingPower(){
+    clickingPower *= 2;
+    setMoney(money -= clickingPowerPrice);
+    clickingPowerPrice *= 2;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+}
+
+function buyClicker() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= clicker.price);
+    setMps(mps + clicker.speed);
+    clicker.price += clicker.increase;
+    clicker.amount++;
+    document.getElementById('clickerBtn').innerHTML = "Koop klikker (" + clicker.price + ")";
+    console.log("buyClicker()");
+}
+
+function buyFarm() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= farm.price);
+    setMps(mps + farm.speed);
+    farm.price += farm.increase;
+    farm.amount++;
+    document.getElementById('farmBtn').innerHTML = "Koop boerderij (" + farm.price + ")";
+    console.log("buyFarm()");
+}
+
+function buyMine() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= mine.price);
+    setMps(mps + mine.speed);
+    mine.price += mine.increase;
+    mine.amount++;
+    document.getElementById('mineBtn').innerHTML = "Koop mijn (" + mine.price + ")";
+    console.log("buyMine()");
+}
+
+function buyVillage() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= village.price);
+    setMps(mps + village.speed);
+    village.price += village.increase;
+    village.amount++;
+    document.getElementById('villageBtn').innerHTML = "Koop dorp (" + village.price + ")";
+    console.log("buyVillage()");
+}
+
+function buyCity() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= city.price);
+    setMps(mps + city.speed);
+    city.price += city.increase;
+    document.getElementById('cityBtn').innerHTML = "Koop stad (" + city.price + ")";
+    console.log("buyCity()");
+}
+
+function buyCountry() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= country.price);
+    setMps(mps + country.speed);
+    country.price += country.increase;
+    country.amount++;
+    document.getElementById('countryBtn').innerHTML = "Koop land (" + country.price + ")";
+    console.log("buyCountry()");
+}
+
+function buyPlanet() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= planet.price);
+    setMps(mps + planet.speed);
+    planet.price += planet.increase;
+    planet.amount++;
+    document.getElementById('planetBtn').innerHTML = "Koop planeet (" + planet.price + ")";
+    console.log("buyPlanet()");
+}
+
+function buyGalaxy() {
+    if (!timerEnabled) {
+        timerEnabled = true;
+        setInterval(mpsLoop, 1000)
+    }
+    setMoney(money -= galaxy.price);
+    setMps(mps + galaxy.speed);
+    galaxy.price += galaxy.increase;
+    galaxy.amount++;
+    document.getElementById('galaxyBtn').innerHTML = "Koop melkweg (" + galaxy.price + ")";
+    console.log("buyGalaxy()");
+}
