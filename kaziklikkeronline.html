@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Kaziklikker online</title>
+    <script type="text/javascript" src="scripts/script.js"></script>
+    <meta charset="UTF-8">
+    <meta name="description" content="Rico de Jong">
+    <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
+    <meta name="author" content="Rico de Jong">
+    <script src="scripts/kaziklikkeronline.js"></script>
+</head>
+
+<body>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="css/bootstrap.min.css" rel="stylesheet">
+
+    <nav class="navbar navbar-inverse">
+        <div class="container-fluid">
+            <a class="navbar-brand" href="#">Rico</a>
+            <ul class="nav navbar-nav">
+                <li><a href="index.html ">Home</a></li>
+                <li><a href="kaziklikker.html ">Kaziklikker</a></li>
+                <li><a href="patrik2.html ">Patrik</a></li>
+                <li><a href="projects.html ">Projecten</a></li>
+                <li><a href="contact.html ">Contact</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="container-fluid">
+        <h1>Kaziklikker online</h1>
+        <h2 id="moneyLbl">Geld: 0</h2>
+        <h2 id="MPSLbl">Geld per seconde: 0</h2>
+        <hr>
+        <button class="btn btn-default btn-lg" onmousedown="clickBtn()">Klik!</button>
+        <br>
+        <hr>
+        <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled">Koop klikker (25)</button>
+        <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled">Koop boerderij (125)</button>
+        <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled">Koop mijn (250)</button>
+    </div>
+</body>
+
+</html>
