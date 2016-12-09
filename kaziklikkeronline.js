@@ -212,6 +212,8 @@ function buyProvince() {
     setMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
+    document.getElementById('provinceBtn').disabled = false;
+    document.getElementById('satelliteBtn').disabled = false;
     console.log("buyProvince()");
 }
 
@@ -219,5 +221,7 @@ function buySatelitte() {
     setMoney(money * 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
+    document.getElementById('provinceBtn').disabled = false;
+    document.getElementById('satelliteBtn').disabled = false;
     console.log("buySatelitte()");
 }
