@@ -37,13 +37,16 @@
         <h1>Kaziklikker online</h1>
         <h2 id="moneyLbl">Geld: 0</h2>
         <h2 id="MPSLbl">Geld per seconde: 0</h2>
+        <h2 id="clickingPowerLbl">Klikkracht: 1</h2>
         <hr>
         <button class="btn btn-default btn-lg" onmousedown="clickBtn()">Klik!</button>
         <br>
         <hr>
+        <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disable="disabled">Koop meer klikkracht (250)</button>
+        <br>
         <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled">Koop klikker (25)</button>
         <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled">Koop boerderij (125)</button>
-        <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled">Koop mijn (250)</button>
+        <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled">Koop mijn (250)</button>
         <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled">Koop dorp (750)</button>
         <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled">Koop stad (1500)</button>
         <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled">Koop land (2500)</button>
