@@ -26,7 +26,7 @@ function setMps(_mps) {
 }
 
 function clickBtn() {
-    setMoney(money += clickingPower);
+    setMoney(money -= clickingPower);
     console.log("clickBtn()");
 }
 
@@ -112,7 +112,7 @@ function mpsLoop() {
 
 function buyClickingPower(){
     clickingPower *= 2;
-    money -= clickingPowerPrice;
+    setMoney(money -= clickingPowerPrice);
     clickingPowerPrice *= 2;
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
     document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
