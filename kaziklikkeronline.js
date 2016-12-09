@@ -31,6 +31,14 @@ function clickBtn() {
 }
 
 function checkMoney() {
+    if (money >= clickingPowerPrice) {
+        document.getElementById('clickerPowerBtn').disabled = false;
+    }
+
+    if (money < clickingPowerPrice) {
+        document.getElementById('clickerPowerBtn').disabled = true;
+    }
+
     if (money >= clicker.price) {
         document.getElementById('clickerBtn').disabled = false;
     }
@@ -107,7 +115,7 @@ function buyClickingPower(){
     money -= clickingPowerPrice;
     clickingPowerPrice *= 2;
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPower + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
 
 function buyClicker() {
