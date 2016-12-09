@@ -1,5 +1,7 @@
 var money = 0;
 var mps = 0;
+var clickingPower = 1;
+var clickingPowerPrice = 250;
 var timerEnabled = false;
 var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
 var farm = { name: "Boerderij", price: 125, speed: 3, increase: 8, amount: 0 };
@@ -24,7 +26,7 @@ function setMps(_mps) {
 }
 
 function clickBtn() {
-    setMoney(money += 1);
+    setMoney(money += clickingPower);
     console.log("clickBtn()");
 }
 
@@ -98,6 +100,14 @@ function checkMoney() {
 function mpsLoop() {
     setMoney(money + mps);
     console.log("mpsLoop()");
+}
+
+function buyClickingPower(){
+    clickingPower *= 2;
+    money -= clickingPowerPrice;
+    clickingPowerPrice *= 2;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPower + ")";
 }
 
 function buyClicker() {
