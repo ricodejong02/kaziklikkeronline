@@ -19,12 +19,28 @@
             crossorigin="anonymous"></script>
     <script>
         window.addEventListener("beforeunload", function (e) {
-            var confirmationMessage = 'Are your sure you wanna quit???'
-                + 'Your KAZI KLIKKER game will be lost...';
-
-            (e || window.event).returnValue = confirmationMessage;
-            return confirmationMessage;
+            save()
         });
+        $(document).ready(function () {
+            var money = localStorage.getItem('money');
+            if (!isNaN(money)){
+                setMoney(money - 1);
+                clickBtn();
+            }
+            else
+                setMoney(0);
+            var mps = parseInt(localStorage.getItem('mps'));
+            if (!isNaN(mps))
+                setMps(mps);
+            else
+                setMps(0);
+            var kk = parseInt(localStorage.getItem('kk'));
+            if (!isNaN(kk))
+                set(kk);
+            else
+                setMps(1);
+            load()
+        })
     </script>
 </head>
 
@@ -36,10 +52,10 @@
 <div class="container-fluid">
     <div class="header">
         <h1>Kaziklikker online</h1>
-        <h4 id="moneyLbl">Geld: 0</h2>
-        <h4 id="MPSLbl">Geld per seconde: 0</h2>
-        <h4 id="clickingPowerLbl">Klikkracht: 1</h2>
-        <h4 id="countdown">Recharge: 120</h2>
+        <h4 id="moneyLbl">Geld: 0</h4>
+        <h4 id="MPSLbl">Geld per seconde: 0</h4>
+        <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
+        <h4 id="countdown">Recharge: 120</h4>
     </div>
     <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
     <br>
@@ -67,8 +83,14 @@
         (25000)
     </button>
     <br>
-    <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled">Koop provincie</button>
-    <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelille()" disabled="disabled">Koop satelliet</button>
+    <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled">Koop provincie
+    </button>
+    <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelille()" disabled="disabled">Koop
+        satelliet
+    </button>
+    <br>
+    <hr>
+    <button id="reset" class="btn btn-default btn-lg" onclick="setMoney(0)">Reset</button>
 </div>
 </body>
 
