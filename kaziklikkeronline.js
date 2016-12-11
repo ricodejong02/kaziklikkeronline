@@ -1,7 +1,7 @@
 var money = 0;
 var mps = 0;
 var clickingPower = 1;
-var clickingPowerPrice = 250;
+var clickingPowerPrice = 100;
 var bankMoney = 0;
 var interest = 1.05;
 var timerEnabled = false;
@@ -247,6 +247,7 @@ function buyClickingPower() {
     setClickingPower(clickingPower *= 2);
     setMoney(money -= clickingPowerPrice);
     clickingPowerPrice *= 2;
+    checkMoney();
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
     document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
