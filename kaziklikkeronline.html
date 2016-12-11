@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html>
+
 <head>
     <title>Kaziklikker online</title>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
@@ -8,15 +9,15 @@
     <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
     <meta name="author" content="Rico de Jong">
     <script src="kaziklikkeronline.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
+    <!--
     <script>
         window.addEventListener("beforeunload", function (e) {
             save()
@@ -34,64 +35,65 @@
                 setMps(mps);
             else
                 setMps(0);
-            var kk = parseInt(localStorage.getItem('kk'));
-            if (!isNaN(kk))
-                set(kk);
+            var clickingPower = parseInt(localStorage.getItem('clickingPower'));
+            if (!isNaN(clickingPower))
+                set(clickingPower);
             else
                 setMps(1);
             load()
         })
     </script>
+    -->
 </head>
 
 <body>
-<meta charset="utf-8">
-<meta http-equiv="X-UA-Compatible" content="IE=edge">
-<meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
 
-<div class="container-fluid">
-    <div class="header">
-        <h1>Kaziklikker online</h1>
-        <h4 id="moneyLbl">Geld: 0</h4>
-        <h4 id="MPSLbl">Geld per seconde: 0</h4>
-        <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
-        <h4 id="countdown">Recharge: 120</h4>
+    <div class="container-fluid">
+        <div class="header">
+            <h1>Kaziklikker online</h1>
+            <h4 id="moneyLbl">Geld: 0</h4>
+            <h4 id="MPSLbl">Geld per seconde: 0</h4>
+            <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
+            <h4 id="countdownLbl">Recharge: 120</h4>
+        </div>
+        <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
+        <br>
+        <hr>
+        <h2>Winkel</h2>
+        <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">Koop meer klikkracht (250)</button>
+        <br>
+        <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled"><img id="clickerImg" class="icon" src=img/cursorb.png height=20px width=20px>Koop klikker (25)</button>
+        <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"><img id="farmImg" class="icon" src=img/farmb.png height=20px width=20px>Koop boerderij (125)</button>
+        <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"><img id="mineImg" class="icon" src=img/mineb.png height=20px width=20px>Koop mijn (250)</button>
+        <br>
+        <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled"><img id="villageImg" class="icon" src=img/villageb.png height=20px width=20px>Koop dorp (750)</button>
+        <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"><img id="cityImg" class="icon" src=img/cityb.png height=20px width=20px>Koop stad (1500)</button>
+        <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled"><img id="countryImg" class="icon" src=img/countryb.png height=20px width=20px>Koop land (2500)</button>
+        <br>
+        <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled"><img id="planetImg" class="icon" src=img/planetb.png height=20px width=20px>Koop planeet (12500)</button>
+        <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled"><img id="galaxyImg" class="icon" src=img/galaxyb.png height=20px width=20px>Koop melkweg (25000)</button>
+        <button id="universeBtn" class="btn btn-default btn-lg" onclick="buyUniverse()" disabled="disabled"><img id="universeImg" class="icon" src=img/universeb.png height=20px width=20px>Koop universum (25000000)</button>
+        <br>
+        <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled">Koop provincie</button>
+        <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatellite()" disabled="disabled">Koop satelliet</button>
+        <br>
+        <hr>
+        <h2>Bank</h2>
+        <h4 id="bankMoneyLbl">Geld op bank: 0</h4>
+        <h4 id="interestLbl">Rente: 5%</h4>
+        <h4 id="bankRechargeLbl">Tijd over: 120</h4>
+        <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>">Alles storten</button>
+        <button id="withdrawAllBtn" class="btn btn-default btn-lg" onclick="withdrawAll()" disabled="disabled">Alles opnemen</button>
+        <br>
+        <button id="deposit10KBtn" class="btn btn-default btn-lg" onclick="deposit10K()" disabled="disabled">10000 storten</button>
+        <button id="withdraw10KBtn" class="btn btn-default btn-lg" onlclick="withdraw10K()" disabled="disabled">10000 opnemen</button>
+        <hr>
+        <h2>Opties</h2>
+        <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
     </div>
-    <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
-    <br>
-    <hr>
-    <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">Koop
-        meer klikkracht (250)
-    </button>
-    <br>
-    <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled">Koop klikker
-        (25)
-    </button>
-    <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled">Koop boerderij (125)
-    </button>
-    <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled">Koop mijn (250)</button>
-    <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled">Koop dorp (750)
-    </button>
-    <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled">Koop stad (1500)
-    </button>
-    <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled">Koop land (2500)
-    </button>
-    <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled">Koop planeet
-        (12500)
-    </button>
-    <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled">Koop melkweg
-        (25000)
-    </button>
-    <br>
-    <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled">Koop provincie
-    </button>
-    <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelille()" disabled="disabled">Koop
-        satelliet
-    </button>
-    <br>
-    <hr>
-    <button id="reset" class="btn btn-default btn-lg" onclick="setMoney(0)">Reset</button>
-</div>
 </body>
 
 </html>
