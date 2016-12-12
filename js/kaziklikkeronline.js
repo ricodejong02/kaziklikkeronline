@@ -61,7 +61,7 @@ function setMoney(_money) {
 function setMoney(_money, animate) {
     money = _money;
     checkMoney();
-    if(animate)
+    if(animate && $('#animateText').is(':checked'))
         animateText($('#moneyLbl'), "Geld: " + money);
     else
         $('#moneyLbl').text("Geld: " + money);
