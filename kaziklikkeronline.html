@@ -32,7 +32,10 @@
             save()
         });
         $(document).ready(function () {
-            $.LoadingOverlay("show");
+            $.LoadingOverlay("show", {
+                color : "rgba(255, 255, 255, 0.9)",
+                fade  : [100, 1000]
+            });
             setTimeout(function(){
                 $.LoadingOverlay("hide");
             }, 1000);
@@ -168,11 +171,10 @@
                 opnemen
             </button>
         </div>
-    </div>
-    <div class="row">
-        <div class="col-md-12 box" style="margin: 35px !important;">
+        <div class="col-md-11 box center-block" style="max-width: 100%; width: 100%">
         </div>
     </div>
+
     <br>
     <hr>
     <div class="row">
