@@ -41,7 +41,11 @@ function load() {
         galaxy = localStorage.getItem('galaxy');
     }
 }*/
-
+function animateText(element, newText) {
+    element.fadeOut(500, function() {
+        $(this).text(newText).fadeIn(100);
+    });
+}
 function reset() {
     setMoney(0);
     setMps(0);
@@ -51,11 +55,17 @@ function reset() {
     recharge = 120;
     console.log("reset()");
 }
-
 function setMoney(_money) {
+    setMoney(_money, false)
+}
+function setMoney(_money, animate) {
     money = _money;
     checkMoney();
-    document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
+    if(animate)
+        animateText($('#moneyLbl'), "Geld: " + money);
+    else
+        $('#moneyLbl').text("Geld: " + money);
+    // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
     //localStorage.setItem("money", money);
 }
 
@@ -81,7 +91,7 @@ function clickBtn() {
         timerEnabled = true;
         setInterval(mpsLoop, 1000)
     }
-    setMoney(money += clickingPower);
+    setMoney(money += clickingPower, true);
 }
 
 function checkMoney() {
@@ -184,13 +194,13 @@ function checkMoney() {
     }
 
     if (recharge > 0) {
-        document.getElementById('provinceBtn').disabled = true;
-        document.getElementById('satelliteBtn').disabled = true;
+        // document.getElementById('provinceBtn').disabled = true;
+        // document.getElementById('satelliteBtn').disabled = true;
     }
 
     if (recharge == 0) {
-        document.getElementById('provinceBtn').disabled = false;
-        document.getElementById('satelliteBtn').disabled = false;
+        // document.getElementById('provinceBtn').disabled = false;
+        // document.getElementById('satelliteBtn').disabled = false;
     }
 
     if (bankMoney == 0) {
@@ -257,7 +267,7 @@ function buyClicker() {
     setMps(mps + clicker.speed);
     clicker.price += clicker.increase;
     clicker.amount++;
-    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=img/cursor.png height=20px width=20px>Koop klikker (" + clicker.price + ")";
+    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=../img/cursor.png height=20px width=20px>Koop klikker (" + clicker.price + ")";
     checkMoney();
     console.log("buyClicker()");
 }
@@ -267,7 +277,7 @@ function buyFarm() {
     setMps(mps + farm.speed);
     farm.price += farm.increase;
     farm.amount++;
-    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=img/farm.png height=20px width=20px>Koop boerderij (" + farm.price + ")";
+    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=../img/farm.png height=20px width=20px>Koop boerderij (" + farm.price + ")";
     checkMoney();
     console.log("buyFarm()");
 }
@@ -277,7 +287,7 @@ function buyMine() {
     setMps(mps + mine.speed);
     mine.price += mine.increase;
     mine.amount++;
-    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=img/mine.png height=20px width=20px>Koop mijn (" + mine.price + ")";
+    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=../img/mine.png height=20px width=20px>Koop mijn (" + mine.price + ")";
     checkMoney();
     console.log("buyMine()");
 }
@@ -287,7 +297,7 @@ function buyVillage() {
     setMps(mps + village.speed);
     village.price += village.increase;
     village.amount++;
-    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";
+    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";
     checkMoney();
     console.log("buyVillage()");
 }
@@ -296,7 +306,7 @@ function buyCity() {
     setMoney(money -= city.price);
     setMps(mps + city.speed);
     city.price += city.increase;
-    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=img/city.png height=20px width=20px>Koop stad (" + city.price + ")";
+    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=../img/city.png height=20px width=20px>Koop stad (" + city.price + ")";
     checkMoney();
     console.log("buyCity()");
 }
@@ -316,7 +326,7 @@ function buyPlanet() {
     setMps(mps + planet.speed);
     planet.price += planet.increase;
     planet.amount++;
-    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=img/planet.png height=20px width=20px>Koop planeet (" + planet.price + ")";
+    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=../img/planet.png height=20px width=20px>Koop planeet (" + planet.price + ")";
     checkMoney();
     console.log("buyPlanet()");
 }
@@ -326,7 +336,7 @@ function buyGalaxy() {
     setMps(mps + galaxy.speed);
     galaxy.price += galaxy.increase;
     galaxy.amount++;
-    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=img/galaxy.png height=20px width=20px>Koop melkweg (" + galaxy.price + ")";
+    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=../img/galaxy.png height=20px width=20px>Koop melkweg (" + galaxy.price + ")";
     checkMoney();
     console.log("buyGalaxy()");
 }
@@ -336,7 +346,7 @@ function buyUniverse() {
     setMps(mps += universe.speed);
     universe.price += universe.increase;
     universe.amount++;
-    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universe.png height=20px width=20px>Koop universum (" + universe.price + ")";
+    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=../img/universe.png height=20px width=20px>Koop universum (" + universe.price + ")";
     checkMoney();
     console.log("buyUniverse()");
 }
