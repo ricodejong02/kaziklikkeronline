@@ -25,9 +25,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
     <script>
-test
         window.addEventListener("beforeunload", function (e) {
             save()
         });
@@ -49,10 +47,9 @@ test
                 set(clickingPower);
             else
                 setMps(1);
-            load()
         })
     </script>
-    -->
+
 </head>
 
 <body>
@@ -146,11 +143,16 @@ test
     </div>
     <br>
     <hr>
-    <h2>Opties</h2>
-    <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
-    <br>
-    <br>
-    <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Opties</h2>
+            <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
+            <br>
+            <br>
+            <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>
+            <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+        </div>
+    </div>
 </div>
 </body>
 
