@@ -66,6 +66,7 @@ function setClickingPower(_clickingPower) {
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
     document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + bankMoney;
+    localStorage.setItem("bankMoney", bankMoney);
 }
 
 function clickBtn() {

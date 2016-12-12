@@ -79,6 +79,17 @@ h1 {
     padding-top: 15px;
 }
 
+@media (min-width: 768px) {
+    #logoHeader{
+        width: 400px;
+    }
+}
+@media (min-width: 992px) {
+    #logoHeader{
+        width: 512px;
+    }
+}
+
 .icon {
     margin-right: 5px;
     margin-bottom: 3px;
