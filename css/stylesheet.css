@@ -2,7 +2,9 @@
     margin-left: 20px !important;
     margin-top: 20px;
 }
-
+h1, h2, h3, h4, h5, p{
+    color: #fff;
+}
 .container-fluid {
     text-align: center;
     margin-bottom: 25px;
@@ -17,7 +19,7 @@
 }
 .box{
     background: rgba(255, 235, 238, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     margin: 20px;
     padding: 20px;
 }

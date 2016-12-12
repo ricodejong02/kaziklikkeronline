@@ -16,29 +16,40 @@ var country = { name: "Land", price: 2500, speed: 35, increase: 35, amount: 0 };
 var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79, amount: 0 };
 var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122, amount: 0 };
 var universe = { name: "Universum", price: 25000000, speed: 100000, increase: 3535, amount: 0 };
-
+$(document).ready(function () {
+    load();
+    $('#clickerBtn').title = "$" + clicker.price;
+    $('#farmBtn').title = "$" + farm.price;
+    $('#mineBtn').title = "$" + mine.price;
+    $('#villageBtn').title = "$" + village.price;
+    $('#cityBtn').title = "$" + city.price;
+    $('#countryBtn').title = "$" + country.price;
+    $('#planetBtn').title = "$" + planet.price;
+    $('#galaxyBtn').title = "$" + galaxy.price;
+    $(document).tooltip();
+});
 function save() {
-    localStorage.setItem('clicker', clicker);
-    localStorage.setItem('farm', farm);
-    localStorage.setItem('mine', mine);
-    localStorage.setItem('village', village);
-    localStorage.setItem('city', city);
-    localStorage.setItem('country', country);
-    localStorage.setItem('planet', planet);
-    localStorage.setItem('galaxy', galaxy);
+    localStorage.setItem('clicker', clicker.price);
+    localStorage.setItem('farm', farm.price);
+    localStorage.setItem('mine', mine.price);
+    localStorage.setItem('village', village.price);
+    localStorage.setItem('city', city.price);
+    localStorage.setItem('country', country.price);
+    localStorage.setItem('planet', planet.price);
+    localStorage.setItem('galaxy', galaxy.price);
 }
 
 function load() {
     var c = localStorage.getItem('clicker');
     if (c != null) {
-        clicker = c;
-        farm = localStorage.getItem('farm');
-        mine = localStorage.getItem('mine');
-        village = localStorage.getItem('village');
-        city = localStorage.getItem('city');
-        country = localStorage.getItem('country');
-        planet = localStorage.getItem('planet');
-        galaxy = localStorage.getItem('galaxy');
+        clicker.price = parseInt(c);
+        farm.price = parseInt(localStorage.getItem('farm'));
+        mine.price = parseInt(localStorage.getItem('mine'));
+        village.price = parseInt(localStorage.getItem('village'));
+        city.price = parseInt(localStorage.getItem('city'));
+        country.price = parseInt(localStorage.getItem('country'));
+        planet.price = parseInt(localStorage.getItem('planet'));
+        galaxy.price = parseInt(localStorage.getItem('galaxy'));
     }
 }
 function animateText(element, newText) {
@@ -297,7 +308,7 @@ function buyVillage() {
     setMps(mps + village.speed);
     village.price += village.increase;
     village.amount++;
-    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";
+    document.getElementById('villagBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";e
     checkMoney();
     console.log("buyVillage()");
 }
