@@ -245,6 +245,11 @@ function mpsLoop() {
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
+    if($('#animateLogo').is(':checked')){
+        $('#logoHeader').fadeOut(1000, function () {
+            $('#logoHeader').fadeIn(1000);
+        });
+    }
 }
 
 function buyClickingPower() {
