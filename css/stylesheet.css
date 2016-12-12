@@ -17,16 +17,12 @@
 }
 .box{
     background: rgba(255, 235, 238, 0.2);
-    border-radius: 20px;
+    border-radius: 5px;
     margin: 20px;
     padding: 20px;
 }
 .header {
-    background: #26c6da; /* Old browsers */
-    background: -moz-linear-gradient(-45deg, #26c6da 0%, #0288d1 100%); /* FF3.6-15 */
-    background: -webkit-linear-gradient(-45deg, #26c6da 0%, #0288d1 100%); /* Chrome10-25,Safari5.1-6 */
-    background: linear-gradient(135deg, #26c6da 0%, #0288d1 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
-    filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#26c6da', endColorstr='#0288d1', GradientType=1); /* IE6-9 fallback on horizontal gradient */
+    background: rgba(38, 198, 218, 0.4); /* Old browsers */
     padding-bottom: 25px;
 }
 
@@ -87,7 +83,9 @@ h1 {
     margin-right: 5px;
     margin-bottom: 3px;
 }
-
+p, h1, h2, h3, h4, h5,h6, label{
+    color: white;
+}
 h2 {
     color: white;
 }

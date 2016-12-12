@@ -43,11 +43,16 @@
             else
                 setMps(0);
             var clickingPower = parseInt(localStorage.getItem('clickingPower'));
-            if (!isNaN(clickingPower))
-                set(clickingPower);
+            var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
+            if(!isNaN(clickingPowerPrice)){
+                setClickingPowerPrice(clickingPowerPrice)
+            }
             else
-                setMps(1);
-            load()
+                setClickingPowerPrice(100);
+            if (!isNaN(clickingPower))
+                setClickingPower(clickingPower);
+            else
+                setClickingPower(1);
         })
     </script>
 
@@ -58,7 +63,7 @@
 
 <div class="container-fluid">
     <div class="header">
-        <img src="logo.svg" width="512"/>
+        <img src="logo.svg" id="logoHeader" width="512"/>
         <h4 id="moneyLbl">Geld: 0</h4>
         <h4 id="MPSLbl">Geld per seconde: 0</h4>
         <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
@@ -156,6 +161,7 @@
         <div class="col-md-12">
             <h2>Opties</h2>
             <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
+            <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
             <br>
             <br>
             <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>

@@ -22,12 +22,15 @@ function animateText(element, newText) {
         $(this).text(newText).fadeIn(100);
     });
 }
+function setClickingPowerPrice(price) {
+    clickingPowerPrice = price;
+}
 function reset() {
     setMoney(0);
     setMps(0);
     setClickingPower(1);
     clickingPowerPrice = 250;
-    timerEnabled = false
+    timerEnabled = false;
     recharge = 120;
     console.log("reset()");
 }
@@ -55,6 +58,9 @@ function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
     localStorage.setItem("clickingPower", clickingPower);
+    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
 
 function setBankMoney(_bankMoney) {
@@ -225,6 +231,7 @@ function checkMoney() {
         }
     }
     catch (exception){}
+  
     console.log("checkMoney()");
 }
 
@@ -251,12 +258,13 @@ function buyClickingPower() {
     checkMoney();
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
     document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+
+    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
 
 function buyClicker() {
     setMoney(money -= clicker.price);
     setMps(mps + clicker.speed);
-    clicker.price += clicker.increase;
     clicker.amount++;
     document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=../img/cursor.png height=20px width=20px>Koop klikker (" + clicker.price + ")";
     checkMoney();
@@ -266,7 +274,6 @@ function buyClicker() {
 function buyFarm() {
     setMoney(money -= farm.price);
     setMps(mps + farm.speed);
-    farm.price += farm.increase;
     farm.amount++;
     document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=../img/farm.png height=20px width=20px>Koop boerderij (" + farm.price + ")";
     checkMoney();
@@ -276,7 +283,6 @@ function buyFarm() {
 function buyMine() {
     setMoney(money -= mine.price);
     setMps(mps + mine.speed);
-    mine.price += mine.increase;
     mine.amount++;
     document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=../img/mine.png height=20px width=20px>Koop mijn (" + mine.price + ")";
     checkMoney();
@@ -286,7 +292,6 @@ function buyMine() {
 function buyVillage() {
     setMoney(money -= village.price);
     setMps(mps + village.speed);
-    village.price += village.increase;
     village.amount++;
     document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";
     checkMoney();
@@ -296,7 +301,6 @@ function buyVillage() {
 function buyCity() {
     setMoney(money -= city.price);
     setMps(mps + city.speed);
-    city.price += city.increase;
     document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=../img/city.png height=20px width=20px>Koop stad (" + city.price + ")";
     checkMoney();
     console.log("buyCity()");
@@ -305,7 +309,6 @@ function buyCity() {
 function buyCountry() {
     setMoney(money -= country.price);
     setMps(mps + country.speed);
-    country.price += country.increase;
     country.amount++;
     document.getElementById('countryBtn').innerHTML = "<img id='countryImg' class='icon' src=img/county.png height=20px width=20px>Koop land (" + country.price + ")";
     checkMoney();
@@ -315,7 +318,6 @@ function buyCountry() {
 function buyPlanet() {
     setMoney(money -= planet.price);
     setMps(mps + planet.speed);
-    planet.price += planet.increase;
     planet.amount++;
     document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=../img/planet.png height=20px width=20px>Koop planeet (" + planet.price + ")";
     checkMoney();
@@ -325,7 +327,6 @@ function buyPlanet() {
 function buyGalaxy() {
     setMoney(money -= galaxy.price);
     setMps(mps + galaxy.speed);
-    galaxy.price += galaxy.increase;
     galaxy.amount++;
     document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=../img/galaxy.png height=20px width=20px>Koop melkweg (" + galaxy.price + ")";
     checkMoney();
@@ -335,7 +336,6 @@ function buyGalaxy() {
 function buyUniverse() {
     setMoney(money -= universe.price);
     setMps(mps += universe.speed);
-    universe.price += universe.increase;
     universe.amount++;
     document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=../img/universe.png height=20px width=20px>Koop universum (" + universe.price + ")";
     checkMoney();
