@@ -15,7 +15,12 @@
 .container-fluid {
     padding: 0;
 }
-
+.box{
+    background: rgba(255, 235, 238, 0.2);
+    border-radius: 20px;
+    margin: 20px;
+    padding: 20px;
+}
 .header {
     background: #26c6da; /* Old browsers */
     background: -moz-linear-gradient(-45deg, #26c6da 0%, #0288d1 100%); /* FF3.6-15 */
