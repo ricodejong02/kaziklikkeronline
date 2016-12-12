@@ -5,6 +5,7 @@
     <title>Kaziklikker online</title>
     <script src="http://code.jquery.com/jquery-3.1.1.min.js"></script>
     <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png" />
     <meta name="description" content="Rico de Jong">
     <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
     <meta name="author" content="Rico de Jong">
@@ -21,9 +22,7 @@
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <!--
     <script>
-test
         window.addEventListener("beforeunload", function (e) {
             save()
         });
@@ -45,15 +44,15 @@ test
                 set(clickingPower);
             else
                 setMps(1);
-            load()
         })
     </script>
-    -->
+
 </head>
 
 <body>
 
 
+<<<<<<< HEAD
     <div class="container-fluid">
         <div class="header">
             <h1>Kaziklikker online</h1>
@@ -69,6 +68,23 @@ test
             <div class="col-md-8">
                 <h2>Winkel</h2>
                 <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">
+=======
+<div class="container-fluid">
+    <div class="header">
+        <img src="logo.svg" width="512"/>
+        <h4 id="moneyLbl">Geld: 0</h4>
+        <h4 id="MPSLbl">Geld per seconde: 0</h4>
+        <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
+        <h4 id="countdownLbl">Recharge: 120</h4>
+    </div>
+    <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
+    <br>
+    <hr>
+    <div class="row" style="margin: 0">
+        <div class="col-md-8 box">
+            <h2>Winkel</h2>
+            <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">
+>>>>>>> 7820420f256ef2309c3e6f47a340c375c35b3f00
                 Koop meer klikkracht (100)
             </button>
                 <br>
@@ -117,6 +133,7 @@ test
                 <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled"><img src="img/moonb.png" id="moonImg" class="icon" width="20px" height="20px">Koop
                 maan
             </button>
+<<<<<<< HEAD
                 <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelitte()" disabled="disabled"><img src="img/sunb.png" id="sunImg" class="icon" width="20px" height="20px">Koop
                 zon
             </button>
@@ -127,6 +144,18 @@ test
                 <h4 id="interestLbl">Rente: 5%</h4>
                 <h4 id="bankRechargeLbl">Tijd over: 120</h4>
                 <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>"><img src="img/allplusb.png" id="allplusImg" class="icon" width="20px" height="20px">Alles
+=======
+            <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelite()" disabled="disabled">Koop
+                satelliet
+            </button>
+        </div>
+        <div class="col-md-3 box">
+            <h2>Bank</h2>
+            <h4 id="bankMoneyLbl">Geld op bank: 0</h4>
+            <h4 id="interestLbl">Rente: 5%</h4>
+            <h4 id="bankRechargeLbl">Tijd over: 120</h4>
+            <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>">Alles
+>>>>>>> 7820420f256ef2309c3e6f47a340c375c35b3f00
                 storten
             </button>
 
@@ -150,6 +179,22 @@ test
         <br>
         <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
     </div>
+<<<<<<< HEAD
+=======
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-12">
+            <h2>Opties</h2>
+            <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
+            <br>
+            <br>
+            <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>
+            <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+        </div>
+    </div>
+</div>
+>>>>>>> 7820420f256ef2309c3e6f47a340c375c35b3f00
 </body>
 
 </html>
