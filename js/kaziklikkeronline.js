@@ -8,14 +8,14 @@ var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
 var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
-var farm = { name: "Boerderij", price: 125, speed: 3, increase: 8, amount: 0 };
-var mine = { name: "Mijn", price: 250, speed: 5, increase: 11, amount: 0 };
-var village = { name: "Dorp", price: 750, speed: 10, increase: 19, amount: 0 };
-var city = { name: "Stad", price: 1500, speed: 20, increase: 27, amount: 0 };
-var country = { name: "Land", price: 2500, speed: 35, increase: 35, amount: 0 };
-var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79, amount: 0 };
-var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122, amount: 0 };
-var universe = { name: "Universum", price: 25000000, speed: 100000, increase: 3535, amount: 0 };
+var farm = { name: "Boerderij", price: 200, speed: 5, increase: 8, amount: 0 };
+var mine = { name: "Mijn", price: 2500, speed: 50, increase: 11, amount: 0 };
+var village = { name: "Dorp", price: 6500, speed: 100, increase: 19, amount: 0 };
+var city = { name: "Stad", price: 75000, speed: 1000, increase: 27, amount: 0 };
+var country = { name: "Land", price: 450000, speed: 5000, increase: 35, amount: 0 };
+var planet = { name: "Planeet", price: 1000000, speed: 10000, increase: 79, amount: 0 };
+var galaxy = { name: "Melkweg", price: 7500000, speed: 50000, increase: 122, amount: 0 };
+var universe = { name: "Universum", price: 100000000, speed: 500000, increase: 3535, amount: 0 };
 
 function animateText(element, newText) {
     element.fadeOut(500, function() {
@@ -237,7 +237,7 @@ function checkMoney() {
 }
 
 function mpsLoop() {
-    setMoney(money + mps);
+    setMoney(money += mps);
     if ((recharge <= 0) == false) {
         recharge--;
     }
