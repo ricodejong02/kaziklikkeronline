@@ -360,7 +360,7 @@ function buyProvince() {
     console.log("buyProvince()");
 }
 
-function buySatelitte() {
+function buySatelite() {
     setMoney(money * 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
