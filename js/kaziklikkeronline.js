@@ -206,44 +206,56 @@ function checkMoney() {
 
     if (recharge > 0) {
         document.getElementById('provinceBtn').disabled = true;
+        document.getElementById('moonImg').src = "img/moonb.png";
         document.getElementById('satelliteBtn').disabled = true;
+        document.getElementById('sunImg').src = "img/sunb.png";
     }
 
     if (recharge == 0) {
         document.getElementById('provinceBtn').disabled = false;
+        document.getElementById('moonImg').src = "img/moon.png";
         document.getElementById('satelliteBtn').disabled = false;
+        document.getElementById('sunImg').src = "img/sun.png";
     }
 
     if (bankMoney == 0) {
         document.getElementById('withdrawAllBtn').disabled = true;
+        document.getElementById('allplusImg').src = "img/allplus.png"
     }
 
     if (bankMoney > 0) {
         document.getElementById('withdrawAllBtn').disabled = false;
+        document.getElementById('allplusImg').src = "img/allplusb.png"
     }
 
     if (money == 0) {
         document.getElementById('depositAllBtn').disabled = true;
+        document.getElementById('allminusImg').src = "img/allminus.png"
     }
 
     if (money > 0) {
         document.getElementById('depositAllBtn').disabled = false;
+        document.getElementById('allminusImg').src = "img/allminusb.png"
     }
 
     if (money >= 10000) {
         document.getElementById('deposit10KBtn').disabled = false;
+        document.getElementById('plusImg').src = "img/plus.png"
     }
 
     if (money < 10000) {
         document.getElementById('deposit10KBtn').disabled = true;
+        document.getElementById('plusImg').src = "img/plusb.png"
     }
 
     if (bankMoney >= 10000) {
         document.getElementById('withdraw10KBtn').disabled = false;
+        document.getElementById('minusImg').src = "img/minus.png"
     }
 
     if (bankMoney < 10000) {
         document.getElementById('withdraw10KBtn').disabled = true;
+        document.getElementById('minusImg').src = "img/minusb.png"
     }
     console.log("checkMoney()");
 }
@@ -366,8 +378,8 @@ function buyProvince() {
     setMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
-    document.getElementById('provinceBtn').disabled = false;
-    document.getElementById('satelliteBtn').disabled = false;
+    document.getElementById('provinceBtn').disabled = true;
+    document.getElementById('satelliteBtn').disabled = true;
     console.log("buyProvince()");
 }
 
@@ -375,8 +387,8 @@ function buySatelite() {
     setMoney(money * 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
-    document.getElementById('provinceBtn').disabled = false;
-    document.getElementById('satelliteBtn').disabled = false;
+    document.getElementById('provinceBtn').disabled = true;
+    document.getElementById('satelliteBtn').disabled = true;
     console.log("buySatelitte()");
 }
 
