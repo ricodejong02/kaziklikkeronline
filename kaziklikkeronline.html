@@ -29,7 +29,10 @@
             save()
         });
         $(document).ready(function () {
-            $.LoadingOverlay("show");
+            $.LoadingOverlay("show", {
+                color : "rgba(255, 255, 255, 0.9)",
+                fade  : [100, 1000]
+            });
             setTimeout(function(){
                 $.LoadingOverlay("hide");
             }, 1000);
