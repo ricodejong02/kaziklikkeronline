@@ -7,6 +7,7 @@ var interest = 1.05;
 var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
+var antiCheat = 0;
 var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
 var farm = { name: "Boerderij", price: 200, speed: 5, increase: 8, amount: 0 };
 var mine = { name: "Mijn", price: 2500, speed: 50, increase: 11, amount: 0 };
@@ -73,6 +74,11 @@ function clickBtn() {
     if (!timerEnabled) {
         timerEnabled = true;
         setInterval(mpsLoop, 1000)
+    }
+    antiCheat++;
+    if(antiCheat >= 15){
+        alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
+        reset();
     }
     setMoney(money += clickingPower, true);
 }
@@ -237,6 +243,7 @@ function checkMoney() {
 }
 
 function mpsLoop() {
+    antiCheat = 0;
     setMoney(money += mps);
     if ((recharge <= 0) == false) {
         recharge--;
