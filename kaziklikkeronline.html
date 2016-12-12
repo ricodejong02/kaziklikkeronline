@@ -43,10 +43,16 @@
             else
                 setMps(0);
             var clickingPower = parseInt(localStorage.getItem('clickingPower'));
-            if (!isNaN(clickingPower))
-                set(clickingPower);
+            var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
+            if(!isNaN(clickingPowerPrice)){
+                setClickingPowerPrice(clickingPowerPrice)
+            }
             else
-                setMps(1);
+                setClickingPowerPrice(100);
+            if (!isNaN(clickingPower))
+                setClickingPower(clickingPower);
+            else
+                setClickingPower(1);
             load()
         })
     </script>
