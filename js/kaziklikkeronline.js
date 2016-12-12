@@ -186,22 +186,22 @@ function checkMoney() {
 
         if (bankMoney == 0) {
             document.getElementById('withdrawAllBtn').disabled = true;
-            document.getElementById('allplusImg').src = "img/allplus.png"
+            document.getElementById('allminusImg').src = "img/allminusb.png"
         }
 
         if (bankMoney > 0) {
             document.getElementById('withdrawAllBtn').disabled = false;
-            document.getElementById('allplusImg').src = "img/allplusb.png"
+            document.getElementById('allminusImg').src = "img/allminus.png"
         }
 
         if (money == 0) {
             document.getElementById('depositAllBtn').disabled = true;
-            document.getElementById('allminusImg').src = "img/allminus.png"
+            document.getElementById('allplusImg').src = "img/allplusb.png"
         }
 
         if (money > 0) {
             document.getElementById('depositAllBtn').disabled = false;
-            document.getElementById('allminusImg').src = "img/allminusb.png"
+            document.getElementById('allplusImg').src = "img/allplus.png"
         }
 
         if (money >= 10000) {
