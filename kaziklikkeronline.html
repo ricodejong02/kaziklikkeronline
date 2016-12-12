@@ -12,17 +12,14 @@
     <script src="js/loadingoverlay.min.js"></script>
     <script src="js/loadingoverlay_progress.min.js"></script>
     <script src="js/kaziklikkeronline.js"></script>
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"
-          integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
-          crossorigin="anonymous">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css"
-          integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
-          crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u"
+        crossorigin="anonymous">
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp"
+        crossorigin="anonymous">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
-    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js"
-            integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
-            crossorigin="anonymous"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
+        crossorigin="anonymous"></script>
 
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
@@ -72,121 +69,122 @@
 <body>
 
 
-<div class="container-fluid">
-    <div class="header">
-        <img src="logo.svg" id="logoHeader" width="512"/>
-        <h4 id="moneyLbl">Geld: 0</h4>
-        <h4 id="MPSLbl">Geld per seconde: 0</h4>
-        <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
-        <h4 id="countdownLbl">Recharge: 120</h4>
-    </div>
-    <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
-    <br>
-    <hr>
-    <div class="row" style="margin: 0">
-        <div class="col-md-8 box">
-            <h2>Winkel</h2>
-            <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">
+    <div class="container-fluid">
+        <div class="header">
+            <img src="logo.svg" id="logoHeader" width="512" />
+            <h4 id="moneyLbl">Geld: 0</h4>
+            <h4 id="MPSLbl">Geld per seconde: 0</h4>
+            <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
+            <h4 id="countdownLbl">Recharge: 120</h4>
+        </div>
+        <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
+        <br>
+        <hr>
+        <div class="row" style="margin: 0">
+            <div class="col-md-8 box">
+                <h2>Winkel</h2>
+                <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()" disabled="disabled">
                 Koop meer klikkracht (100)
             </button>
-            <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled"><img
+                <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled"><img
                     id="clickerImg" class="icon" src=img/cursorb.png height=20px width=20px>Koop klikker (25)
             </button>
-            <br>
-            <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"><img id="farmImg"
+                <br>
+                <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"><img id="farmImg"
                                                                                                              class="icon"
                                                                                                              src=img/farmb.png
                                                                                                              height=20px
                                                                                                              width=20px>Koop
                 boerderij (125)
             </button>
-            <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"><img id="mineImg"
+                <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"><img id="mineImg"
                                                                                                              class="icon"
                                                                                                              src=img/mineb.png
                                                                                                              height=20px
                                                                                                              width=20px>Koop
                 mijn (250)
             </button>
-            <br>
-            <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled"><img
+                <br>
+                <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled"><img
                     id="villageImg" class="icon" src=img/villageb.png height=20px width=20px>Koop dorp (750)
             </button>
-            <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"><img id="cityImg"
+                <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"><img id="cityImg"
                                                                                                              class="icon"
                                                                                                              src=img/cityb.png
                                                                                                              height=20px
                                                                                                              width=20px>Koop
                 stad (1500)
             </button>
-            <br>
+                <br>
 
-            <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled"><img
+                <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled"><img
                     id="countryImg" class="icon" src=img/countryb.png height=20px width=20px>Koop land (2500)
             </button>
-            <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled"><img
+                <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled"><img
                     id="planetImg" class="icon" src=img/planetb.png height=20px width=20px>Koop planeet (12500)
             </button>
-            <br>
+                <br>
 
-            <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled"><img
+                <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled"><img
                     id="galaxyImg" class="icon" src=img/galaxyb.png height=20px width=20px>Koop melkweg (25000)
             </button>
-            <button id="universeBtn" class="btn btn-default btn-lg" onclick="buyUniverse()" disabled="disabled"><img
+                <button id="universeBtn" class="btn btn-default btn-lg" onclick="buyUniverse()" disabled="disabled"><img
                     id="universeImg" class="icon" src=img/universeb.png height=20px width=20px>Koop universum (25000000)
             </button>
-<br>
-            <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled"><img
+                <br>
+                <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" disabled="disabled"><img
                     id="moonImg" class="icon" src=img/moonb.png height=20px width=20px>Koop
                 maan
             </button>
-            <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelite()" disabled="disabled"><img
+                <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelite()" disabled="disabled"><img
                     id="sunImg" class="icon" src=img/sunb.png height=20px width=20px>Koop
                 zon
             </button>
-        </div>
-        <div class="col-md-3 box">
-            <h2>Bank</h2>
-            <h4 id="bankMoneyLbl">Geld op bank: 0</h4>
-            <h4 id="interestLbl">Rente: 5%</h4>
-            <h4 id="bankRechargeLbl">Tijd over: 120</h4>
-            <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>"><img
+            </div>
+            <div class="col-md-3 box">
+                <h2>Bank</h2>
+                <h4 id="bankMoneyLbl">Geld op bank: 0</h4>
+                <h4 id="interestLbl">Rente: 5%</h4>
+                <h4 id="bankRechargeLbl">Tijd over: 120</h4>
+                <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>"><img
                     id="allplusImg" class="icon" src=img/allplusb.png height=20px width=20px>Alles
                 storten
             </button>
-            <br>
-            <button id="withdrawAllBtn" class="btn btn-default btn-lg" onclick="withdrawAll()" disabled="disabled"><img
+                <br>
+                <button id="withdrawAllBtn" class="btn btn-default btn-lg" onclick="withdrawAll()" disabled="disabled"><img
                     id="allminusImg" class="icon" src=img/allminusb.png height=20px width=20px>Alles
                 opnemen
             </button>
-            <br>
-            <button id="deposit10KBtn" class="btn btn-default btn-lg" onclick="deposit10K()" disabled="disabled"><img
+                <br>
+                <button id="deposit10KBtn" class="btn btn-default btn-lg" onclick="deposit10K()" disabled="disabled"><img
                     id="plusImg" class="icon" src=img/plusb.png height=20px width=20px>10000 storten
             </button>
-            <br>
-            <button id="withdraw10KBtn" class="btn btn-default btn-lg" onclick="withdraw10K()" disabled="disabled"><img
+                <br>
+                <button id="withdraw10KBtn" class="btn btn-default btn-lg" onclick="withdraw10K()" disabled="disabled"><img
                     id="minusImg" class="icon" src=img/minusb.png height=20px width=20px>10000
                 opnemen
             </button>
+            </div>
+        </div>
+        <div class="row" style="margin: 0">
+            <div class="col-md-11 box">
+                <h2>Loterij</h2>
+            </div>
+        </div>
+        <br>
+        <hr>
+        <div class="row">
+            <div class="col-md-12">
+                <h2>Opties</h2>
+                <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
+                <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
+                <br>
+                <br>
+                <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>
+                <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+            </div>
         </div>
     </div>
-    <div class="row">
-        <div class="col-md-12 box" style="margin: 35px !important;">
-        </div>
-    </div>
-    <br>
-    <hr>
-    <div class="row">
-        <div class="col-md-12">
-            <h2>Opties</h2>
-            <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
-            <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
-            <br>
-            <br>
-            <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>
-            <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
-        </div>
-    </div>
-</div>
 </body>
 
 </html>
