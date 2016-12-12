@@ -194,13 +194,13 @@ function checkMoney() {
     }
 
     if (recharge > 0) {
-        // document.getElementById('provinceBtn').disabled = true;
-        // document.getElementById('satelliteBtn').disabled = true;
+        document.getElementById('provinceBtn').disabled = true;
+        document.getElementById('satelliteBtn').disabled = true;
     }
 
     if (recharge == 0) {
-        // document.getElementById('provinceBtn').disabled = false;
-        // document.getElementById('satelliteBtn').disabled = false;
+        document.getElementById('provinceBtn').disabled = false;
+        document.getElementById('satelliteBtn').disabled = false;
     }
 
     if (bankMoney == 0) {
