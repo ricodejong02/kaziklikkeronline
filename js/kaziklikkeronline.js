@@ -17,7 +17,7 @@ var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79, amount: 0
 var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122, amount: 0 };
 var universe = { name: "Universum", price: 25000000, speed: 100000, increase: 3535, amount: 0 };
 
-function save() {
+/*function save() {
     localStorage.setItem('clicker', clicker);
     localStorage.setItem('farm', farm);
     localStorage.setItem('mine', mine);
@@ -40,7 +40,7 @@ function load() {
         planet = localStorage.getItem('planet');
         galaxy = localStorage.getItem('galaxy');
     }
-}
+}*/
 function animateText(element, newText) {
     element.fadeOut(500, function() {
         $(this).text(newText).fadeIn(100);
@@ -66,19 +66,19 @@ function setMoney(_money, animate) {
     else
         $('#moneyLbl').text("Geld: " + money);
     // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
-    localStorage.setItem("money", money);
+    //localStorage.setItem("money", money);
 }
 
 function setMps(_mps) {
     mps = _mps;
     document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
-    localStorage.setItem("mps", mps);
+    //localStorage.setItem("mps", mps);
 }
 
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
-    localStorage.setItem("clickingPower", clickingPower);
+    //localStorage.setItem("clickingPower", clickingPower);
 }
 
 function setBankMoney(_bankMoney) {
