@@ -77,157 +77,161 @@ function clickBtn() {
 }
 
 function checkMoney() {
-    if (money >= clickingPowerPrice) {
-        document.getElementById('clickingPowerBtn').disabled = false;
-    }
+    try{
+        if (money >= clickingPowerPrice) {
+            document.getElementById('clickingPowerBtn').disabled = false;
+        }
 
-    if (money < clickingPowerPrice) {
-        document.getElementById('clickingPowerBtn').disabled = true;
-    }
+        if (money < clickingPowerPrice) {
+            document.getElementById('clickingPowerBtn').disabled = true;
+        }
 
-    if (money >= clicker.price) {
-        document.getElementById('clickerBtn').disabled = false;
-        document.getElementById('clickerImg').src = "img/cursor.png";
-    }
+        if (money >= clicker.price) {
+            document.getElementById('clickerBtn').disabled = false;
+            document.getElementById('clickerImg').src = "img/cursor.png";
+        }
 
-    if (money < clicker.price) {
-        document.getElementById('clickerBtn').disabled = true;
-        document.getElementById('clickerImg').src = "img/cursorb.png";
-    }
+        if (money < clicker.price) {
+            document.getElementById('clickerBtn').disabled = true;
+            document.getElementById('clickerImg').src = "img/cursorb.png";
+        }
 
-    if (money >= farm.price) {
-        document.getElementById('farmBtn').disabled = false;
-        document.getElementById('farmImg').src = "img/farm.png";
-    }
+        if (money >= farm.price) {
+            document.getElementById('farmBtn').disabled = false;
+            document.getElementById('farmImg').src = "img/farm.png";
+        }
 
-    if (money < farm.price) {
-        document.getElementById('farmBtn').disabled = true;
-        document.getElementById('farmImg').src = "img/farmb.png";
-    }
+        if (money < farm.price) {
+            document.getElementById('farmBtn').disabled = true;
+            document.getElementById('farmImg').src = "img/farmb.png";
+        }
 
-    if (money >= mine.price) {
-        document.getElementById('mineBtn').disabled = false;
-        document.getElementById('mineImg').src = "img/mine.png";
-    }
+        if (money >= mine.price) {
+            document.getElementById('mineBtn').disabled = false;
+            document.getElementById('mineImg').src = "img/mine.png";
+        }
 
-    if (money < mine.price) {
-        document.getElementById('mineBtn').disabled = true;
-        document.getElementById('mineImg').src = "img/mineb.png";
-    }
+        if (money < mine.price) {
+            document.getElementById('mineBtn').disabled = true;
+            document.getElementById('mineImg').src = "img/mineb.png";
+        }
 
-    if (money >= village.price) {
-        document.getElementById('villageBtn').disabled = false;
-        document.getElementById('villageImg').src = "img/village.png";
-    }
+        if (money >= village.price) {
+            document.getElementById('villageBtn').disabled = false;
+            document.getElementById('villageImg').src = "img/village.png";
+        }
 
-    if (money < village.price) {
-        document.getElementById('villageBtn').disabled = true;
-        document.getElementById('villageImg').src = "img/villageb.png";
-    }
+        if (money < village.price) {
+            document.getElementById('villageBtn').disabled = true;
+            document.getElementById('villageImg').src = "img/villageb.png";
+        }
 
-    if (money >= city.price) {
-        document.getElementById('cityBtn').disabled = false;
-        document.getElementById('cityImg').src = "img/city.png";
-    }
+        if (money >= city.price) {
+            document.getElementById('cityBtn').disabled = false;
+            document.getElementById('cityImg').src = "img/city.png";
+        }
 
-    if (money < city.price) {
-        document.getElementById('cityBtn').disabled = true;
-        document.getElementById('cityImg').src = "img/cityb.png";
-    }
+        if (money < city.price) {
+            document.getElementById('cityBtn').disabled = true;
+            document.getElementById('cityImg').src = "img/cityb.png";
+        }
 
-    if (money >= country.price) {
-        document.getElementById('countryBtn').disabled = false;
-        document.getElementById('countryImg').src = "img/country.png";
-    }
+        if (money >= country.price) {
+            document.getElementById('countryBtn').disabled = false;
+            document.getElementById('countryImg').src = "img/country.png";
+        }
 
-    if (money < country.price) {
-        document.getElementById('countryBtn').disabled = true;
-        document.getElementById('countryImg').src = "img/countryb.png";
-    }
+        if (money < country.price) {
+            document.getElementById('countryBtn').disabled = true;
+            document.getElementById('countryImg').src = "img/countryb.png";
+        }
 
-    if (money >= planet.price) {
-        document.getElementById('planetBtn').disabled = false;
-        document.getElementById('planetImg').src = "img/planet.png";
-    }
+        if (money >= planet.price) {
+            document.getElementById('planetBtn').disabled = false;
+            document.getElementById('planetImg').src = "img/planet.png";
+        }
 
-    if (money < planet.price) {
-        document.getElementById('planetBtn').disabled = true;
-        document.getElementById('planetImg').src = "img/planetb.png";
-    }
+        if (money < planet.price) {
+            document.getElementById('planetBtn').disabled = true;
+            document.getElementById('planetImg').src = "img/planetb.png";
+        }
 
-    if (money >= galaxy.price) {
-        document.getElementById('galaxyBtn').disabled = false;
-        document.getElementById('galaxyImg').src = "img/galaxy.png";
-    }
+        if (money >= galaxy.price) {
+            document.getElementById('galaxyBtn').disabled = false;
+            document.getElementById('galaxyImg').src = "img/galaxy.png";
+        }
 
-    if (money < galaxy.price) {
-        document.getElementById('galaxyBtn').disabled = true;
-        document.getElementById('galaxyImg').src = "img/galaxyb.png";
-    }
+        if (money < galaxy.price) {
+            document.getElementById('galaxyBtn').disabled = true;
+            document.getElementById('galaxyImg').src = "img/galaxyb.png";
+        }
 
-    if (money >= universe.price) {
-        document.getElementById('universeBtn').disabled = false;
-        document.getElementById('universeImg').src = "img/universe.png";
-    }
+        if (money >= universe.price) {
+            document.getElementById('universeBtn').disabled = false;
+            document.getElementById('universeImg').src = "img/universe.png";
+        }
 
-    if (money < universe.price) {
-        document.getElementById('universeBtn').disabled = true;
-        document.getElementById('universeImg').src = "img/universeb.png";
-    }
+        if (money < universe.price) {
+            document.getElementById('universeBtn').disabled = true;
+            document.getElementById('universeImg').src = "img/universeb.png";
+        }
 
-    if (recharge > 0) {
-        document.getElementById('provinceBtn').disabled = true;
-        document.getElementById('moonImg').src = "img/moonb.png";
-        document.getElementById('satelliteBtn').disabled = true;
-        document.getElementById('sunImg').src = "img/sunb.png";
-    }
+        if (recharge > 0) {
+            document.getElementById('provinceBtn').disabled = true;
+            document.getElementById('moonImg').src = "img/moonb.png";
+            document.getElementById('satelliteBtn').disabled = true;
+            document.getElementById('sunImg').src = "img/sunb.png";
+        }
 
-    if (recharge == 0) {
-        document.getElementById('provinceBtn').disabled = false;
-        document.getElementById('moonImg').src = "img/moon.png";
-        document.getElementById('satelliteBtn').disabled = false;
-        document.getElementById('sunImg').src = "img/sun.png";
-    }
+        if (recharge == 0) {
+            document.getElementById('provinceBtn').disabled = false;
+            document.getElementById('moonImg').src = "img/moon.png";
+            document.getElementById('satelliteBtn').disabled = false;
+            document.getElementById('sunImg').src = "img/sun.png";
+        }
 
-    if (bankMoney == 0) {
-        document.getElementById('withdrawAllBtn').disabled = true;
-        document.getElementById('allplusImg').src = "img/allplus.png"
-    }
+        if (bankMoney == 0) {
+            document.getElementById('withdrawAllBtn').disabled = true;
+            document.getElementById('allminusImg').src = "img/allminusb.png"
+        }
 
-    if (bankMoney > 0) {
-        document.getElementById('withdrawAllBtn').disabled = false;
-        document.getElementById('allplusImg').src = "img/allplusb.png"
-    }
+        if (bankMoney > 0) {
+            document.getElementById('withdrawAllBtn').disabled = false;
+            document.getElementById('allminusImg').src = "img/allminus.png"
+        }
 
-    if (money == 0) {
-        document.getElementById('depositAllBtn').disabled = true;
-        document.getElementById('allminusImg').src = "img/allminus.png"
-    }
+        if (money == 0) {
+            document.getElementById('depositAllBtn').disabled = true;
+            document.getElementById('allplusImg').src = "img/allplusb.png"
+        }
 
-    if (money > 0) {
-        document.getElementById('depositAllBtn').disabled = false;
-        document.getElementById('allminusImg').src = "img/allminusb.png"
-    }
+        if (money > 0) {
+            document.getElementById('depositAllBtn').disabled = false;
+            document.getElementById('allplusImg').src = "img/allplus.png"
+        }
 
-    if (money >= 10000) {
-        document.getElementById('deposit10KBtn').disabled = false;
-        document.getElementById('plusImg').src = "img/plus.png"
-    }
+        if (money >= 10000) {
+            document.getElementById('deposit10KBtn').disabled = false;
+            document.getElementById('plusImg').src = "img/plus.png"
+        }
 
-    if (money < 10000) {
-        document.getElementById('deposit10KBtn').disabled = true;
-        document.getElementById('plusImg').src = "img/plusb.png"
-    }
+        if (money < 10000) {
+            document.getElementById('deposit10KBtn').disabled = true;
+            document.getElementById('plusImg').src = "img/plusb.png"
+        }
 
-    if (bankMoney >= 10000) {
-        document.getElementById('withdraw10KBtn').disabled = false;
-        document.getElementById('minusImg').src = "img/minus.png"
-    }
+        if (bankMoney >= 10000) {
+            document.getElementById('withdraw10KBtn').disabled = false;
+            document.getElementById('minusImg').src = "img/minus.png"
+        }
 
-    if (bankMoney < 10000) {
-        document.getElementById('withdraw10KBtn').disabled = true;
-        document.getElementById('minusImg').src = "img/minusb.png"
+        if (bankMoney < 10000) {
+            document.getElementById('withdraw10KBtn').disabled = true;
+            document.getElementById('minusImg').src = "img/minusb.png"
+        }
     }
+    catch (exception){}
+  
     console.log("checkMoney()");
 }
 
@@ -245,11 +249,6 @@ function mpsLoop() {
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
-    if($('#animateLogo').is(':checked')){
-        $('#logoHeader').fadeOut(1000, function () {
-            $('#logoHeader').fadeIn(1000);
-        });
-    }
 }
 
 function buyClickingPower() {
