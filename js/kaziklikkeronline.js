@@ -17,30 +17,6 @@ var planet = { name: "Planeet", price: 12500, speed: 50, increase: 79, amount: 0
 var galaxy = { name: "Melkweg", price: 25000, speed: 75, increase: 122, amount: 0 };
 var universe = { name: "Universum", price: 25000000, speed: 100000, increase: 3535, amount: 0 };
 
-function save() {
-    localStorage.setItem('clicker', clicker);
-    localStorage.setItem('farm', farm);
-    localStorage.setItem('mine', mine);
-    localStorage.setItem('village', village);
-    localStorage.setItem('city', city);
-    localStorage.setItem('country', country);
-    localStorage.setItem('planet', planet);
-    localStorage.setItem('galaxy', galaxy);
-}
-
-function load() {
-    var c = localStorage.getItem('clicker');
-    if (c != null) {
-        clicker = c;
-        farm = localStorage.getItem('farm');
-        mine = localStorage.getItem('mine');
-        village = localStorage.getItem('village');
-        city = localStorage.getItem('city');
-        country = localStorage.getItem('country');
-        planet = localStorage.getItem('planet');
-        galaxy = localStorage.getItem('galaxy');
-    }
-}
 function animateText(element, newText) {
     element.fadeOut(500, function() {
         $(this).text(newText).fadeIn(100);
