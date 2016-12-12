@@ -31,6 +31,9 @@
         });
         $(document).ready(function () {
             var money = localStorage.getItem('money');
+            var clickingPower = parseInt(localStorage.getItem('clickingPower'));
+            var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
+            var bankMoney = parseInt(localStorage.getItem('bankMoney'));
             if (!isNaN(money)){
                 setMoney(money - 1);
                 clickBtn();
@@ -42,8 +45,7 @@
                 setMps(mps);
             else
                 setMps(0);
-            var clickingPower = parseInt(localStorage.getItem('clickingPower'));
-            var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
+
             if(!isNaN(clickingPowerPrice)){
                 setClickingPowerPrice(clickingPowerPrice)
             }
@@ -53,6 +55,9 @@
                 setClickingPower(clickingPower);
             else
                 setClickingPower(1);
+            if(!isNaN(bankMoney))
+                setBankMoney(bankMoney)
+            
         })
     </script>
 
