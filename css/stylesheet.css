@@ -82,14 +82,19 @@ h1 {
     padding-top: 15px;
 }
 
+@media screen {
+    #logoHeader {
+        width: 100%;
+    }
+}
 @media (min-width: 768px) {
     #logoHeader{
-        width: 400px;
+        width: 100%;
     }
 }
 @media (min-width: 992px) {
     #logoHeader{
-        width: 512px;
+        width: 50%;
     }
 }
 

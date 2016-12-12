@@ -20,7 +20,16 @@
     <link rel="stylesheet" href="css/stylesheet.css">
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa"
         crossorigin="anonymous"></script>
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
 
+        ga('create', 'UA-74770080-9', 'auto');
+        ga('send', 'pageview');
+
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -169,15 +178,6 @@
             </button>
             </div>
         </div>
-        <div class="row" style="margin: 0">
-            <div class="col-md-11 box">
-                <h2>Loterij</h2>
-                <h4>Kaartje: 1000</h4>
-                <h4>Jackpot: 15000</h4>
-                <h4>Winkans: 1 op 15</h4>
-                <button class="btn btn-default btn-lg" onclick="lottery()" disabled="disabled">Doe mee</button>
-            </div>
-        </div>
         <br>
         <hr>
         <div class="row">
@@ -187,7 +187,6 @@
                 <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
                 <br>
                 <br>
-                <button id="save" class="btn btn-default btn-lg" onclick="save()">Save</button>
                 <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
             </div>
         </div>

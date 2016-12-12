@@ -247,6 +247,11 @@ function mpsLoop() {
     if (bankRecharge == 0) {
         bankCalculate();
     }
+    if($('#animateLogo').is(':checked')){
+        $('#logoHeader').fadeOut(1000, function () {
+            $('#logoHeader').fadeIn(1000);
+        });
+    }
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
