@@ -33,7 +33,7 @@
     padding: 0 !important;
 }
 body{
-    background: linear-gradient(123deg, #03a9f4, #e91e63, #5e35b1, #ff1744, #4DD0E1);
+    background: linear-gradient(123deg, #64B5F6, #F06292, #BA68C8, #ff5367, #4DB6AC);
     background-size: 800% 800%;
 
     -webkit-animation: BackgroundGradientAnimation 16s ease infinite;

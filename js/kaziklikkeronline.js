@@ -42,7 +42,7 @@ function animateText(element, newText) {
     });
 }
 function setClickingPowerPrice(price) {
-    clickingPowerPrice = NiceNumber(price);
+    clickingPowerPrice = price;
 }
 
 function setMoney(_money) {
@@ -292,18 +292,7 @@ function buyClickingPower() {
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
-function updatePrices() {
-    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=../img/cursor.png height=20px width=20px>Koop klikker (" + Data.clicker.price + ")";
-    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=../img/farm.png height=20px width=20px>Koop boerderij (" + Data.farm.price + ")";
-    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=../img/mine.png height=20px width=20px>Koop mijn (" + Data.mine.price + ")";
-    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + Data.village.price + ")";
-    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=../img/city.png height=20px width=20px>Koop stad (" + Data.city.price + ")";
-    document.getElementById('countryBtn').innerHTML = "<img id='countryImg' class='icon' src=img/county.png height=20px width=20px>Koop land (" + Data.country.price + ")";
-    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=../img/planet.png height=20px width=20px>Koop planeet (" + Data.planet.price + ")";
-    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=../img/galaxy.png height=20px width=20px>Koop melkweg (" + Data.galaxy.price + ")";
-    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=../img/universe.png height=20px width=20px>Koop universum (" + Data.universe.price + ")";
 
-}
 function buyClicker() {
     setMoney(money -= Data.clicker.price);
     setMps(mps + Data.clicker.speed);
