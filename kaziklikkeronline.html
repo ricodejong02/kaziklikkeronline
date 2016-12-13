@@ -12,6 +12,8 @@
     <script src="js/loadingoverlay.min.js"></script>
     <script src="js/loadingoverlay_progress.min.js"></script>
     <script src="js/kaziklikkeronline.js"></script>
+    <script src="js/localStorageController.js"></script>
+    <script src="js/Constants.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
@@ -41,33 +43,9 @@
             setTimeout(function(){
                 $.LoadingOverlay("hide");
             }, 1000);
-            var money = localStorage.getItem('money');
-            var clickingPower = parseInt(localStorage.getItem('clickingPower'));
-            var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
-            var bankMoney = parseInt(localStorage.getItem('bankMoney'));
-            if (!isNaN(money)){
-                setMoney(money - 1);
-                clickBtn();
-            }
-            else
-                setMoney(0);
-            var mps = parseInt(localStorage.getItem('mps'));
-            if (!isNaN(mps))
-                setMps(mps);
-            else
-                setMps(0);
+            //Restores the saved data
+            restoreSaves();
 
-            if(!isNaN(clickingPowerPrice)){
-                setClickingPowerPrice(clickingPowerPrice)
-            }
-            else
-                setClickingPowerPrice(100);
-            if (!isNaN(clickingPower))
-                setClickingPower(clickingPower);
-            else
-                setClickingPower(1);
-            if(!isNaN(bankMoney))
-                setBankMoney(bankMoney)
             $('[datatype=tooltip]').tooltip();
         })
     </script>
