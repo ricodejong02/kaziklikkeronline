@@ -9,7 +9,7 @@ var recharge = 120;
 var bankRecharge = 120;
 var antiCheat = 0;
 
-var Data = DataBC;
+var Data;
 
 /**
  * @return {string}

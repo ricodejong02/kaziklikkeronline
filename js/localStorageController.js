@@ -10,10 +10,10 @@ function restoreSaves() {
     else
         setMoney(0);
 
-    var clickingPower = parseInt(localStorage.getItem('clickingPower'));
-    var clickingPowerPrice = parseInt(localStorage.getItem('clickingPowerPrice'));
-    var bankMoney = parseInt(localStorage.getItem('bankMoney'));
-    var mps = parseInt(localStorage.getItem('mps'));
+    var clickingPower = parseFloat(localStorage.getItem('clickingPower'));
+    var clickingPowerPrice = parseFloat(localStorage.getItem('clickingPowerPrice'));
+    var bankMoney = parseFloat(localStorage.getItem('bankMoney'));
+    var mps = parseFloat(localStorage.getItem('mps'));
     if (!isNaN(mps))
         setMps(mps);
     else
@@ -39,6 +39,9 @@ function load() {
     var data = JSON.parse(localStorage.getItem('data'));
     if (data != undefined) {
         Data = data;
+    }
+    else{
+        Data = DataBC;
     }
     updatePrices();
 }

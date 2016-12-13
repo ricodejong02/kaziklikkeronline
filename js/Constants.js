@@ -1,7 +1,7 @@
 /**
  * Created by Daniel Verhoef on 13-12-2016.
  */
-const DataBC = {
+var DataBC = {
     clicker: {name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0},
     farm: {name: "Boerderij", price: 2000, speed: 5, increase: 8, amount: 0},
     mine: {name: "Mijn", price: 50000, speed: 50, increase: 11, amount: 0},

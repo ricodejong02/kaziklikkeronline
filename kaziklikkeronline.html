@@ -9,15 +9,18 @@
     <meta name="description" content="Rico de Jong">
     <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
     <meta name="author" content="Rico de Jong">
+    <script src="js/bootstrap.min.js"></script>
+
     <script src="js/loadingoverlay.min.js"></script>
     <script src="js/loadingoverlay_progress.min.js"></script>
     <script src="js/kaziklikkeronline.js"></script>
+    <script src="js/bootstrap-dialog.min.js"></script>
     <script src="js/localStorageController.js"></script>
     <script src="js/Constants.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
-    <script src="js/bootstrap.min.js"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
     <script>
         (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
                 (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
@@ -41,6 +44,24 @@
                 fade  : [100, 1000]
             });
             setTimeout(function(){
+                if(localStorage.getItem("name") === null){
+                    BootstrapDialog.show({
+                        message: function(dialog) {
+                            var $message = $('<div></div>');
+                            var pageToLoad = dialog.getData('pageToLoad');
+                            $message.load(pageToLoad);
+
+                            return $message;
+                        },
+                        data: {
+                            'pageToLoad': 'dialogs/first.html'
+                        }
+                    });
+
+                }
+                else{
+                    $("#welcomeMessage").text("Hallo, " + localStorage.getItem("name") + "!");
+                }
                 $.LoadingOverlay("hide");
             }, 1000);
             //Restores the saved data
@@ -54,10 +75,10 @@
 
 <body>
 
-
     <div class="container-fluid">
         <div class="header">
             <img src="logo.svg" id="logoHeader" width="512" />
+            <h2 id="welcomeMessage">Hallo, Wereld!</h2>
             <h4 id="moneyLbl" datatype="tooltip">Geld: 0</h4>
             <h4 id="MPSLbl" datatype="tooltip">Geld per seconde: 0</h4>
             <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
