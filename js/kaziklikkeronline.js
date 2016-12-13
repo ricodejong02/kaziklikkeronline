@@ -18,15 +18,41 @@ var planet = { name: "Planeet", price: 1000000, speed: 10000, increase: 79, amou
 var galaxy = { name: "Melkweg", price: 7500000, speed: 50000, increase: 122, amount: 0 };
 var universe = { name: "Universum", price: 100000000, speed: 500000, increase: 3535, amount: 0 };
 
+/**
+ * @return {string}
+ */
+function NiceNumber(num) {
+    num = parseFloat(num);
+    console.log(num);
+    if(num < 1000)
+        return num.toString();
+    if(num >= 1000 && num < 1000000)
+        return (Math.round(num / 1000)).toFixed(0).toString() + "K";
+    if(num >= 1000000 && num < 1000000000)
+        return (Math.round(num / 1000000)).toFixed(0).toString() + "M";
+    if(num >= 1000000000 && num < 1000000000000)
+        return (Math.round(num / 1000000000)).toFixed(2).toString() + "B";
+    if(num >= 1000000000000 && num < 1000000000000000)
+        return (Math.round(num / 1000000000000)).toFixed(2).toString() + "T";
+    if(num >= 1000000000000000 && num < 1000000000000000000)
+        return (Math.round(num / 1000000000000000)).toFixed(2).toString() + "Qa";
+    if(num >= 1000000000000000000)
+        return (Math.round(num / 1000000000000000000)).toFixed(2).toString() + "Qi";
+    else
+        return "ERR";
+}
+
+
 function animateText(element, newText) {
-    element.fadeOut(500, function() {
+    element.fadeOut(200, function() {
         $(this).text(newText).fadeIn(100);
     });
 }
 function setClickingPowerPrice(price) {
-    clickingPowerPrice = price;
+    clickingPowerPrice = NiceNumber(price);
 }
 function reset() {
+    setBankMoney(0);
     setMoney(0);
     setMps(0);
     setClickingPower(1);
@@ -45,22 +71,25 @@ function setMoney(_money, animate) {
         animateText($('#moneyLbl'), "Geld: " + money);
     else
         $('#moneyLbl').text("Geld: " + money);
+    $('#moneyLbl').prop('title', NiceNumber(money).toString()).tooltip();
     // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
     localStorage.setItem("money", money);
 }
 
 function setMps(_mps) {
     mps = _mps;
+    $('#MPSLbl').prop('title', NiceNumber(mps).toString());
+
     document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
     localStorage.setItem("mps", mps);
 }
 
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
     localStorage.setItem("clickingPower", clickingPower);
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
     document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
 
@@ -80,6 +109,7 @@ function clickBtn() {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
+    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
     setMoney(money += clickingPower, true);
 }
 
@@ -244,6 +274,8 @@ function checkMoney() {
 
 function mpsLoop() {
     antiCheat = 0;
+    $('[datatype=tooltip]').tooltip();
+
     setMoney(money += mps);
     if ((recharge <= 0) == false) {
         recharge--;
@@ -269,7 +301,7 @@ function buyClickingPower() {
     setMoney(money -= clickingPowerPrice);
     clickingPowerPrice *= 2;
     checkMoney();
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
     document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);

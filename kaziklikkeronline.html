@@ -68,7 +68,7 @@
                 setClickingPower(1);
             if(!isNaN(bankMoney))
                 setBankMoney(bankMoney)
-
+            $('[datatype=tooltip]').tooltip();
         })
     </script>
 
@@ -80,8 +80,8 @@
     <div class="container-fluid">
         <div class="header">
             <img src="logo.svg" id="logoHeader" width="512" />
-            <h4 id="moneyLbl">Geld: 0</h4>
-            <h4 id="MPSLbl">Geld per seconde: 0</h4>
+            <h4 id="moneyLbl" datatype="tooltip">Geld: 0</h4>
+            <h4 id="MPSLbl" datatype="tooltip">Geld per seconde: 0</h4>
             <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
             <h4 id="countdownLbl">Recharge: 120</h4>
         </div>
