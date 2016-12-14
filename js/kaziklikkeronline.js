@@ -1,72 +1,96 @@
-var money = 0;
+var money = 200;
 var mps = 0;
 var clickingPower = 1;
-var clickingPowerPrice = 100;
+var clickingPowerPrice = 500;
 var bankMoney = 0;
 var interest = 1.05;
 var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
 var antiCheat = 0;
-var clicker = { name: "Klikker", price: 25, speed: 1, increase: 4, amount: 0 };
-var farm = { name: "Boerderij", price: 200, speed: 5, increase: 8, amount: 0 };
-var mine = { name: "Mijn", price: 2500, speed: 50, increase: 11, amount: 0 };
-var village = { name: "Dorp", price: 6500, speed: 100, increase: 19, amount: 0 };
-var city = { name: "Stad", price: 75000, speed: 1000, increase: 27, amount: 0 };
-var country = { name: "Land", price: 450000, speed: 5000, increase: 35, amount: 0 };
-var planet = { name: "Planeet", price: 1000000, speed: 10000, increase: 79, amount: 0 };
-var galaxy = { name: "Melkweg", price: 7500000, speed: 50000, increase: 122, amount: 0 };
-var universe = { name: "Universum", price: 100000000, speed: 500000, increase: 3535, amount: 0 };
+
+var Data;
+
+/**
+ * @return {string}
+ */
+function NiceNumber(num) {
+    num = parseFloat(num);
+    console.log(num);
+    if (num < 1e+3)
+        return num.toString();
+    if (num >= 1e+3 && num < 1e+6)
+        return (num / 1e+3).toFixed(2).toString() + "K";
+    if (num >= 1e+6 && num < 1e+9)
+        return (num / 1e+6).toFixed(2).toString() + "Mi";
+    if (num >= 1e+9 && num < 1e+12)
+        return (num / 1e+9).toFixed(2).toString() + "Bi";
+    if (num >= 1e+12 && num < 1e+15)
+        return (num / 1e+12).toFixed(2).toString() + "Tr";
+    if (num >= 1e+15 && num < 1e+18)
+        return (num / 1e+15).toFixed(2).toString() + "Qa";
+    if (num >= 1e+18 && num < 1e+21)
+        return (num / 1e+18).toFixed(2).toString() + "Qi";
+    if (num >= 1e+21 && num < 1e+24)
+        return (num / 1e+21).toFixed(2).toString() + "Sx";
+    if (num >= 1e+24 && num < 1e+27)
+        return (num / 1e+24).toFixed(2).toString() + "Sp";     
+    if (num >= 1e+27 && num < 1e+30)
+        return (num / 1e+27).toFixed(2).toString() + "Oc";  
+    if (num >= 1e+30 && num < 1e+33)
+        return (num / 1e+30).toFixed(2).toString() + "No";  
+    if (num >= 1e+33 && num < 1e+36)
+        return (num / 1e+33).toFixed(2).toString() + "De";  
+    else
+        return "ERR";
+}
 
 function animateText(element, newText) {
-    element.fadeOut(500, function() {
+    element.fadeOut(200, function () {
         $(this).text(newText).fadeIn(100);
     });
 }
 function setClickingPowerPrice(price) {
     clickingPowerPrice = price;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
-function reset() {
-    setMoney(0);
-    setMps(0);
-    setClickingPower(1);
-    clickingPowerPrice = 250;
-    timerEnabled = false;
-    recharge = 120;
-    console.log("reset()");
-}
+
 function setMoney(_money) {
     setMoney(_money, false)
 }
 function setMoney(_money, animate) {
     money = _money;
     checkMoney();
-    if(animate && $('#animateText').is(':checked'))
+    if (animate && $('#animateText').is(':checked'))
         animateText($('#moneyLbl'), "Geld: " + money);
     else
-        $('#moneyLbl').text("Geld: " + money);
+        $('#moneyLbl').text("Geld: " + NiceNumber(money));
+    //$('#moneyLbl').prop('title', money.toString()).tooltip();
     // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
     localStorage.setItem("money", money);
 }
 
 function setMps(_mps) {
     mps = _mps;
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
+    //$('#MPSLbl').prop('title', mps.toString());
+
+    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + NiceNumber(mps);
     localStorage.setItem("mps", mps);
 }
 
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
     localStorage.setItem("clickingPower", clickingPower);
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
-    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + bankMoney;
+    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + NiceNumber(bankMoney);
     localStorage.setItem("bankMoney", bankMoney);
 }
 
@@ -76,15 +100,16 @@ function clickBtn() {
         setInterval(mpsLoop, 1000)
     }
     antiCheat++;
-    if(antiCheat >= 15){
+    if (antiCheat >= 15) {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
+    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
     setMoney(money += clickingPower, true);
 }
 
 function checkMoney() {
-    try{
+    try {
         if (money >= clickingPowerPrice) {
             document.getElementById('clickingPowerBtn').disabled = false;
         }
@@ -93,92 +118,92 @@ function checkMoney() {
             document.getElementById('clickingPowerBtn').disabled = true;
         }
 
-        if (money >= clicker.price) {
+        if (money >= Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = false;
             document.getElementById('clickerImg').src = "img/cursor.png";
         }
 
-        if (money < clicker.price) {
+        if (money < Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = true;
             document.getElementById('clickerImg').src = "img/cursorb.png";
         }
 
-        if (money >= farm.price) {
+        if (money >= Data.farm.price) {
             document.getElementById('farmBtn').disabled = false;
             document.getElementById('farmImg').src = "img/farm.png";
         }
 
-        if (money < farm.price) {
+        if (money < Data.farm.price) {
             document.getElementById('farmBtn').disabled = true;
             document.getElementById('farmImg').src = "img/farmb.png";
         }
 
-        if (money >= mine.price) {
+        if (money >= Data.mine.price) {
             document.getElementById('mineBtn').disabled = false;
             document.getElementById('mineImg').src = "img/mine.png";
         }
 
-        if (money < mine.price) {
+        if (money < Data.mine.price) {
             document.getElementById('mineBtn').disabled = true;
             document.getElementById('mineImg').src = "img/mineb.png";
         }
 
-        if (money >= village.price) {
+        if (money >= Data.village.price) {
             document.getElementById('villageBtn').disabled = false;
             document.getElementById('villageImg').src = "img/village.png";
         }
 
-        if (money < village.price) {
+        if (money < Data.village.price) {
             document.getElementById('villageBtn').disabled = true;
             document.getElementById('villageImg').src = "img/villageb.png";
         }
 
-        if (money >= city.price) {
+        if (money >= Data.city.price) {
             document.getElementById('cityBtn').disabled = false;
             document.getElementById('cityImg').src = "img/city.png";
         }
 
-        if (money < city.price) {
+        if (money < Data.city.price) {
             document.getElementById('cityBtn').disabled = true;
             document.getElementById('cityImg').src = "img/cityb.png";
         }
 
-        if (money >= country.price) {
+        if (money >= Data.country.price) {
             document.getElementById('countryBtn').disabled = false;
             document.getElementById('countryImg').src = "img/country.png";
         }
 
-        if (money < country.price) {
+        if (money < Data.country.price) {
             document.getElementById('countryBtn').disabled = true;
             document.getElementById('countryImg').src = "img/countryb.png";
         }
 
-        if (money >= planet.price) {
+        if (money >= Data.planet.price) {
             document.getElementById('planetBtn').disabled = false;
             document.getElementById('planetImg').src = "img/planet.png";
         }
 
-        if (money < planet.price) {
+        if (money < Data.planet.price) {
             document.getElementById('planetBtn').disabled = true;
             document.getElementById('planetImg').src = "img/planetb.png";
         }
 
-        if (money >= galaxy.price) {
+        if (money >= Data.galaxy.price) {
             document.getElementById('galaxyBtn').disabled = false;
             document.getElementById('galaxyImg').src = "img/galaxy.png";
         }
 
-        if (money < galaxy.price) {
+        if (money < Data.galaxy.price) {
             document.getElementById('galaxyBtn').disabled = true;
             document.getElementById('galaxyImg').src = "img/galaxyb.png";
         }
 
-        if (money >= universe.price) {
+        if (money >= Data.universe.price) {
             document.getElementById('universeBtn').disabled = false;
             document.getElementById('universeImg').src = "img/universe.png";
         }
 
-        if (money < universe.price) {
+        if (money < Data.universe.price) {
             document.getElementById('universeBtn').disabled = true;
             document.getElementById('universeImg').src = "img/universeb.png";
         }
@@ -237,13 +262,16 @@ function checkMoney() {
             document.getElementById('minusImg').src = "img/minusb.png"
         }
     }
-    catch (exception){}
-  
+    catch (exception) {
+    }
+
     console.log("checkMoney()");
 }
 
 function mpsLoop() {
     antiCheat = 0;
+    $('[datatype=tooltip]').tooltip();
+
     setMoney(money += mps);
     if ((recharge <= 0) == false) {
         recharge--;
@@ -254,7 +282,7 @@ function mpsLoop() {
     if (bankRecharge == 0) {
         bankCalculate();
     }
-    if($('#animateLogo').is(':checked')){
+    if ($('#animateLogo').is(':checked')) {
         $('#logoHeader').fadeOut(1000, function () {
             $('#logoHeader').fadeIn(1000);
         });
@@ -262,6 +290,7 @@ function mpsLoop() {
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
+    saveData();
 }
 
 function buyClickingPower() {
@@ -269,94 +298,98 @@ function buyClickingPower() {
     setMoney(money -= clickingPowerPrice);
     clickingPowerPrice *= 2;
     checkMoney();
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + clickingPower;
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + clickingPowerPrice + ")";
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
 
 function buyClicker() {
-    setMoney(money -= clicker.price);
-    setMps(mps + clicker.speed);
-    clicker.amount++;
-    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=../img/cursor.png height=20px width=20px>Koop klikker (" + clicker.price + ")";
+    setMoney(money -= Data.clicker.price);
+    setMps(mps + Data.clicker.speed);
+    Data.clicker.amount++;
+    Data.clicker.price += Data.clicker.increase;
     checkMoney();
-    console.log("buyClicker()");
+    console.log("buyclicker()");
+    updatePrices()
 }
 
 function buyFarm() {
-    setMoney(money -= farm.price);
-    setMps(mps + farm.speed);
-    farm.amount++;
-    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=../img/farm.png height=20px width=20px>Koop boerderij (" + farm.price + ")";
+    setMoney(money -= Data.farm.price);
+    setMps(mps + Data.farm.speed);
+    Data.farm.amount++;
+    Data.farm.price += Data.farm.increase;
     checkMoney();
     console.log("buyFarm()");
+    updatePrices()
 }
 
 function buyMine() {
-    setMoney(money -= mine.price);
-    setMps(mps + mine.speed);
-    mine.amount++;
-    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=../img/mine.png height=20px width=20px>Koop mijn (" + mine.price + ")";
+    setMoney(money -= Data.mine.price);
+    setMps(mps + Data.mine.speed);
+    Data.mine.amount++;
+    Data.mine.price += Data.mine.increase;
     checkMoney();
-    console.log("buyMine()");
+    console.log("buyMine()");updatePrices()
 }
 
 function buyVillage() {
-    setMoney(money -= village.price);
-    setMps(mps + village.speed);
-    village.amount++;
-    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=../img/village.png height=20px width=20px>Koop dorp (" + village.price + ")";
+    setMoney(money -= Data.village.price);
+    setMps(mps + Data.village.speed);
+    Data.village.amount++;
+    Data.village.price += Data.village.increase;
     checkMoney();
     console.log("buyVillage()");
+    updatePrices()
 }
 
 function buyCity() {
-    setMoney(money -= city.price);
-    setMps(mps + city.speed);
-    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=../img/city.png height=20px width=20px>Koop stad (" + city.price + ")";
+    setMoney(money -= Data.city.price);
+    setMps(mps + Data.city.speed);
+    Data.city.price += Data.city.increase;
     checkMoney();
-    console.log("buyCity()");
+    console.log("buyCity()");updatePrices()
 }
 
 function buyCountry() {
-    setMoney(money -= country.price);
-    setMps(mps + country.speed);
-    country.amount++;
-    document.getElementById('countryBtn').innerHTML = "<img id='countryImg' class='icon' src=img/county.png height=20px width=20px>Koop land (" + country.price + ")";
+    setMoney(money -= Data.country.price);
+    setMps(mps + Data.country.speed);
+    Data.country.amount++;
+    Data.country.price += Data.country.increase;
     checkMoney();
-    console.log("buyCountry()");
+    console.log("buyCountry()");updatePrices()
 }
 
 function buyPlanet() {
-    setMoney(money -= planet.price);
-    setMps(mps + planet.speed);
-    planet.amount++;
-    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=../img/planet.png height=20px width=20px>Koop planeet (" + planet.price + ")";
+    setMoney(money -= Data.planet.price);
+    setMps(mps + Data.planet.speed);
+    Data.planet.amount++;
+    Data.planet.price += Data.planet.increase;
     checkMoney();
-    console.log("buyPlanet()");
+    console.log("buyPlanet()");updatePrices()
 }
 
 function buyGalaxy() {
-    setMoney(money -= galaxy.price);
-    setMps(mps + galaxy.speed);
-    galaxy.amount++;
-    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=../img/galaxy.png height=20px width=20px>Koop melkweg (" + galaxy.price + ")";
+    setMoney(money -= Data.galaxy.price);
+    setMps(mps + Data.galaxy.speed);
+    Data.galaxy.amount++;
+    Data.galaxy.price += Data.galaxy.increase;
     checkMoney();
-    console.log("buyGalaxy()");
+    console.log("buyGalaxy()");updatePrices()
 }
 
 function buyUniverse() {
-    setMoney(money -= universe.price);
-    setMps(mps += universe.speed);
-    universe.amount++;
-    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=../img/universe.png height=20px width=20px>Koop universum (" + universe.price + ")";
+    setMoney(money -= Data.universe.price);
+    setMps(mps += Data.universe.speed);
+    Data.universe.amount++;
+    Data.universe.price += Data.universe.increase;
     checkMoney();
-    console.log("buyUniverse()");
+    console.log("buyUniverse()");updatePrices()
 }
 
 function buyProvince() {
     setMoney(Math.round(money / 3));
+    setBankMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
@@ -366,11 +399,12 @@ function buyProvince() {
 
 function buySatelite() {
     setMoney(money * 2);
+    setBankMoney(money / 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buySatelitte()");
+    console.log("buySatelitte()");updatePrices()
 }
 
 function depositAll() {
