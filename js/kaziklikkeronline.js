@@ -1,7 +1,7 @@
-var money = 0;
+var money = 200;
 var mps = 0;
 var clickingPower = 1;
-var clickingPowerPrice = 100;
+var clickingPowerPrice = 500;
 var bankMoney = 0;
 var interest = 1.05;
 var timerEnabled = false;
@@ -17,24 +17,33 @@ var Data;
 function NiceNumber(num) {
     num = parseFloat(num);
     console.log(num);
-    if (num < 1000)
+    if (num < 1e+3)
         return num.toString();
-    if (num >= 1000 && num < 1000000)
-        return (Math.round(num / 1000)).toFixed(0).toString() + "K";
-    if (num >= 1000000 && num < 1000000000)
-        return (Math.round(num / 1000000)).toFixed(0).toString() + "M";
-    if (num >= 1000000000 && num < 1000000000000)
-        return (Math.round(num / 1000000000)).toFixed(2).toString() + "B";
-    if (num >= 1000000000000 && num < 1000000000000000)
-        return (Math.round(num / 1000000000000)).toFixed(2).toString() + "T";
-    if (num >= 1000000000000000 && num < 1000000000000000000)
-        return (Math.round(num / 1000000000000000)).toFixed(2).toString() + "Qa";
-    if (num >= 1000000000000000000)
-        return (Math.round(num / 1000000000000000000)).toFixed(2).toString() + "Qi";
+    if (num >= 1e+3 && num < 1e+6)
+        return (num / 1e+3).toFixed(2).toString() + "K";
+    if (num >= 1e+6 && num < 1e+9)
+        return (num / 1e+6).toFixed(2).toString() + "Mi";
+    if (num >= 1e+9 && num < 1e+12)
+        return (num / 1e+9).toFixed(2).toString() + "Bi";
+    if (num >= 1e+12 && num < 1e+15)
+        return (num / 1e+12).toFixed(2).toString() + "Tr";
+    if (num >= 1e+15 && num < 1e+18)
+        return (num / 1e+15).toFixed(2).toString() + "Qa";
+    if (num >= 1e+18 && num < 1e+21)
+        return (num / 1e+18).toFixed(2).toString() + "Qi";
+    if (num >= 1e+21 && num < 1e+24)
+        return (num / 1e+21).toFixed(2).toString() + "Sx";
+    if (num >= 1e+24 && num < 1e+27)
+        return (num / 1e+24).toFixed(2).toString() + "Sp";     
+    if (num >= 1e+27 && num < 1e+30)
+        return (num / 1e+27).toFixed(2).toString() + "Oc";  
+    if (num >= 1e+30 && num < 1e+33)
+        return (num / 1e+30).toFixed(2).toString() + "No";  
+    if (num >= 1e+33 && num < 1e+36)
+        return (num / 1e+33).toFixed(2).toString() + "De";  
     else
         return "ERR";
 }
-
 
 function animateText(element, newText) {
     element.fadeOut(200, function () {
@@ -54,17 +63,17 @@ function setMoney(_money, animate) {
     if (animate && $('#animateText').is(':checked'))
         animateText($('#moneyLbl'), "Geld: " + money);
     else
-        $('#moneyLbl').text("Geld: " + money);
-    $('#moneyLbl').prop('title', NiceNumber(money).toString()).tooltip();
+        $('#moneyLbl').text("Geld: " + NiceNumber(money));
+    //$('#moneyLbl').prop('title', money.toString()).tooltip();
     // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
     localStorage.setItem("money", money);
 }
 
 function setMps(_mps) {
     mps = _mps;
-    $('#MPSLbl').prop('title', NiceNumber(mps).toString());
+    //$('#MPSLbl').prop('title', mps.toString());
 
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
+    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + NiceNumber(mps);
     localStorage.setItem("mps", mps);
 }
 
@@ -79,7 +88,7 @@ function setClickingPower(_clickingPower) {
 
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
-    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + bankMoney;
+    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + NiceNumber(bankMoney);
     localStorage.setItem("bankMoney", bankMoney);
 }
 
@@ -378,6 +387,7 @@ function buyUniverse() {
 
 function buyProvince() {
     setMoney(Math.round(money / 3));
+    setBankMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
@@ -387,6 +397,7 @@ function buyProvince() {
 
 function buySatelite() {
     setMoney(money * 2);
+    setBankMoney(money / 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
