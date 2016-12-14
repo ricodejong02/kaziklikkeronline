@@ -53,7 +53,7 @@ function animateText(element, newText) {
 function setClickingPowerPrice(price) {
     clickingPowerPrice = price;
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setMoney(_money) {
@@ -85,7 +85,7 @@ function setClickingPower(_clickingPower) {
     localStorage.setItem("clickingPower", clickingPower);
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setBankMoney(_bankMoney) {
@@ -104,7 +104,6 @@ function clickBtn() {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
     setMoney(money += clickingPower, true);
 }
 
@@ -296,10 +295,10 @@ function mpsLoop() {
 function buyClickingPower() {
     setClickingPower(clickingPower *= 2);
     setMoney(money -= clickingPowerPrice);
-    clickingPowerPrice *= 2;
+    setClickingPowerPrice(clickingPowerPrice *= 2);
     checkMoney();
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
