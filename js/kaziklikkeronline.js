@@ -299,7 +299,7 @@ function buyClickingPower() {
     clickingPowerPrice *= 2;
     checkMoney();
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + clickingPowerPrice + ")";
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
