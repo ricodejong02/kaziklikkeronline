@@ -52,6 +52,8 @@ function animateText(element, newText) {
 }
 function setClickingPowerPrice(price) {
     clickingPowerPrice = price;
+    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
 }
 
 function setMoney(_money) {
