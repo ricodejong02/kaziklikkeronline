@@ -85,7 +85,7 @@ function setClickingPower(_clickingPower) {
     localStorage.setItem("clickingPower", clickingPower);
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
     document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setBankMoney(_bankMoney) {
