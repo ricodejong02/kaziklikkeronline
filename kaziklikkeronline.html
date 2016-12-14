@@ -35,9 +35,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <script>
-        window.addEventListener("beforeunload", function (e) {
-            save()
-        });
         $(document).ready(function () {
             $.LoadingOverlay("show", {
                 color : "rgba(255, 255, 255, 1)",
@@ -64,6 +61,14 @@
                 }
                 $.LoadingOverlay("hide");
             }, 1000);
+        window.addEventListener("beforeunload", function (e) {
+            $.LoadingOverlay("show", {
+                color : "rgba(255, 255, 255, 1)",
+                fade  : [100, 1000]
+            });
+            save()
+        });
+
             //Restores the saved data
             restoreSaves();
 
@@ -183,6 +188,7 @@
                 <br>
                 <br>
                 <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+				
             </div>
         </div>
     </div>
