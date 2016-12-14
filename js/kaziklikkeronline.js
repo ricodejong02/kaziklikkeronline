@@ -289,6 +289,7 @@ function mpsLoop() {
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
+    localStorage.setItem("recharge", recharge);
     saveData();
 }
 

@@ -13,6 +13,7 @@ function restoreSaves() {
     var clickingPower = parseFloat(localStorage.getItem('clickingPower'));
     var clickingPowerPrice = parseFloat(localStorage.getItem('clickingPowerPrice'));
     var bankMoney = parseFloat(localStorage.getItem('bankMoney'));
+    var _recharge = parseInt(localStorage.getItem('recharge'));
     var mps = parseFloat(localStorage.getItem('mps'));
     if (!isNaN(mps))
         setMps(mps);
@@ -30,6 +31,10 @@ function restoreSaves() {
         setClickingPower(1);
     if (!isNaN(bankMoney))
         setBankMoney(bankMoney);
+    if(!isNaN(_recharge)){
+        recharge = _recharge;
+        console.log("Recharge: "+_recharge)
+    }
     load();
 }
 function saveData() {
