@@ -10,7 +10,13 @@ var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
 var antiCheat = 0;
-
+var bankGraph = {datasets:
+[{
+    label: "Interest",
+    data: [
+        {x: 0, y: 0}
+    ]
+}]};
 var Data;
 
 /**
@@ -36,13 +42,13 @@ function NiceNumber(num) {
     if (num >= 1e+21 && num < 1e+24)
         return (num / 1e+21).toFixed(2).toString() + "Sx";
     if (num >= 1e+24 && num < 1e+27)
-        return (num / 1e+24).toFixed(2).toString() + "Sp";     
+        return (num / 1e+24).toFixed(2).toString() + "Sp";
     if (num >= 1e+27 && num < 1e+30)
-        return (num / 1e+27).toFixed(2).toString() + "Oc";  
+        return (num / 1e+27).toFixed(2).toString() + "Oc";
     if (num >= 1e+30 && num < 1e+33)
-        return (num / 1e+30).toFixed(2).toString() + "No";  
+        return (num / 1e+30).toFixed(2).toString() + "No";
     if (num >= 1e+33 && num < 1e+36)
-        return (num / 1e+33).toFixed(2).toString() + "De";  
+        return (num / 1e+33).toFixed(2).toString() + "De";
     else
         return "ERR";
 }
@@ -282,6 +288,7 @@ function openWiki() {
         }
     });
 }
+var i = 0;
 function mpsLoop() {
     antiCheat = 0;
     // $('[datatype=tooltip]').tooltip();
@@ -301,14 +308,17 @@ function mpsLoop() {
             $('#logoHeader').fadeIn(1000);
         });
     }
-    if(Math.floor(((Math.random() * 5)) + 1 ) == 1){
-        setInterest(Math.floor((Math.random() * 9) + 1));
+    if (Math.floor(((Math.random() * 4  )) + 1) == 1) {
+        setInterest(Math.floor((Math.random() * 9) + 0.1));
     }
+    bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
     localStorage.setItem("recharge", recharge);
     saveData();
+    console.log(bankGraph);
+    i++;
 }
 
 function buyClickingPower() {
@@ -348,7 +358,8 @@ function buyMine() {
     Data.mine.amount++;
     Data.mine.price += Data.mine.increase;
     checkMoney();
-    console.log("buyMine()");updatePrices()
+    console.log("buyMine()");
+    updatePrices()
 }
 
 function buyVillage() {
@@ -366,7 +377,8 @@ function buyCity() {
     setMps(mps + Data.city.speed);
     Data.city.price += Data.city.increase;
     checkMoney();
-    console.log("buyCity()");updatePrices()
+    console.log("buyCity()");
+    updatePrices()
 }
 
 function buyCountry() {
@@ -375,7 +387,8 @@ function buyCountry() {
     Data.country.amount++;
     Data.country.price += Data.country.increase;
     checkMoney();
-    console.log("buyCountry()");updatePrices()
+    console.log("buyCountry()");
+    updatePrices()
 }
 
 function buyPlanet() {
@@ -384,7 +397,8 @@ function buyPlanet() {
     Data.planet.amount++;
     Data.planet.price += Data.planet.increase;
     checkMoney();
-    console.log("buyPlanet()");updatePrices()
+    console.log("buyPlanet()");
+    updatePrices()
 }
 
 function buyGalaxy() {
@@ -393,7 +407,8 @@ function buyGalaxy() {
     Data.galaxy.amount++;
     Data.galaxy.price += Data.galaxy.increase;
     checkMoney();
-    console.log("buyGalaxy()");updatePrices()
+    console.log("buyGalaxy()");
+    updatePrices()
 }
 
 function buyUniverse() {
@@ -402,7 +417,8 @@ function buyUniverse() {
     Data.universe.amount++;
     Data.universe.price += Data.universe.increase;
     checkMoney();
-    console.log("buyUniverse()");updatePrices()
+    console.log("buyUniverse()");
+    updatePrices()
 }
 
 function buyProvince() {
@@ -422,7 +438,8 @@ function buySatelite() {
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buySatelitte()");updatePrices()
+    console.log("buySatelitte()");
+    updatePrices()
 }
 
 function depositAll() {

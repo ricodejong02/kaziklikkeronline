@@ -14,6 +14,7 @@
     <script src="js/loadingoverlay.min.js"></script>
     <script src="js/loadingoverlay_progress.min.js"></script>
     <script src="js/kaziklikkeronline.js"></script>
+    <script src="js/Chart.bundle.min.js"></script>
     <script src="js/bootstrap-dialog.min.js"></script>
     <script src="js/localStorageController.js"></script>
     <script src="js/Constants.js"></script>
@@ -201,6 +202,19 @@
             <button id="withdraw10KBtn" class="btn btn-default btn-lg" onclick="withdraw10K()" disabled="disabled"><img
                     id="minusImg" class="icon" src=img/minusb.png height=20px width=20px>10000
                 opnemen
+            </button>
+            <button id="bank" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
+                        message: function (dialog) {
+                            var $message = $('<div></div>');
+                            var pageToLoad = dialog.getData('pageToLoad');
+                            $message.load(pageToLoad);
+
+                            return $message;
+                        },
+                        data: {
+                            'pageToLoad': 'dialogs/bankchart.html'
+                        }
+                    });" >Bekijk grafiek
             </button>
         </div>
     </div>
