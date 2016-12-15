@@ -8,7 +8,7 @@ function restoreSaves() {
         clickBtn();
     }
     else
-        setMoney(0);
+        setMoney(200);
 
     var clickingPower = parseFloat(localStorage.getItem('clickingPower'));
     var clickingPowerPrice = parseFloat(localStorage.getItem('clickingPowerPrice'));

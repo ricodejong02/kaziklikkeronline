@@ -225,7 +225,8 @@
                         data: {
                             'pageToLoad': 'dialogs/getiframe.html'
                         }
-                    });">Get KaziKlikker for your website!</button>
+                    });">Get the iFrame!
+            </button>
         </div>
     </div>
 </div>
@@ -233,9 +234,12 @@
     <div class="col-md-12" style="padding: 0">
         <div class="header text-center">
             <h4 style="padding-top: 30px;">Made by <b>Daniel Verhoef</b> <br>and<br><b>Rico de Jong</b></h4>
+            <h5>Versie <span id="version"></span></h5>
         </div>
     </div>
 </div>
 </body>
-
+<script>
+    $('#version').html("<a href=''><b>" + version + "</b></a>");
+</script>
 </html>

@@ -1,3 +1,5 @@
+const version = "0.0.1";
+
 var money = 200;
 var mps = 0;
 var clickingPower = 1;
