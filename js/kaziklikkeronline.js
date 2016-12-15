@@ -299,6 +299,9 @@ function mpsLoop() {
             $('#logoHeader').fadeIn(1000);
         });
     }
+    if(Math.floor(((Math.random() * 5)) + 1 ) == 1){
+        setInterest(Math.floor((Math.random() * 9) + 1));
+    }
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
     console.log("mpsLoop()");
@@ -448,4 +451,9 @@ function bankCalculate() {
     bankRecharge = 120;
     setBankMoney(Math.round(bankMoney * interest));
     console.log("bankCalculate()");
+}
+function setInterest(_interest) {
+    interest = _interest / 100 + 1;
+    console.log(interest);
+    $('#interestLbl').text('Rente: ' + _interest + '%');
 }

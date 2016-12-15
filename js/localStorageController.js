@@ -61,6 +61,7 @@ function reset() {
     recharge = 120;
     console.log("reset()");
     Data = DataBC;
+    saveData();
     updatePrices();
 }
 

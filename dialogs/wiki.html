@@ -7,11 +7,12 @@
     var content = "";
     for (var item in Data) {
         var value = Data[item];
+        console.log(value);
         content += '<h3>' + value.name.toString() + '</h3>' +
-            '<h6>Geld per seconde: ' + value.speed.toString() + '</h6>' +
-            '<h6>Kost: ' + NiceNumber(value.price) + '</h6>' +
-            '<h6>Je hebt er ' + value.amount + '!</h6>';
+            '<h5>Geld per seconde: ' + value.speed.toString() + '</h5>' +
+            '<h5>Kost: ' + NiceNumber(value.price) + '</h5>' +
+            '<h5>Je hebt er ' + value.amount + '!</h5>';
         $('#content').html(content);
     }
 </script>
-<div id="content"></div>
+<div id="content" class="text-center"></div>
