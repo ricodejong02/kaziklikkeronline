@@ -2,7 +2,7 @@
  * Created by Daniel Verhoef on 13-12-2016.
  */
 function restoreSaves() {
-    var money = localStorage.getItem('money');
+    var money = parseInt(localStorage.getItem('money'));
     if (!isNaN(money)) {
         setMoney(money - 1);
         clickBtn();
