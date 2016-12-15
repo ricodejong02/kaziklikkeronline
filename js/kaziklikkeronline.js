@@ -1,4 +1,4 @@
-const version = "0.0.1";
+const version = "0.0.2";
 
 var money = 200;
 var mps = 0;
