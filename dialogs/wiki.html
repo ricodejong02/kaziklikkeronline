@@ -11,7 +11,8 @@
         content += '<h3>' + value.name.toString() + '</h3>' +
             '<h5>Geld per seconde: ' + value.speed.toString() + '</h5>' +
             '<h5>Kost: ' + NiceNumber(value.price) + '</h5>' +
-            '<h5>Je hebt er ' + value.amount + '!</h5>';
+            '<h5>Je hebt er ' + value.amount + '!</h5>' +
+            '<h5>Totale aantal geld/seconde: ' + value.amount * value.speed + '</h5>';
         $('#content').html(content);
     }
 </script>
