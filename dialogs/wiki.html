@@ -1,0 +1,17 @@
+<style>
+    h1, h2, h3, h4, h5, h6, p, a {
+        color: #2c2c2c;
+    }
+</style>
+<script>
+    var content = "";
+    for (var item in Data) {
+        var value = Data[item];
+        content += '<h3>' + value.name.toString() + '</h3>' +
+            '<h6>Geld per seconde: ' + value.speed.toString() + '</h6>' +
+            '<h6>Kost: ' + NiceNumber(value.price) + '</h6>' +
+            '<h6>Je hebt er ' + value.amount + '!</h6>';
+        $('#content').html(content);
+    }
+</script>
+<div id="content"></div>

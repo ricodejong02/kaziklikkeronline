@@ -266,10 +266,23 @@ function checkMoney() {
 
     console.log("checkMoney()");
 }
+function openWiki() {
+    BootstrapDialog.show({
+        message: function (dialog) {
+            var $message = $('<div></div>');
+            var pageToLoad = dialog.getData('pageToLoad');
+            $message.load(pageToLoad);
 
+            return $message;
+        },
+        data: {
+            'pageToLoad': 'dialogs/wiki.html'
+        }
+    });
+}
 function mpsLoop() {
     antiCheat = 0;
-    $('[datatype=tooltip]').tooltip();
+    // $('[datatype=tooltip]').tooltip();
 
     setMoney(money += mps);
     if ((recharge <= 0) == false) {

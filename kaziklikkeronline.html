@@ -80,7 +80,8 @@
             //Restores the saved data
             restoreSaves();
 
-            $('[datatype=tooltip]').tooltip();
+            // Temporary disable the tooltips
+//            $('[datatype=tooltip]').tooltip();
         })
     </script>
 
@@ -174,6 +175,9 @@
                     id="sunImg" class="icon" src=img/sunb.png height=20px width=20px>Koop
                 zon
             </button>
+            <br>
+            <hr>
+            <button class="btn btn-primary btn-lg" onclick="openWiki()">Open de wiki</button>
         </div>
         <div class="col-md-3 box">
             <h2>Bank</h2>
