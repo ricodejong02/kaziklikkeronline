@@ -74,13 +74,13 @@ Storage.prototype.getObject = function (key) {
     return value && JSON.parse(value);
 };
 function updatePrices() {
-    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=img/cursorb.png height=20px width=20px>Koop klikker (" + NiceNumber(Data.clicker.price) + ")";
-    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=img/farmb.png height=20px width=20px>Koop boerderij (" + NiceNumber(Data.farm.price) + ")";
-    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=img/mineb.png height=20px width=20px>Koop mijn (" + NiceNumber(Data.mine.price) + ")";
-    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=img/villageb.png height=20px width=20px>Koop dorp (" + NiceNumber(Data.village.price) + ")";
-    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=img/cityb.png height=20px width=20px>Koop stad (" + NiceNumber(Data.city.price) + ")";
-    document.getElementById('countryBtn').innerHTML = "<img id='countryImg' class='icon' src=img/countryb.png height=20px width=20px>Koop land (" + NiceNumber(Data.country.price) + ")";
-    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=img/planetb.png height=20px width=20px>Koop planeet (" + NiceNumber(Data.planet.price) + ")";
-    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=img/galaxyb.png height=20px width=20px>Koop melkweg (" + NiceNumber(Data.galaxy.price) + ")";
-    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universeb.png height=20px width=20px>Koop universum (" + NiceNumber(Data.universe.price) + ")";
+    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=img/cursorb.png height=20px width=20px>Buy klikker (" + NiceNumber(Data.clicker.price) + ")";
+    document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=img/farmb.png height=20px width=20px>Buy boerderij (" + NiceNumber(Data.farm.price) + ")";
+    document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=img/mineb.png height=20px width=20px>Buy mijn (" + NiceNumber(Data.mine.price) + ")";
+    document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=img/villageb.png height=20px width=20px>Buy dorp (" + NiceNumber(Data.village.price) + ")";
+    document.getElementById('cityBtn').innerHTML = "<img id='cityImg' class='icon' src=img/cityb.png height=20px width=20px>Buy stad (" + NiceNumber(Data.city.price) + ")";
+    document.getElementById('countryBtn').innerHTML = "<img id='countryImg' class='icon' src=img/countryb.png height=20px width=20px>Buy land (" + NiceNumber(Data.country.price) + ")";
+    document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=img/planetb.png height=20px width=20px>Buy planeet (" + NiceNumber(Data.planet.price) + ")";
+    document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=img/galaxyb.png height=20px width=20px>Buy melkweg (" + NiceNumber(Data.galaxy.price) + ")";
+    document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universeb.png height=20px width=20px>Buy universum (" + NiceNumber(Data.universe.price) + ")";
 }

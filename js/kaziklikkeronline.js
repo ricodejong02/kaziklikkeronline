@@ -60,8 +60,8 @@ function animateText(element, newText) {
 }
 function setClickingPowerPrice(price) {
     clickingPowerPrice = price;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setMoney(_money) {
@@ -71,11 +71,11 @@ function setMoney(_money, animate) {
     money = _money;
     checkMoney();
     if (animate && $('#animateText').is(':checked'))
-        animateText($('#moneyLbl'), "Geld: " + money);
+        animateText($('#moneyLbl'), "Money: " + money);
     else
-        $('#moneyLbl').text("Geld: " + NiceNumber(money));
+        $('#moneyLbl').text("Money: " + NiceNumber(money));
     //$('#moneyLbl').prop('title', money.toString()).tooltip();
-    // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
+    // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
     localStorage.setItem("money", money);
 }
 
@@ -83,22 +83,22 @@ function setMps(_mps) {
     mps = _mps;
     //$('#MPSLbl').prop('title', mps.toString());
 
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + NiceNumber(mps);
+    document.getElementById('MPSLbl').innerHTML = "Money/second: " + NiceNumber(mps);
     localStorage.setItem("mps", mps);
 }
 
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
     localStorage.setItem("clickingPower", clickingPower);
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
-    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + NiceNumber(bankMoney);
+    document.getElementById('bankMoneyLbl').innerHTML = "Money on bank: " + NiceNumber(bankMoney);
     localStorage.setItem("bankMoney", bankMoney);
 }
 
@@ -326,8 +326,8 @@ function buyClickingPower() {
     setMoney(money -= clickingPowerPrice);
     setClickingPowerPrice(clickingPowerPrice *= 2);
     checkMoney();
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 
     localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }

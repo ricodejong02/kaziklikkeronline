@@ -9,10 +9,10 @@
         var value = Data[item];
         console.log(value);
         content += '<h3>' + value.name.toString() + '</h3>' +
-            '<h5>Geld per seconde: ' + value.speed.toString() + '</h5>' +
-            '<h5>Kost: ' + NiceNumber(value.price) + '</h5>' +
-            '<h5>Je hebt er ' + value.amount + '!</h5>' +
-            '<h5>Totale aantal geld/seconde: ' + NiceNumber(value.amount * value.speed) + '</h5>';
+            '<h5>Money/second: ' + value.speed.toString() + '</h5>' +
+            '<h5>Costs: ' + NiceNumber(value.price) + '</h5>' +
+            '<h5>You own ' + value.amount + '!</h5>' +
+            '<h5>Totale aantal Money/seconde: ' + NiceNumber(value.amount * value.speed) + '</h5>';
         $('#content').html(content);
     }
 </script>

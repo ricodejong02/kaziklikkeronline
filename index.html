@@ -86,9 +86,9 @@
     <div class="header">
         <img src="logo.svg" id="logoHeader" width="512"/>
         <h2 id="welcomeMessage">Hallo, Wereld!</h2>
-        <h4 id="moneyLbl" datatype="tooltip">Geld: 200</h4>
-        <h4 id="MPSLbl" datatype="tooltip">Geld per seconde: 0</h4>
-        <h4 id="clickingPowerLbl">Klikkracht: 1</h4>
+        <h4 id="moneyLbl" datatype="tooltip">Money: 200</h4>
+        <h4 id="MPSLbl" datatype="tooltip">Money/seconde: 0</h4>
+        <h4 id="clickingPowerLbl">Clicking power: 1</h4>
         <h4 id="countdownLbl">Recharge: 120</h4>
     </div>
     <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Klik!</button>
@@ -98,83 +98,83 @@
         <div class="col-md-8 box">
             <h2>Winkel</h2>
             <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()"
-                    datatype="tooltip" title="Verdubbel je klikkracht"
+                    datatype="tooltip" title="Verdubbel je Clicking power"
                     disabled>
-                Koop klikkracht (500)
+                Buy Clicking power (500)
             </button>
             <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 1"><img
-                    id="clickerImg" class="icon" src=img/cursorb.png height=20px width=20px>Koop klikker (250)
+                    datatype="tooltip" title="Money/second: 1"><img
+                    id="clickerImg" class="icon" src=img/cursorb.png height=20px width=20px>Buy klikker (250)
             </button>
             <br>
             <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 5"><img id="farmImg"
+                    datatype="tooltip" title="Money/second: 5"><img id="farmImg"
                                                                          class="icon"
                                                                          src=img/farmb.png
                                                                          height=20px
-                                                                         width=20px>Koop
+                                                                         width=20px>Buy
                 boerderij (200)
             </button>
             <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 50"><img id="mineImg"
+                    datatype="tooltip" title="Money/second: 50"><img id="mineImg"
                                                                           class="icon"
                                                                           src=img/mineb.png
                                                                           height=20px
-                                                                          width=20px>Koop
+                                                                          width=20px>Buy
                 mijn (2500)
             </button>
             <br>
             <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 100"><img
-                    id="villageImg" class="icon" src=img/villageb.png height=20px width=20px>Koop dorp (6500)
+                    datatype="tooltip" title="Money/second: 100"><img
+                    id="villageImg" class="icon" src=img/villageb.png height=20px width=20px>Buy dorp (6500)
             </button>
             <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 1000"><img id="cityImg"
+                    datatype="tooltip" title="Money/second: 1000"><img id="cityImg"
                                                                             class="icon"
                                                                             src=img/cityb.png
                                                                             height=20px
-                                                                            width=20px>Koop
+                                                                            width=20px>Buy
                 stad (75000)
             </button>
             <br>
 
             <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 65000"><img
-                    id="countryImg" class="icon" src=img/countryb.png height=20px width=20px>Koop land (450000)
+                    datatype="tooltip" title="Money/second: 65000"><img
+                    id="countryImg" class="icon" src=img/countryb.png height=20px width=20px>Buy land (450000)
             </button>
             <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 100000"><img
-                    id="planetImg" class="icon" src=img/planetb.png height=20px width=20px>Koop planeet (1000000)
+                    datatype="tooltip" title="Money/second: 100000"><img
+                    id="planetImg" class="icon" src=img/planetb.png height=20px width=20px>Buy planeet (1000000)
             </button>
             <br>
 
             <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 50000"><img
-                    id="galaxyImg" class="icon" src=img/galaxyb.png height=20px width=20px>Koop melkweg (7500000)
+                    datatype="tooltip" title="Money/second: 50000"><img
+                    id="galaxyImg" class="icon" src=img/galaxyb.png height=20px width=20px>Buy melkweg (7500000)
             </button>
             <button id="universeBtn" class="btn btn-default btn-lg" onclick="buyUniverse()" disabled="disabled"
-                    datatype="tooltip" title="Geld per seconden: 500000"><img
-                    id="universeImg" class="icon" src=img/universeb.png height=20px width=20px>Koop universum
+                    datatype="tooltip" title="Money/second: 500000"><img
+                    id="universeImg" class="icon" src=img/universeb.png height=20px width=20px>Buy universum
                 (100000000)
             </button>
             <br>
             <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" datatype="tooltip"
-                    title="Koop een maan om je geld/seconde te verdubbelen" disabled="disabled"><img
-                    id="moonImg" class="icon" src=img/moonb.png height=20px width=20px>Koop
+                    title="Buy a maan to dubble your money/second" disabled="disabled"><img
+                    id="moonImg" class="icon" src=img/moonb.png height=20px width=20px>Buy
                 maan
             </button>
             <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelite()" datatype="tooltip"
-                    title="Koop een zon om je totale geld te verdubbelen" disabled="disabled"><img
-                    id="sunImg" class="icon" src=img/sunb.png height=20px width=20px>Koop
+                    title="Buy a zon to dubble your money" disabled="disabled"><img
+                    id="sunImg" class="icon" src=img/sunb.png height=20px width=20px>Buy
                 zon
             </button>
             <br>
             <hr>
-            <button class="btn btn-primary btn-lg" onclick="openWiki()">Bekijk de informatie</button>
+            <button class="btn btn-primary btn-lg" onclick="openWiki()">Show info</button>
         </div>
         <div class="col-md-3 box">
             <h2>Bank</h2>
-            <h4 id="bankMoneyLbl">Geld op bank: 0</h4>
+            <h4 id="bankMoneyLbl">Money on bank: 0</h4>
             <h4 id="interestLbl">Rente: 5%</h4>
             <h4 id="bankRechargeLbl">Tijd over: 120</h4>
             <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>"><img
@@ -215,7 +215,7 @@
     <hr>
     <div class="row">
         <div class="col-md-12">
-            <h2>Opties</h2>
+            <h2>Settings</h2>
             <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
             <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
             <br>
