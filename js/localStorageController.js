@@ -4,6 +4,8 @@
 var database = firebase.database();
 
 function restoreSaves() {
+    $.LoadingOverlay("hide");
+
     getProperties();
     updatePrices();
 
@@ -28,8 +30,8 @@ function saveProperty(name, prop) {
 function getProperties() {
     getUserDB().child('properties').once('value').then(function(snapshot) {
         var values = snapshot.val();
-        if(isNaN(values.money)){
-
+        if(values == null){
+            save()
         }
         else{
             setMoney(values.money);
@@ -44,7 +46,6 @@ function getProperties() {
             setInterval(mpsLoop, 1000)
         }
         updatePrices();
-        $.LoadingOverlay("hide");
     });
 }
 function reset() {
