@@ -33,9 +33,9 @@ function getProperties() {
         }
         else{
             setMoney(values.money);
-            bankMoney = values.bankMoney;
-            clickingPower = values.clickingPower;
-            clickingPowerPrice = values.clickingPowerPrice;
+            setBankMoney(values.bankMoney);
+            setClickingPower(values.clickingPower);
+            setClickingPowerPrice(values.clickingPowerPrice);
             recharge = values.recharge;
             setMps(values.mps);
         }
