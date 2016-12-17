@@ -74,7 +74,10 @@ function updatePrices() {
     document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universeb.png height=20px width=20px>Buy universum (" + NiceNumber(Data.universe.price) + ")";
 }
 function save() {
-    saveProperty("money", money);
+    console.log("saving... ");
+    if(money !== 200){
+        saveProperty("money", money);
+    }
     saveProperty("bankMoney", bankMoney);
     saveProperty("clickingPower", clickingPower);
     saveProperty("clickingPowerPrice", clickingPowerPrice);
