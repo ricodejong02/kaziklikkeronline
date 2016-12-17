@@ -1,3 +1,4 @@
+
 const version = "0.0.2";
 
 var money = 200;
@@ -10,6 +11,8 @@ var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
 var antiCheat = 0;
+var currentUser;
+var signedIn = false;
 var bankGraph = {datasets:
 [{
     label: "Interest",
@@ -18,13 +21,45 @@ var bankGraph = {datasets:
     ]
 }]};
 var Data;
-
+function signIn() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    provider.setCustomParameters({
+        'login_hint': 'user@example.com'
+    });
+    firebase.auth().onAuthStateChanged(function(user) {
+        if (user) {
+            currentUser = user;
+            $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+            if(!signedIn){
+                console.log("Loading...");
+                Load();
+                signedIn = true;
+            }
+        } else {
+            firebase.auth().signInWithPopup(provider).then(function(result) {
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                currentUser = result.user;
+            }).catch(function(error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+        }
+    });
+}
 /**
  * @return {string}
  */
 function NiceNumber(num) {
     num = parseFloat(num);
-    console.log(num);
     if (num < 1e+3)
         return num.toString();
     if (num >= 1e+3 && num < 1e+6)
@@ -76,15 +111,13 @@ function setMoney(_money, animate) {
         $('#moneyLbl').text("Money: " + NiceNumber(money));
     //$('#moneyLbl').prop('title', money.toString()).tooltip();
     // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
-    localStorage.setItem("money", money);
+    save();
 }
 
 function setMps(_mps) {
     mps = _mps;
-    //$('#MPSLbl').prop('title', mps.toString());
-
+    // console.log("setMps: " + mps + " is now: " + _mps);
     document.getElementById('MPSLbl').innerHTML = "Money/second: " + NiceNumber(mps);
-    localStorage.setItem("mps", mps);
 }
 
 function setClickingPower(_clickingPower) {
@@ -112,7 +145,7 @@ function clickBtn() {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
-    setMoney(money += clickingPower, true);
+    setMoney(money += clickingPower);
 }
 
 function checkMoney() {
@@ -272,7 +305,6 @@ function checkMoney() {
     catch (exception) {
     }
 
-    console.log("checkMoney()");
 }
 function openWiki() {
     BootstrapDialog.show({
@@ -314,10 +346,9 @@ function mpsLoop() {
     bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
-    console.log("mpsLoop()");
     localStorage.setItem("recharge", recharge);
     saveData();
-    console.log(bankGraph);
+    save();
     i++;
 }
 
@@ -338,7 +369,6 @@ function buyClicker() {
     Data.clicker.amount++;
     Data.clicker.price += Data.clicker.increase;
     checkMoney();
-    console.log("buyclicker()");
     updatePrices()
 }
 
@@ -348,7 +378,6 @@ function buyFarm() {
     Data.farm.amount++;
     Data.farm.price += Data.farm.increase;
     checkMoney();
-    console.log("buyFarm()");
     updatePrices()
 }
 
@@ -358,7 +387,6 @@ function buyMine() {
     Data.mine.amount++;
     Data.mine.price += Data.mine.increase;
     checkMoney();
-    console.log("buyMine()");
     updatePrices()
 }
 
@@ -368,7 +396,6 @@ function buyVillage() {
     Data.village.amount++;
     Data.village.price += Data.village.increase;
     checkMoney();
-    console.log("buyVillage()");
     updatePrices()
 }
 
@@ -377,7 +404,6 @@ function buyCity() {
     setMps(mps + Data.city.speed);
     Data.city.price += Data.city.increase;
     checkMoney();
-    console.log("buyCity()");
     updatePrices()
 }
 
@@ -387,7 +413,6 @@ function buyCountry() {
     Data.country.amount++;
     Data.country.price += Data.country.increase;
     checkMoney();
-    console.log("buyCountry()");
     updatePrices()
 }
 
@@ -397,7 +422,6 @@ function buyPlanet() {
     Data.planet.amount++;
     Data.planet.price += Data.planet.increase;
     checkMoney();
-    console.log("buyPlanet()");
     updatePrices()
 }
 
@@ -407,7 +431,6 @@ function buyGalaxy() {
     Data.galaxy.amount++;
     Data.galaxy.price += Data.galaxy.increase;
     checkMoney();
-    console.log("buyGalaxy()");
     updatePrices()
 }
 
@@ -417,7 +440,6 @@ function buyUniverse() {
     Data.universe.amount++;
     Data.universe.price += Data.universe.increase;
     checkMoney();
-    console.log("buyUniverse()");
     updatePrices()
 }
 
@@ -428,7 +450,6 @@ function buyProvince() {
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buyProvince()");
 }
 
 function buySatelite() {
@@ -438,41 +459,34 @@ function buySatelite() {
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buySatelitte()");
     updatePrices()
 }
 
 function depositAll() {
     setBankMoney(bankMoney += money);
     setMoney(0);
-    console.log("depositAll()");
 }
 
 function withdrawAll() {
     setMoney(money += bankMoney);
     setBankMoney(0);
-    console.log("withdrawAll()");
 }
 
 function deposit10K() {
     setBankMoney(bankMoney += 10000);
     setMoney(money -= 10000);
-    console.log("deposit10K()");
 }
 
 function withdraw10K() {
     setMoney(money += 10000);
     setBankMoney(bankMoney -= 10000);
-    console.log("withdraw10K()");
 }
 
 function bankCalculate() {
     bankRecharge = 120;
     setBankMoney(Math.round(bankMoney * interest));
-    console.log("bankCalculate()");
 }
 function setInterest(_interest) {
     interest = _interest / 100 + 1;
-    console.log(interest);
     $('#interestLbl').text('Rente: ' + _interest + '%');
 }
