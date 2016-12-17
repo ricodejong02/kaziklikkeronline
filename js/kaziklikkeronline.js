@@ -123,8 +123,6 @@ function setMps(_mps) {
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
     document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
-    localStorage.setItem("clickingPower", clickingPower);
-    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
     document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
     document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
@@ -132,7 +130,6 @@ function setClickingPower(_clickingPower) {
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
     document.getElementById('bankMoneyLbl').innerHTML = "Money on bank: " + NiceNumber(bankMoney);
-    localStorage.setItem("bankMoney", bankMoney);
 }
 
 function clickBtn() {
@@ -346,7 +343,6 @@ function mpsLoop() {
     bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
     document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
     document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
-    localStorage.setItem("recharge", recharge);
     saveData();
     save();
     i++;
@@ -360,7 +356,6 @@ function buyClickingPower() {
     document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
     document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 
-    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
 
 function buyClicker() {
