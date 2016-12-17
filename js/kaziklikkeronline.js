@@ -99,19 +99,18 @@ function setClickingPowerPrice(price) {
     document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
-function setMoney(_money) {
-    setMoney(_money, false)
-}
-function setMoney(_money, animate) {
-    money = _money;
-    checkMoney();
-    if (animate && $('#animateText').is(':checked'))
-        animateText($('#moneyLbl'), "Money: " + money);
-    else
-        $('#moneyLbl').text("Money: " + NiceNumber(money));
-    //$('#moneyLbl').prop('title', money.toString()).tooltip();
-    // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
-    save();
+function setMoney(_money, animate, uid) {
+    if(uid == currentUser.uid){
+        money = _money;
+        checkMoney();
+        if (animate && $('#animateText').is(':checked'))
+            animateText($('#moneyLbl'), "Money: " + money);
+        else
+            $('#moneyLbl').text("Money: " + NiceNumber(money));
+        //$('#moneyLbl').prop('title', money.toString()).tooltip();
+        // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
+        save();
+    }
 }
 
 function setMps(_mps) {
@@ -142,7 +141,7 @@ function clickBtn() {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
-    setMoney(money += clickingPower);
+    setMoney(money += clickingPower, undefined, currentUser.uid);
 }
 
 function checkMoney() {
@@ -322,7 +321,7 @@ function mpsLoop() {
     antiCheat = 0;
     // $('[datatype=tooltip]').tooltip();
 
-    setMoney(money += mps);
+    setMoney(money += mps, undefined, currentUser.uid);
     if ((recharge <= 0) == false) {
         recharge--;
     }
@@ -350,7 +349,7 @@ function mpsLoop() {
 
 function buyClickingPower() {
     setClickingPower(clickingPower *= 2);
-    setMoney(money -= clickingPowerPrice);
+    setMoney(money -= clickingPowerPrice, undefined, currentUser.uid);
     setClickingPowerPrice(clickingPowerPrice *= 2);
     checkMoney();
     document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
@@ -359,7 +358,7 @@ function buyClickingPower() {
 }
 
 function buyClicker() {
-    setMoney(money -= Data.clicker.price);
+    setMoney(money -= Data.clicker.price, undefined, currentUser.uid);
     setMps(mps + Data.clicker.speed);
     Data.clicker.amount++;
     Data.clicker.price += Data.clicker.increase;
@@ -368,7 +367,7 @@ function buyClicker() {
 }
 
 function buyFarm() {
-    setMoney(money -= Data.farm.price);
+    setMoney(money -= Data.farm.price, undefined, currentUser.uid);
     setMps(mps + Data.farm.speed);
     Data.farm.amount++;
     Data.farm.price += Data.farm.increase;
@@ -377,7 +376,7 @@ function buyFarm() {
 }
 
 function buyMine() {
-    setMoney(money -= Data.mine.price);
+    setMoney(money -= Data.mine.price, undefined, currentUser.uid);
     setMps(mps + Data.mine.speed);
     Data.mine.amount++;
     Data.mine.price += Data.mine.increase;
@@ -386,7 +385,7 @@ function buyMine() {
 }
 
 function buyVillage() {
-    setMoney(money -= Data.village.price);
+    setMoney(money -= Data.village.price, undefined, currentUser.uid);
     setMps(mps + Data.village.speed);
     Data.village.amount++;
     Data.village.price += Data.village.increase;
@@ -395,7 +394,7 @@ function buyVillage() {
 }
 
 function buyCity() {
-    setMoney(money -= Data.city.price);
+    setMoney(money -= Data.city.price, undefined, currentUser.uid);
     setMps(mps + Data.city.speed);
     Data.city.price += Data.city.increase;
     checkMoney();
@@ -403,7 +402,7 @@ function buyCity() {
 }
 
 function buyCountry() {
-    setMoney(money -= Data.country.price);
+    setMoney(money -= Data.country.price, undefined, currentUser.uid);
     setMps(mps + Data.country.speed);
     Data.country.amount++;
     Data.country.price += Data.country.increase;
@@ -412,7 +411,7 @@ function buyCountry() {
 }
 
 function buyPlanet() {
-    setMoney(money -= Data.planet.price);
+    setMoney(money -= Data.planet.price, undefined, currentUser.uid);
     setMps(mps + Data.planet.speed);
     Data.planet.amount++;
     Data.planet.price += Data.planet.increase;
@@ -421,7 +420,7 @@ function buyPlanet() {
 }
 
 function buyGalaxy() {
-    setMoney(money -= Data.galaxy.price);
+    setMoney(money -= Data.galaxy.price, undefined, currentUser.uid);
     setMps(mps + Data.galaxy.speed);
     Data.galaxy.amount++;
     Data.galaxy.price += Data.galaxy.increase;
@@ -430,7 +429,7 @@ function buyGalaxy() {
 }
 
 function buyUniverse() {
-    setMoney(money -= Data.universe.price);
+    setMoney(money -= Data.universe.price, undefined, currentUser.uid);
     setMps(mps += Data.universe.speed);
     Data.universe.amount++;
     Data.universe.price += Data.universe.increase;
@@ -439,7 +438,7 @@ function buyUniverse() {
 }
 
 function buyProvince() {
-    setMoney(Math.round(money / 3));
+    setMoney(Math.round(money / 3), undefined, currentUser.uid);
     setBankMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
@@ -448,7 +447,7 @@ function buyProvince() {
 }
 
 function buySatelite() {
-    setMoney(money * 2);
+    setMoney(money * 2, undefined, currentUser.uid);
     setBankMoney(money / 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
@@ -459,21 +458,21 @@ function buySatelite() {
 
 function depositAll() {
     setBankMoney(bankMoney += money);
-    setMoney(0);
+    setMoney(0, undefined, currentUser.uid);
 }
 
 function withdrawAll() {
-    setMoney(money += bankMoney);
+    setMoney(money += bankMoney, undefined, currentUser.uid);
     setBankMoney(0);
 }
 
 function deposit10K() {
     setBankMoney(bankMoney += 10000);
-    setMoney(money -= 10000);
+    setMoney(money -= 10000, undefined, currentUser.uid);
 }
 
 function withdraw10K() {
-    setMoney(money += 10000);
+    setMoney(money += 10000, undefined, currentUser.uid);
     setBankMoney(bankMoney -= 10000);
 }
 

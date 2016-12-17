@@ -34,7 +34,7 @@ function getProperties() {
             save()
         }
         else{
-            setMoney(values.money);
+            setMoney(values.money, undefined, currentUser.uid);
             setBankMoney(values.bankMoney);
             setClickingPower(values.clickingPower);
             setClickingPowerPrice(values.clickingPowerPrice);
@@ -50,7 +50,7 @@ function getProperties() {
 }
 function reset() {
     setBankMoney(0);
-    setMoney(200);
+    setMoney(200, undefined, currentUser.uid);
     setMps(0);
     setClickingPower(1);
     setClickingPowerPrice(500);
