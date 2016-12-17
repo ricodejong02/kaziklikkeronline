@@ -9,6 +9,20 @@
     <meta name="description" content="Rico de Jong">
     <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
     <meta name="author" content="Rico de Jong">
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD37DRJHrKrQqo8KOy0XmRWwEHrVvR48io",
+            authDomain: "kaziklikker.firebaseapp.com",
+            databaseURL: "https://kaziklikker.firebaseio.com",
+            storageBucket: "kaziklikker.appspot.com",
+            messagingSenderId: "800071590250"
+        };
+        firebase.initializeApp(config);
+    </script>
+
     <script src="js/bootstrap.min.js"></script>
 
     <script src="js/loadingoverlay.min.js"></script>
@@ -42,26 +56,9 @@
                 fade: [10, 500]
             });
             setTimeout(function () {
-                if (localStorage.getItem("name") === null) {
-                    BootstrapDialog.show({
-                        message: function (dialog) {
-                            var $message = $('<div></div>');
-                            var pageToLoad = dialog.getData('pageToLoad');
-                            $message.load(pageToLoad);
+                signIn();
 
-                            return $message;
-                        },
-                        data: {
-                            'pageToLoad': 'dialogs/first.html'
-                        }
-                    });
-
-                }
-                else {
-                    $("#welcomeMessage").text("Hallo, " + localStorage.getItem("name") + "!");
-                }
-                $.LoadingOverlay("hide");
-            }, 500);
+            }, 100);
             window.addEventListener("beforeunload", function (e) {
                 $.LoadingOverlay("show", {
                     color: "rgba(255, 255, 255, 1)",
@@ -69,13 +66,11 @@
                 });
                 saveData()
             });
-
             //Restores the saved data
-            restoreSaves();
 
             // Temporary disable the tooltips
 //            $('[datatype=tooltip]').tooltip();
-        })
+        });
     </script>
 
 </head>

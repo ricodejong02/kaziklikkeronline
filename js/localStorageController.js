@@ -1,54 +1,51 @@
 /**
  * Created by Daniel Verhoef on 13-12-2016.
  */
+var database = firebase.database();
+
 function restoreSaves() {
-    var money = parseInt(localStorage.getItem('money'));
-    if (!isNaN(money)) {
-        setMoney(money - 1);
-        clickBtn();
-    }
-    else
-        setMoney(200);
+    getProperties();
+    updatePrices();
 
-    var clickingPower = parseFloat(localStorage.getItem('clickingPower'));
-    var clickingPowerPrice = parseFloat(localStorage.getItem('clickingPowerPrice'));
-    var bankMoney = parseFloat(localStorage.getItem('bankMoney'));
-    var _recharge = parseInt(localStorage.getItem('recharge'));
-    var mps = parseFloat(localStorage.getItem('mps'));
-    if (!isNaN(mps))
-        setMps(mps);
-    else
-        setMps(0);
-
-    if (!isNaN(clickingPowerPrice)) {
-        setClickingPowerPrice(clickingPowerPrice)
-    }
-    else
-        setClickingPowerPrice(500);
-    if (!isNaN(clickingPower))
-        setClickingPower(clickingPower);
-    else
-        setClickingPower(1);
-    if (!isNaN(bankMoney))
-        setBankMoney(bankMoney);
-    if(!isNaN(_recharge)){
-        recharge = _recharge;
-        console.log("Recharge: "+_recharge)
-    }
-    load();
+}
+function getUserDB() {
+    return database.ref("users").child(currentUser.uid);
 }
 function saveData() {
-    localStorage.setItem('data', JSON.stringify(Data));
+    getUserDB().child("data").set(Data);
 }
-function load() {
-    var data = JSON.parse(localStorage.getItem('data'));
-    if (data != undefined) {
-        Data = data;
-    }
-    else{
-        Data = DataBC;
-    }
-    updatePrices();
+function Load() {
+    getUserDB().child('data').on('value', function(snapshot) {
+        Data = snapshot.val();
+        if(Data == null)
+            Data = DataBC;
+        restoreSaves();
+    });
+}
+function saveProperty(name, prop) {
+    getUserDB().child('properties').child(name).set(prop);
+}
+function getProperties() {
+    getUserDB().child('properties').once('value').then(function(snapshot) {
+        var values = snapshot.val();
+        if(isNaN(values.money)){
+
+        }
+        else{
+            setMoney(values.money);
+            setBankMoney(values.bankMoney);
+            setClickingPower(values.clickingPower);
+            setClickingPowerPrice(values.clickingPowerPrice);
+            recharge = values.recharge;
+            setMps(values.mps);
+        }
+        if (!timerEnabled) {
+            timerEnabled = true;
+            setInterval(mpsLoop, 1000)
+        }
+        updatePrices();
+        $.LoadingOverlay("hide");
+    });
 }
 function reset() {
     setBankMoney(0);
@@ -65,14 +62,6 @@ function reset() {
     updatePrices();
 }
 
-Storage.prototype.setObject = function (key, value) {
-    this.setItem(key, JSON.stringify(value));
-};
-
-Storage.prototype.getObject = function (key) {
-    var value = this.getItem(key);
-    return value && JSON.parse(value);
-};
 function updatePrices() {
     document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=img/cursorb.png height=20px width=20px>Buy klikker (" + NiceNumber(Data.clicker.price) + ")";
     document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=img/farmb.png height=20px width=20px>Buy boerderij (" + NiceNumber(Data.farm.price) + ")";
@@ -83,4 +72,12 @@ function updatePrices() {
     document.getElementById('planetBtn').innerHTML = "<img id='planetImg' class='icon' src=img/planetb.png height=20px width=20px>Buy planeet (" + NiceNumber(Data.planet.price) + ")";
     document.getElementById('galaxyBtn').innerHTML = "<img id='galaxyImg' class='icon' src=img/galaxyb.png height=20px width=20px>Buy melkweg (" + NiceNumber(Data.galaxy.price) + ")";
     document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universeb.png height=20px width=20px>Buy universum (" + NiceNumber(Data.universe.price) + ")";
+}
+function save() {
+    saveProperty("money", money);
+    saveProperty("bankMoney", bankMoney);
+    saveProperty("clickingPower", clickingPower);
+    saveProperty("clickingPowerPrice", clickingPowerPrice);
+    saveProperty("recharge", recharge);
+    saveProperty("mps", mps);
 }
