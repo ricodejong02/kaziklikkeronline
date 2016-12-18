@@ -1,8 +1,8 @@
 .btn-default {
     margin-top: 20px;
     font-size: 20px;
+    border-radius: 4px;
 }
-
 .container-fluid {
     text-align: center;
     margin-bottom: 25px;
