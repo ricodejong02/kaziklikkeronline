@@ -1,0 +1,24 @@
+<script>
+    $('#googlesignin').click(function () {
+        signInGoogle();
+        Dialog.setClosable(true);
+        Dialog.close();
+    });
+    $('#facebooksignin').click(function () {
+        signInFacebook();
+        Dialog.setClosable(true);
+        Dialog.close();
+    });
+</script>
+
+<div class="page-header"><h2 style="color: black">Login Form</h2></div>
+<fieldset>
+    <!-- Form Name -->
+    <legend><h3 style="color: black">Have an account? Sign In</h3></legend>
+    <div class="col-md-6">
+        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary">Use google</button>
+    </div>
+    <div class="col-md-6">
+        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary">Use facebook</button>
+    </div>
+</fieldset>

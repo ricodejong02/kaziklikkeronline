@@ -1,4 +1,3 @@
-
 const version = "0.0.2";
 
 var money = 200;
@@ -13,36 +12,64 @@ var bankRecharge = 120;
 var antiCheat = 0;
 var currentUser;
 var signedIn = false;
-var bankGraph = {datasets:
-[{
-    label: "Interest",
-    data: [
-        {x: 0, y: 0}
-    ]
-}]};
+var bankGraph = {
+    datasets: [{
+        label: "Interest",
+        data: [
+            {x: 0, y: 0}
+        ]
+    }]
+};
 var Data;
-function signIn() {
+var Dialog;
+function loadDialog(path, isClosable) {
+    BootstrapDialog.show({
+        message: function (dialog) {
+            var $message = $('<div></div>');
+            var pageToLoad = dialog.getData('pageToLoad');
+            dialog.setClosable(!isClosable);
+            $message.load(pageToLoad);
+            Dialog = dialog;
+            return $message;
+        },
+        data: {
+            'pageToLoad': path
+        }
+    });
+}
+function signInGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/plus.login');
     provider.setCustomParameters({
         'login_hint': 'user@example.com'
     });
-    firebase.auth().onAuthStateChanged(function(user) {
+    auth(provider);
+}
+function signInFacebook() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope("email");
+    provider.addScope("public_profile");
+    provider.addScope("user_about_me");
+    auth(provider);
+}
+function auth(provider) {
+    firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             currentUser = user;
             $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
-            if(!signedIn){
+            if (!signedIn) {
                 console.log("Loading...");
+                save();
                 Load();
                 signedIn = true;
             }
         } else {
-            firebase.auth().signInWithPopup(provider).then(function(result) {
+            firebase.auth().signInWithPopup(provider).then(function (result) {
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 var token = result.credential.accessToken;
                 // The signed-in user info.
                 currentUser = result.user;
-            }).catch(function(error) {
+            }).catch(function (error) {
                 // Handle Errors here.
                 var errorCode = error.code;
                 var errorMessage = error.message;
@@ -100,13 +127,11 @@ function setClickingPowerPrice(price) {
 }
 
 function setMoney(_money, animate, uid) {
-    if(uid == currentUser.uid){
+    if (uid == currentUser.uid) {
         money = _money;
         checkMoney();
-        if (animate && $('#animateText').is(':checked'))
-            animateText($('#moneyLbl'), "Money: " + money);
-        else
-            $('#moneyLbl').text("Money: " + NiceNumber(money));
+
+        $('#moneyLbl').text("Money: " + NiceNumber(money));
         //$('#moneyLbl').prop('title', money.toString()).tooltip();
         // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
         save();

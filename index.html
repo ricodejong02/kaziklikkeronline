@@ -36,16 +36,23 @@
     <link rel="stylesheet" href="css/bootstrap.css">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap-dialog.min.css">
-<script>
-  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
-  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
-  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
-  })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
 
-  ga('create', 'UA-74770080-11', 'auto');
-  ga('send', 'pageview');
+        ga('create', 'UA-74770080-11', 'auto');
+        ga('send', 'pageview');
 
-</script>
+    </script>
     <meta charset="utf-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -56,7 +63,23 @@
                 fade: [10, 500]
             });
             setTimeout(function () {
-                signIn();
+//                signInGoogle();
+                firebase.auth().onAuthStateChanged(function (user) {
+                    if (user) {
+                        currentUser = user;
+                        $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+                        if (!signedIn) {
+                            console.log("Loading...");
+                            save();
+                            Load();
+                            signedIn = true;
+                        }
+                    } else {
+                        $.LoadingOverlay("hide");
+                        loadDialog("dialogs/email.html", true)
+                    }
+                });
+
 
             }, 100);
             window.addEventListener("beforeunload", function (e) {
@@ -104,18 +127,18 @@
             <br>
             <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"
                     datatype="tooltip" title="Money/second: 5"><img id="farmImg"
-                                                                         class="icon"
-                                                                         src=img/farmb.png
-                                                                         height=20px
-                                                                         width=20px>Buy
+                                                                    class="icon"
+                                                                    src=img/farmb.png
+                                                                    height=20px
+                                                                    width=20px>Buy
                 boerderij (200)
             </button>
             <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"
                     datatype="tooltip" title="Money/second: 50"><img id="mineImg"
-                                                                          class="icon"
-                                                                          src=img/mineb.png
-                                                                          height=20px
-                                                                          width=20px>Buy
+                                                                     class="icon"
+                                                                     src=img/mineb.png
+                                                                     height=20px
+                                                                     width=20px>Buy
                 mijn (2500)
             </button>
             <br>
@@ -125,10 +148,10 @@
             </button>
             <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"
                     datatype="tooltip" title="Money/second: 1000"><img id="cityImg"
-                                                                            class="icon"
-                                                                            src=img/cityb.png
-                                                                            height=20px
-                                                                            width=20px>Buy
+                                                                       class="icon"
+                                                                       src=img/cityb.png
+                                                                       height=20px
+                                                                       width=20px>Buy
                 stad (75000)
             </button>
             <br>
@@ -211,7 +234,6 @@
     <div class="row">
         <div class="col-md-12">
             <h2>Settings</h2>
-            <label class="checkbox-inline"><input id="animateText" type="checkbox" value="">Animate text</label>
             <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
             <br>
             <br>

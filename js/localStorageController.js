@@ -46,6 +46,7 @@ function getProperties() {
             setInterval(mpsLoop, 1000)
         }
         updatePrices();
+        $.LoadingOverlay("hide");
     });
 }
 function reset() {
@@ -75,7 +76,6 @@ function updatePrices() {
     document.getElementById('universeBtn').innerHTML = "<img id='universeImg' class='icon' src=img/universeb.png height=20px width=20px>Buy universum (" + NiceNumber(Data.universe.price) + ")";
 }
 function save() {
-    console.log("saving... ");
     if(money !== 200){
         saveProperty("money", money);
     }
