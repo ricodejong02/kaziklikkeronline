@@ -3,12 +3,12 @@
         signInGoogle();
         Dialog.setClosable(true);
         Dialog.close();
-    });
+    }).tooltip();
     $('#facebooksignin').click(function () {
         signInFacebook();
         Dialog.setClosable(true);
         Dialog.close();
-    });
+    }).tooltip();
     $('#anonymous').click(function () {
         firebase.auth().signInAnonymously().catch(function(error) {
             // Handle Errors here.
@@ -16,11 +16,10 @@
             var errorMessage = error.message;
             // ...
         });
+        reset();
         Dialog.setClosable(true);
         Dialog.close();
-    });
-
-
+    }).tooltip();
 </script>
 
 <div class="page-header"><h2 style="color: black">Login Form</h2></div>
@@ -28,13 +27,13 @@
     <!-- Form Name -->
     <legend><h3 style="color: black">Have an account? Sign In</h3></legend>
     <div class="col-md-4">
-        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary">Use google</button>
+        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google login so KaziKlikker can link its data to your account">Use google</button>
     </div>
     <div class="col-md-4">
-        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary">Use facebook</button>
+        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google login so KaziKlikker can link its data to your account">Use facebook</button>
     </div>
     <div class="col-md-4">
-        <button id="anonymous" name="forpass" class="btn btn-block btn-primary">Sign in anonymous</button>
+        <button id="anonymous" name="forpass" class="btn btn-block btn-primary" title="Use anonymous access for a device based sign-in method">Sign in anonymous</button>
     </div>
 
 </fieldset>

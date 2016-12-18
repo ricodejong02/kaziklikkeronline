@@ -1,6 +1,6 @@
 const version = "0.0.2";
 
-var money = 200;
+var money;
 var mps = 0;
 var clickingPower = 1;
 var clickingPowerPrice = 500;
@@ -135,7 +135,7 @@ function setClickingPowerPrice(price) {
 }
 
 function setMoney(_money, animate, uid) {
-    if (uid == currentUser.uid) {
+    if (uid == currentUser.uid && !isNaN(_money)) {
         money = _money;
         checkMoney();
 
