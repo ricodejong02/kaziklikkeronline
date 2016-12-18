@@ -213,20 +213,6 @@
                     id="minusImg" class="icon" src=img/minusb.png height=20px width=20px>10000
                 opnemen
             </button>
-            <br>
-            <button id="bank" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
-                        message: function (dialog) {
-                            var $message = $('<div></div>');
-                            var pageToLoad = dialog.getData('pageToLoad');
-                            $message.load(pageToLoad);
-
-                            return $message;
-                        },
-                        data: {
-                            'pageToLoad': 'dialogs/bankchart.html'
-                        }
-                    });">Bekijk grafiek
-            </button>
         </div>
     </div>
     <br>
@@ -238,6 +224,7 @@
             <br>
             <br>
             <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+            <button id="signout" class="btn btn-default btn-lg" onclick="sign_out()">Sign out</button>
             <button id="iframe" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
                         message: function (dialog) {
                             var $message = $('<div></div>');

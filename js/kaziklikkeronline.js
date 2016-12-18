@@ -37,6 +37,14 @@ function loadDialog(path, isClosable) {
         }
     });
 }
+function sign_out() {
+    firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+        location.reload()
+    }, function(error) {
+        console.error('Sign Out Error', error);
+    });
+}
 function signInGoogle() {
     var provider = new firebase.auth.GoogleAuthProvider();
     provider.addScope('https://www.googleapis.com/auth/plus.login');
