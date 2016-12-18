@@ -27,7 +27,7 @@ function loadDialog(path, isClosable) {
         message: function (dialog) {
             var $message = $('<div></div>');
             var pageToLoad = dialog.getData('pageToLoad');
-            dialog.setClosable(!isClosable);
+            dialog.setClosable(isClosable);
             $message.load(pageToLoad);
             Dialog = dialog;
             return $message;

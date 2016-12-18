@@ -67,7 +67,6 @@
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         currentUser = user;
-                        $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
                         if (!signedIn) {
                             console.log("Loading...");
                             save();
@@ -76,7 +75,7 @@
                         }
                     } else {
                         $.LoadingOverlay("hide");
-                        loadDialog("dialogs/email.html", true)
+                        loadDialog("dialogs/login.html")
                     }
                 });
 
@@ -103,7 +102,7 @@
 <div class="container-fluid">
     <div class="header">
         <img src="logo.svg" id="logoHeader" width="512"/>
-        <h2 id="welcomeMessage">Hallo, Wereld!</h2>
+        <h2 id="welcomeMessage">Hello there!</h2>
         <h4 id="moneyLbl" datatype="tooltip">Money: 200</h4>
         <h4 id="MPSLbl" datatype="tooltip">Money/seconde: 0</h4>
         <h4 id="clickingPowerLbl">Clicking power: 1</h4>

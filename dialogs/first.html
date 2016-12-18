@@ -1,6 +1,6 @@
 <script>
 $("#form").submit(function () {
-    localStorage.setItem("name",$("#name").val());
+    saveProperty("name", $("#name").val())
 });
 </script>
 <form id="form">
@@ -8,5 +8,5 @@ $("#form").submit(function () {
     <label for="name" class="form-control">Enter your name:</label>
     <input id="name" class="form-control">
     <br>
-    <button type="submit" class="btn btn-primary">Done!</button>
+    <button type="submit" class="btn btn-success">Done!</button>
 </form>

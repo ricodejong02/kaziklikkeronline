@@ -9,16 +9,32 @@
         Dialog.setClosable(true);
         Dialog.close();
     });
+    $('#anonymous').click(function () {
+        firebase.auth().signInAnonymously().catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            // ...
+        });
+        Dialog.setClosable(true);
+        Dialog.close();
+    });
+
+
 </script>
 
 <div class="page-header"><h2 style="color: black">Login Form</h2></div>
 <fieldset>
     <!-- Form Name -->
     <legend><h3 style="color: black">Have an account? Sign In</h3></legend>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <button id="googlesignin" name="forpass" class="btn btn-block btn-primary">Use google</button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-4">
         <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary">Use facebook</button>
     </div>
+    <div class="col-md-4">
+        <button id="anonymous" name="forpass" class="btn btn-block btn-primary">Sign in anonymous</button>
+    </div>
+
 </fieldset>
