@@ -224,19 +224,6 @@
             <br>
             <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
             <button id="signout" class="btn btn-default btn-lg" onclick="sign_out()">Sign out</button>
-            <button id="iframe" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
-                        message: function (dialog) {
-                            var $message = $('<div></div>');
-                            var pageToLoad = dialog.getData('pageToLoad');
-                            $message.load(pageToLoad);
-
-                            return $message;
-                        },
-                        data: {
-                            'pageToLoad': 'dialogs/getiframe.html'
-                        }
-                    });">Get the iFrame!
-            </button>
             <button id="licenses" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
                         message: function (dialog) {
                             var $message = $('<div></div>');
