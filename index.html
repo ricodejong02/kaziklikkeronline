@@ -68,7 +68,12 @@
                     if (user) {
                         currentUser = user;
                         if (!signedIn) {
-                            $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+                            if(currentUser.displayName == null){
+                                $("#welcomeMessage").text("Hello, Anonymous person!");
+                            }
+                            else{
+                                $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+                            }
                             console.log("Loading...");
                             Load();
                             signedIn = true;
@@ -109,7 +114,7 @@
         <h4 id="clickingPowerLbl">Clicking power: 1</h4>
         <h4 id="countdownLbl">Recharge: 120</h4>
         <br>
-        <h6>If you experience problems with first-time use, try to reset</h6>
+        <h6 id="problems">If you experience problems with first-time use, try to reset</h6>
     </div>
     <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Click!</button>
     <br>

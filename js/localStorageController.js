@@ -9,6 +9,9 @@ function restoreSaves() {
     getProperties();
     updatePrices();
 
+    setTimeout(function () {
+        $('#problems').fadeOut();
+    }, 5000)
 }
 function getUserDB() {
     return database.ref("users").child(currentUser.uid);

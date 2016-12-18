@@ -73,7 +73,12 @@ function auth(provider) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             currentUser = user;
-            $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+            if(currentUser.displayName == null){
+                $("#welcomeMessage").text("Hello, Anonymous person!");
+            }
+            else{
+                $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+            }
             if (!signedIn) {
                 console.log("Loading...");
                 save();
