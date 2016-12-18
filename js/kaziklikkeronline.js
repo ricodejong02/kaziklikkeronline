@@ -142,7 +142,6 @@ function setMoney(_money, animate, uid) {
         $('#moneyLbl').text("Money: " + NiceNumber(money));
         //$('#moneyLbl').prop('title', money.toString()).tooltip();
         // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
-        save();
     }
 }
 
