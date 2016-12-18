@@ -64,7 +64,7 @@ function reset() {
     updatePrices();
 }
 function updatePrices() {
-    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src=img/clickerb.png height=20px width=20px>Buy klikker (" + NiceNumber(Data.clicker.price) + ")";
+    document.getElementById('clickerBtn').innerHTML = "<img id='clickerImg' class='icon' src='img/clickerb.png' height=20px width=20px>Buy klikker (" + NiceNumber(Data.clicker.price) + ")";
     document.getElementById('farmBtn').innerHTML = "<img id='farmImg' class='icon' src=img/farmb.png height=20px width=20px>Buy boerderij (" + NiceNumber(Data.farm.price) + ")";
     document.getElementById('mineBtn').innerHTML = "<img id='mineImg' class='icon' src=img/mineb.png height=20px width=20px>Buy mijn (" + NiceNumber(Data.mine.price) + ")";
     document.getElementById('villageBtn').innerHTML = "<img id='villageImg' class='icon' src=img/villageb.png height=20px width=20px>Buy dorp (" + NiceNumber(Data.village.price) + ")";
