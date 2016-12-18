@@ -9,6 +9,11 @@
         Dialog.setClosable(true);
         Dialog.close();
     }).tooltip();
+    $('#twitter').click(function () {
+        signInFacebook();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
     $('#anonymous').click(function () {
         firebase.auth().signInAnonymously().catch(function(error) {
             // Handle Errors here.
@@ -26,13 +31,16 @@
 <fieldset>
     <!-- Form Name -->
     <legend><h3 style="color: black">Have an account? Sign In</h3></legend>
-    <div class="col-md-4">
-        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google login so KaziKlikker can link its data to your account">Use google</button>
+    <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
+        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use google</button>
     </div>
-    <div class="col-md-4">
-        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google login so KaziKlikker can link its data to your account">Use facebook</button>
+    <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
+        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use facebook</button>
     </div>
-    <div class="col-md-4">
+    <div class="col-md-6">
+        <button id="twitter" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use twitter</button>
+    </div>
+    <div class="col-md-6">
         <button id="anonymous" name="forpass" class="btn btn-block btn-primary" title="Use anonymous access for a device based sign-in method">Sign in anonymous</button>
     </div>
 

@@ -1,4 +1,4 @@
-const version = "0.0.2";
+const version = "0.1.0";
 
 var money;
 var mps = 0;
@@ -55,6 +55,13 @@ function signInGoogle() {
 }
 function signInFacebook() {
     var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope("email");
+    provider.addScope("public_profile");
+    provider.addScope("user_about_me");
+    auth(provider);
+}
+function signInTwitter() {
+    var provider = new firebase.auth.TwitterAuthProvider();
     provider.addScope("email");
     provider.addScope("public_profile");
     provider.addScope("user_about_me");
@@ -188,12 +195,12 @@ function checkMoney() {
 
         if (money >= Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = false;
-            document.getElementById('clickerImg').src = "img/cursor.png";
+            document.getElementById('clickerImg').src = "img/clicker.png";
         }
 
         if (money < Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = true;
-            document.getElementById('clickerImg').src = "img/cursorb.png";
+            document.getElementById('clickerImg').src = "img/clickerb.png";
         }
 
         if (money >= Data.farm.price) {
