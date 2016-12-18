@@ -10,7 +10,12 @@
         Dialog.close();
     }).tooltip();
     $('#twitter').click(function () {
-        signInFacebook();
+        signInTwitter();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+    $('#github').click(function () {
+        signInGitHub();
         Dialog.setClosable(true);
         Dialog.close();
     }).tooltip();
@@ -27,20 +32,19 @@
     }).tooltip();
 </script>
 
-<div class="page-header"><h2 style="color: black">Login Form</h2></div>
 <fieldset>
     <!-- Form Name -->
-    <legend><h3 style="color: black">Have an account? Sign In</h3></legend>
+    <h3 style="color: black">Sign In/Up now!</h3>
     <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
-        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use google</button>
+        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use Google login so KaziKlikker can link its data to your account">Use Google</button>
     </div>
     <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
-        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use facebook</button>
+        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use Facebook login so KaziKlikker can link its data to your account">Use Facebook</button>
     </div>
     <div class="col-md-6">
-        <button id="twitter" name="forpass" class="btn btn-block btn-primary" title="Use facebook/google/twitter login so KaziKlikker can link its data to your account">Use twitter</button>
+        <button id="twitter" name="forpass" class="btn btn-block btn-primary" title="Use Twitter login so KaziKlikker can link its data to your account">Use Twitter</button>
     </div>
-    <div class="col-md-6">
+    <div class="col-md-6" style="/* margin-bottom: 10px; margin-top: 10px;">
         <button id="anonymous" name="forpass" class="btn btn-block btn-primary" title="Use anonymous access for a device based sign-in method">Sign in anonymous</button>
     </div>
 

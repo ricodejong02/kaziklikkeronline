@@ -62,9 +62,11 @@ function signInFacebook() {
 }
 function signInTwitter() {
     var provider = new firebase.auth.TwitterAuthProvider();
-    provider.addScope("email");
-    provider.addScope("public_profile");
-    provider.addScope("user_about_me");
+    auth(provider);
+}
+function signInGitHub() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope("user");
     auth(provider);
 }
 function auth(provider) {
