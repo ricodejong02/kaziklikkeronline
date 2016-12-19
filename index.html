@@ -32,11 +32,13 @@
     <script src="js/bootstrap-dialog.min.js"></script>
     <script src="js/localStorageController.js"></script>
     <script src="js/Constants.js"></script>
+    <script src="js/firechat.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/agency.css">
     <link rel="stylesheet" href="css/stylesheet.css">
     <link rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="css/firechat.css">
     <script>
         (function (i, s, o, g, r, a, m) {
             i['GoogleAnalyticsObject'] = r;
@@ -67,6 +69,7 @@
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         currentUser = user;
+                        initChat(currentUser);
                         if (!signedIn) {
                             if(currentUser.displayName == null){
                                 $("#welcomeMessage").text("Hello, Anonymous person!");
@@ -217,6 +220,12 @@
                 opnemen
             </button>
         </div>
+        <div class="col-md-6">
+            <div id="firechat-wrapper"></div>
+        </div>
+        <div class="col-md-5 box">
+            <h1>Soon there will be a lottery here!</h1>
+        </div>
     </div>
     <br>
     <hr>
@@ -244,6 +253,7 @@
         </div>
     </div>
 </div>
+
 <div class="row">
     <div class="col-md-12" style="padding: 0">
         <div class="header text-center">
@@ -252,6 +262,7 @@
         </div>
     </div>
 </div>
+
 </body>
 <script>
     $('#version').html("<b>" + version + "</b>  ");

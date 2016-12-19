@@ -70,10 +70,17 @@ function signInGitHub() {
     provider.addScope("user");
     auth(provider);
 }
+function initChat(user) {
+    var chatRef = firebase.database().ref("chat");
+    var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+    chat.setUser(user.uid, user.displayName);
+}
+
 function auth(provider) {
     firebase.auth().onAuthStateChanged(function (user) {
         if (user) {
             currentUser = user;
+            initChat(currentUser);
             if(currentUser.displayName == null){
                 $("#welcomeMessage").text("Hello, Anonymous person!");
             }
