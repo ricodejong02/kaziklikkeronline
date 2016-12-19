@@ -12,6 +12,7 @@ var bankRecharge = 120;
 var antiCheat = 0;
 var currentUser;
 var signedIn = false;
+var deviceId;
 var bankGraph = {
     datasets: [{
         label: "Interest",
@@ -87,6 +88,7 @@ function auth(provider) {
             }
         } else {
             firebase.auth().signInWithRedirect(provider).then(function (result) {
+                console.log(deviceId);
                 // This gives you a Google Access Token. You can use it to access the Google API.
                 var token = result.credential.accessToken;
                 // The signed-in user info.
@@ -365,32 +367,34 @@ function openWiki() {
 var i = 0;
 function mpsLoop() {
     antiCheat = 0;
-    // $('[datatype=tooltip]').tooltip();
+    setTimeout(function () {
+        // $('[datatype=tooltip]').tooltip();
 
-    setMoney(money += mps, undefined, currentUser.uid);
-    if ((recharge <= 0) == false) {
-        recharge--;
-    }
-    if ((bankRecharge <= 0) == false) {
-        bankRecharge--;
-    }
-    if (bankRecharge == 0) {
-        bankCalculate();
-    }
-    if ($('#animateLogo').is(':checked')) {
-        $('#logoHeader').fadeOut(1000, function () {
-            $('#logoHeader').fadeIn(1000);
-        });
-    }
-    if (Math.floor(((Math.random() * 4  )) + 1) == 1) {
-        setInterest(Math.floor((Math.random() * 9) + 0.1));
-    }
-    bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
-    document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
-    document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
-    saveData();
-    save();
-    i++;
+        setMoney(money += mps, undefined, currentUser.uid);
+        if ((recharge <= 0) == false) {
+            recharge--;
+        }
+        if ((bankRecharge <= 0) == false) {
+            bankRecharge--;
+        }
+        if (bankRecharge == 0) {
+            bankCalculate();
+        }
+        if ($('#animateLogo').is(':checked')) {
+            $('#logoHeader').fadeOut(1000, function () {
+                $('#logoHeader').fadeIn(1000);
+            });
+        }
+        if (Math.floor(((Math.random() * 4  )) + 1) == 1) {
+            setInterest(Math.floor((Math.random() * 9) + 0.1));
+        }
+        bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
+        document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
+        document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
+        saveData();
+        save();
+        i++;
+    }, 0)
 }
 
 function buyClickingPower() {

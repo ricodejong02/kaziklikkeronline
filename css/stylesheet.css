@@ -119,3 +119,15 @@ h3 {
 h4 {
     color: white;
 }
+button.close{
+    opacity: 1;
+    color: white;
+    font-weight: 100;
+}
+.bootstrap-dialog .modal-header {
+    border-top-left-radius: 10px !important;
+    border-top-right-radius: 10px !important;
+}
+.modal-content {
+    border-radius: 12px;
+}

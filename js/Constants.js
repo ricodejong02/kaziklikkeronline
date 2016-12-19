@@ -1,6 +1,7 @@
 /**
  * Created by Daniel Verhoef on 13-12-2016.
  */
+const loadingDelay = 1500;
 var DataBC = {
     clicker: {name: "Klikker", price: 250, speed: 1, increase: 25, amount: 0},
     farm: {name: "Boerderij", price: 2000, speed: 5, increase: 200, amount: 0},

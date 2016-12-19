@@ -4,7 +4,9 @@
 var database = firebase.database();
 
 function restoreSaves() {
-    $.LoadingOverlay("hide");
+    setTimeout(function () {
+        $.LoadingOverlay("hide");
+    }, loadingDelay);
 
     getProperties();
     updatePrices();
@@ -49,7 +51,9 @@ function getProperties() {
             setInterval(mpsLoop, 1000)
         }
         updatePrices();
-        $.LoadingOverlay("hide");
+        setTimeout(function () {
+            $.LoadingOverlay("hide");
+        }, loadingDelay);
     });
 }
 function reset() {
