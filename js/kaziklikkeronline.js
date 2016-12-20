@@ -23,7 +23,11 @@ var bankGraph = {
 };
 var Data;
 var Dialog;
-
+function initHotkeys() {
+    $(document).on('keydown', null, 'ctrl+i', function () {
+        loadDialog('dialogs/wiki.html', true)
+    });
+}
 function loadDialog(path, isClosable) {
     BootstrapDialog.show({
         message: function (dialog) {

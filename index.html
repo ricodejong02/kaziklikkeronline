@@ -35,6 +35,7 @@
     <script src="js/Constants.js"></script>
     <script src="js/firechat.min.js"></script>
     <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="js/jquery.hotkeys.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/agency.css">
@@ -67,7 +68,7 @@
                 color: "rgba(255, 255, 255, 1)",
                 fade: [10, 500]
             });
-
+            initHotkeys();
             $("nav a").click(function(evn){
                 evn.preventDefault();
                 $('html,body').scrollTo(this.hash, this.hash);
@@ -112,7 +113,7 @@
 <body>
 
 <div class="container-fluid">
-    <nav class="navbar navbar-default" style="margin-bottom: 0">
+    <nav class="navbar navbar-default navbar-fixed-top" style="margin-bottom: 0">
         <!-- Brand and toggle get grouped for better mobile display -->
         <div class="navbar-header">
             <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
@@ -122,20 +123,26 @@
                 <span class="icon-bar"></span>
                 <span class="icon-bar"></span>
             </button>
-            <a class="navbar-brand" href="/" style="padding: 5px;"><img src="favicon.png" height="40"></a>
+            <a class="navbar-brand" href="./index.html" style="padding: 5px;"><img src="favicon.png" height="40"></a>
         </div>
 
         <!-- Collect the nav links, forms, and other content for toggling -->
-        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+        <div class="collapse navbar-collapse">
             <ul class="nav navbar-nav">
-                <li><a href="#header">Home</a></li>
-                <li><a href="#shop">Shop</a></li>
-                <li><a href="#chat">Chat</a></li>
-                <li><a href="#options">Options</a></li>
+                <li><a class="scroll" href="#header">Home</a></li>
+                <li><a class="scroll" href="#shop">Shop</a></li>
+                <li><a class="scroll" href="#chat">Chat</a></li>
+                <li><a class="scroll" href="#options">Options</a></li>
+                <li><a href="#" onclick="loadDialog('dialogs/wiki.html',true)">View info</a></li>
             </ul>
-        </div><!-- /.navbar-collapse -->
+            <ul class="nav navbar-nav navbar-right">
+                <li><a href="#" onclick="sign_out()">Logout</a></li>
+                <li><a href="#" onclick="loadDialog('dialogs/licenses.html', true)">Licenses</a></li>
+            </ul>
+        </div>
     </nav>
     <div class="header" id="header">
+        <br>
         <img src="logo.svg" id="logoHeader" width="512"/>
         <h2 id="welcomeMessage">Hello there!</h2>
         <h4 id="moneyLbl" datatype="tooltip">Money: 200</h4>
@@ -252,6 +259,7 @@
         </div>
         <div class="col-md-6" id="chat">
             <div id="firechat-wrapper"></div>
+            <p><i>Powered by firechat</i></p>
         </div>
         <div class="col-md-5 box" id="lotery">
             <h1>Soon there will be a lottery here!</h1>
@@ -267,18 +275,7 @@
             <br>
             <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
             <button id="signout" class="btn btn-default btn-lg" onclick="sign_out()">Sign out</button>
-            <button id="licenses" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
-                        message: function (dialog) {
-                            var $message = $('<div></div>');
-                            var pageToLoad = dialog.getData('pageToLoad');
-                            $message.load(pageToLoad);
-
-                            return $message;
-                        },
-                        data: {
-                            'pageToLoad': 'dialogs/licenses.html'
-                        }
-                    });">Licenses
+            <button id="licenses" class="btn btn-default btn-lg" onclick="loadDialog('dialogs/licenses.html', true)">Licenses
             </button>
         </div>
     </div>
