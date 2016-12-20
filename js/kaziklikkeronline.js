@@ -23,6 +23,7 @@ var bankGraph = {
 };
 var Data;
 var Dialog;
+
 function loadDialog(path, isClosable) {
     BootstrapDialog.show({
         message: function (dialog) {

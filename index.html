@@ -6,7 +6,8 @@
     <script src="js/jquery-3.1.1.min.js"></script>
     <meta charset="UTF-8">
     <link rel="icon" type="image/png" href="favicon.png"/>
-    <meta name="description" content="Kaziklikker the best clicker game online (better than cookie clicker ;)) - Rico de Jong & Daniel Verhoef">
+    <meta name="description"
+          content="Kaziklikker the best clicker game online (better than cookie clicker ;)) - Rico de Jong & Daniel Verhoef">
     <meta name="keywords" content="kaziklikker, kaziclicker, ccraft, home, Rico, de, Jong">
     <meta name="author" content="Rico de Jong & Daniel Verhoef">
 
@@ -33,6 +34,7 @@
     <script src="js/localStorageController.js"></script>
     <script src="js/Constants.js"></script>
     <script src="js/firechat.min.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
     <link rel="stylesheet" href="css/bootstrap.min.css">
     <link rel="stylesheet" href="css/agency.css">
@@ -65,16 +67,21 @@
                 color: "rgba(255, 255, 255, 1)",
                 fade: [10, 500]
             });
+
+            $("nav a").click(function(evn){
+                evn.preventDefault();
+                $('html,body').scrollTo(this.hash, this.hash);
+            });
             setTimeout(function () {
                 firebase.auth().onAuthStateChanged(function (user) {
                     if (user) {
                         currentUser = user;
                         initChat(currentUser);
                         if (!signedIn) {
-                            if(currentUser.displayName == null){
+                            if (currentUser.displayName == null) {
                                 $("#welcomeMessage").text("Hello, Anonymous person!");
                             }
-                            else{
+                            else {
                                 $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
                             }
                             console.log("Loading...");
@@ -105,7 +112,30 @@
 <body>
 
 <div class="container-fluid">
-    <div class="header">
+    <nav class="navbar navbar-default" style="margin-bottom: 0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="padding: 5px;"><img src="favicon.png" height="40"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a href="#options">Options</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <div class="header" id="header">
         <img src="logo.svg" id="logoHeader" width="512"/>
         <h2 id="welcomeMessage">Hello there!</h2>
         <h4 id="moneyLbl" datatype="tooltip">Money: 200</h4>
@@ -119,7 +149,7 @@
     <br>
     <hr>
     <div class="row" style="margin: 0">
-        <div class="col-md-8 box">
+        <div class="col-md-8 box" id="shop">
             <h2>Winkel</h2>
             <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()"
                     datatype="tooltip" title="Verdubbel je Clicking power"
@@ -220,17 +250,17 @@
                 opnemen
             </button>
         </div>
-        <div class="col-md-6">
+        <div class="col-md-6" id="chat">
             <div id="firechat-wrapper"></div>
         </div>
-        <div class="col-md-5 box">
+        <div class="col-md-5 box" id="lotery">
             <h1>Soon there will be a lottery here!</h1>
         </div>
     </div>
     <br>
     <hr>
     <div class="row">
-        <div class="col-md-12">
+        <div class="col-md-12" id="options">
             <h2>Settings</h2>
             <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
             <br>
