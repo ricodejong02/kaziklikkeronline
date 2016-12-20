@@ -1,0 +1,27 @@
+<canvas id="chart"></canvas>
+<button class="btn btn-primary text-center" onclick="clearGraph()">Clear chart</button>
+<script>
+    var ctx = $('#chart');
+    var chartInstance = new Chart(ctx, {
+        type: 'line',
+        data: bankGraph,
+        options: {
+            scales: {
+                xAxes: [{
+                    type: 'linear',
+                    position: 'bottom'
+                }]
+            }
+        }
+
+    });
+    function clearGraph() {
+        bankGraph = {datasets:
+            [{
+                label: "Interest",
+                data: [
+                    {x: 0, y: 0}
+                ]
+            }]};
+    }
+</script>

@@ -1,0 +1,300 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <title>Kaziklikker online</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png"/>
+    <meta name="description"
+          content="Kaziklikker the best clicker game online (better than cookie clicker ;)) - Rico de Jong & Daniel Verhoef">
+    <meta name="keywords" content="kaziklikker, kaziclicker, ccraft, home, Rico, de, Jong">
+    <meta name="author" content="Rico de Jong & Daniel Verhoef">
+
+    <script src="https://www.gstatic.com/firebasejs/3.6.4/firebase.js"></script>
+    <script>
+        // Initialize Firebase
+        var config = {
+            apiKey: "AIzaSyD37DRJHrKrQqo8KOy0XmRWwEHrVvR48io",
+            authDomain: "kaziklikker.firebaseapp.com",
+            databaseURL: "https://kaziklikker.firebaseio.com",
+            storageBucket: "kaziklikker.appspot.com",
+            messagingSenderId: "800071590250"
+        };
+        firebase.initializeApp(config);
+    </script>
+
+    <script src="js/bootstrap.min.js"></script>
+
+    <script src="js/loadingoverlay.min.js"></script>
+    <script src="js/loadingoverlay_progress.min.js"></script>
+    <script src="js/kaziklikkeronline.js"></script>
+    <script src="js/Chart.bundle.min.js"></script>
+    <script src="js/bootstrap-dialog.min.js"></script>
+    <script src="js/localStorageController.js"></script>
+    <script src="js/Constants.js"></script>
+    <script src="js/firechat.min.js"></script>
+    <script src="js/jquery.scrollTo.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/fingerprintjs2/1.4.1/fingerprint2.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/agency.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="css/bootstrap-dialog.min.css">
+    <link rel="stylesheet" href="css/firechat.css">
+    <script>
+        (function (i, s, o, g, r, a, m) {
+            i['GoogleAnalyticsObject'] = r;
+            i[r] = i[r] || function () {
+                    (i[r].q = i[r].q || []).push(arguments)
+                }, i[r].l = 1 * new Date();
+            a = s.createElement(o),
+                m = s.getElementsByTagName(o)[0];
+            a.async = 1;
+            a.src = g;
+            m.parentNode.insertBefore(a, m)
+        })(window, document, 'script', 'https://www.google-analytics.com/analytics.js', 'ga');
+
+        ga('create', 'UA-74770080-11', 'auto');
+        ga('send', 'pageview');
+
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <script>
+        $(document).ready(function () {
+            $.LoadingOverlay("show", {
+                color: "rgba(255, 255, 255, 1)",
+                fade: [10, 500]
+            });
+
+            $("nav a").click(function(evn){
+                evn.preventDefault();
+                $('html,body').scrollTo(this.hash, this.hash);
+            });
+            setTimeout(function () {
+                firebase.auth().onAuthStateChanged(function (user) {
+                    if (user) {
+                        currentUser = user;
+                        initChat(currentUser);
+                        if (!signedIn) {
+                            if (currentUser.displayName == null) {
+                                $("#welcomeMessage").text("Hello, Anonymous person!");
+                            }
+                            else {
+                                $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+                            }
+                            console.log("Loading...");
+                            Load();
+                            signedIn = true;
+
+                        }
+                    } else {
+                        setTimeout(function () {
+                            $.LoadingOverlay("hide");
+                        }, loadingDelay);
+                        loadDialog("dialogs/login.html")
+                    }
+                });
+            }, 100);
+            window.addEventListener("beforeunload", function (e) {
+                $.LoadingOverlay("show", {
+                    color: "rgba(255, 255, 255, 1)",
+                    fade: [100, 1000]
+                });
+                saveData()
+            });
+        });
+    </script>
+
+</head>
+
+<body>
+
+<div class="container-fluid">
+    <nav class="navbar navbar-default" style="margin-bottom: 0">
+        <!-- Brand and toggle get grouped for better mobile display -->
+        <div class="navbar-header">
+            <button type="button" class="navbar-toggle collapsed" data-toggle="collapse"
+                    data-target="#bs-example-navbar-collapse-1" aria-expanded="false">
+                <span class="sr-only">Toggle navigation</span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+                <span class="icon-bar"></span>
+            </button>
+            <a class="navbar-brand" href="/" style="padding: 5px;"><img src="favicon.png" height="40"></a>
+        </div>
+
+        <!-- Collect the nav links, forms, and other content for toggling -->
+        <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+            <ul class="nav navbar-nav">
+                <li><a href="#header">Home</a></li>
+                <li><a href="#shop">Shop</a></li>
+                <li><a href="#chat">Chat</a></li>
+                <li><a href="#options">Options</a></li>
+            </ul>
+        </div><!-- /.navbar-collapse -->
+    </nav>
+    <div class="header" id="header">
+        <img src="logo.svg" id="logoHeader" width="512"/>
+        <h2 id="welcomeMessage">Hello there!</h2>
+        <h4 id="moneyLbl" datatype="tooltip">Money: 200</h4>
+        <h4 id="MPSLbl" datatype="tooltip">Money/seconde: 0</h4>
+        <h4 id="clickingPowerLbl">Clicking power: 1</h4>
+        <h4 id="countdownLbl">Recharge: 120</h4>
+        <br>
+        <h6 id="problems">If you experience problems with first-time use, try to reset</h6>
+    </div>
+    <button class="btn btn-default btn-lg" id="klikker" onmousedown="clickBtn()">Click!</button>
+    <br>
+    <hr>
+    <div class="row" style="margin: 0">
+        <div class="col-md-8 box" id="shop">
+            <h2>Winkel</h2>
+            <button id="clickingPowerBtn" class="btn btn-default btn-lg" onclick="buyClickingPower()"
+                    datatype="tooltip" title="Verdubbel je Clicking power"
+                    disabled>
+                Buy Clicking power (500)
+            </button>
+            <button id="clickerBtn" class="btn btn-default btn-lg" onclick="buyClicker()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 1"><img
+                    id="clickerImg" class="icon" src=img/clickerb.png height=20px width=20px>Buy klikker (250)
+            </button>
+            <br>
+            <button id="farmBtn" class="btn btn-default btn-lg" onclick="buyFarm()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 5"><img id="farmImg"
+                                                                    class="icon"
+                                                                    src=img/farmb.png
+                                                                    height=20px
+                                                                    width=20px>Buy
+                boerderij (200)
+            </button>
+            <button id="mineBtn" class="btn btn-default btn-lg" onclick="buyMine()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 50"><img id="mineImg"
+                                                                     class="icon"
+                                                                     src=img/mineb.png
+                                                                     height=20px
+                                                                     width=20px>Buy
+                mijn (2500)
+            </button>
+            <br>
+            <button id="villageBtn" class="btn btn-default btn-lg" onclick="buyVillage()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 100"><img
+                    id="villageImg" class="icon" src=img/villageb.png height=20px width=20px>Buy dorp (6500)
+            </button>
+            <button id="cityBtn" class="btn btn-default btn-lg" onclick="buyCity()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 1000"><img id="cityImg"
+                                                                       class="icon"
+                                                                       src=img/cityb.png
+                                                                       height=20px
+                                                                       width=20px>Buy
+                stad (75000)
+            </button>
+            <br>
+
+            <button id="countryBtn" class="btn btn-default btn-lg" onclick="buyCountry()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 65000"><img
+                    id="countryImg" class="icon" src=img/countryb.png height=20px width=20px>Buy land (450000)
+            </button>
+            <button id="planetBtn" class="btn btn-default btn-lg" onclick="buyPlanet()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 100000"><img
+                    id="planetImg" class="icon" src=img/planetb.png height=20px width=20px>Buy planeet (1000000)
+            </button>
+            <br>
+
+            <button id="galaxyBtn" class="btn btn-default btn-lg" onclick="buyGalaxy()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 50000"><img
+                    id="galaxyImg" class="icon" src=img/galaxyb.png height=20px width=20px>Buy melkweg (7500000)
+            </button>
+            <button id="universeBtn" class="btn btn-default btn-lg" onclick="buyUniverse()" disabled="disabled"
+                    datatype="tooltip" title="Money/second: 500000"><img
+                    id="universeImg" class="icon" src=img/universeb.png height=20px width=20px>Buy universum
+                (100000000)
+            </button>
+            <br>
+            <button id="provinceBtn" class="btn btn-default btn-lg" onclick="buyProvince()" datatype="tooltip"
+                    title="Buy a maan to dubble your money/second" disabled="disabled"><img
+                    id="moonImg" class="icon" src=img/moonb.png height=20px width=20px>Buy
+                maan
+            </button>
+            <button id="satelliteBtn" class="btn btn-default btn-lg" onclick="buySatelite()" datatype="tooltip"
+                    title="Buy a zon to dubble your money" disabled="disabled"><img
+                    id="sunImg" class="icon" src=img/sunb.png height=20px width=20px>Buy
+                zon
+            </button>
+            <br>
+            <hr>
+            <button class="btn btn-primary btn-lg" onclick="openWiki()">Show info</button>
+        </div>
+        <div class="col-md-3 box">
+            <h2>Bank</h2>
+            <h4 id="bankMoneyLbl">Money on bank: 0</h4>
+            <h4 id="interestLbl">Rente: 5%</h4>
+            <h4 id="bankRechargeLbl">Tijd over: 120</h4>
+            <button id="depositAllBtn" class="btn btn-default btn-lg" onclick="depositAll()" disabled="disabled>"><img
+                    id="allplusImg" class="icon" src=img/allplusb.png height=20px width=20px>Alles
+                storten
+            </button>
+            <br>
+            <button id="withdrawAllBtn" class="btn btn-default btn-lg" onclick="withdrawAll()" disabled="disabled"><img
+                    id="allminusImg" class="icon" src=img/allminusb.png height=20px width=20px>Alles
+                opnemen
+            </button>
+            <br>
+            <button id="deposit10KBtn" class="btn btn-default btn-lg" onclick="deposit10K()" disabled="disabled"><img
+                    id="plusImg" class="icon" src=img/plusb.png height=20px width=20px>10000 storten
+            </button>
+            <br>
+            <button id="withdraw10KBtn" class="btn btn-default btn-lg" onclick="withdraw10K()" disabled="disabled"><img
+                    id="minusImg" class="icon" src=img/minusb.png height=20px width=20px>10000
+                opnemen
+            </button>
+        </div>
+        <div class="col-md-6" id="chat">
+            <div id="firechat-wrapper"></div>
+        </div>
+        <div class="col-md-5 box" id="lotery">
+            <h1>Soon there will be a lottery here!</h1>
+        </div>
+    </div>
+    <br>
+    <hr>
+    <div class="row">
+        <div class="col-md-12" id="options">
+            <h2>Settings</h2>
+            <label class="checkbox-inline"><input id="animateLogo" type="checkbox" checked>Animate logo</label>
+            <br>
+            <br>
+            <button id="reset" class="btn btn-default btn-lg" onclick="reset()">Reset</button>
+            <button id="signout" class="btn btn-default btn-lg" onclick="sign_out()">Sign out</button>
+            <button id="licenses" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
+                        message: function (dialog) {
+                            var $message = $('<div></div>');
+                            var pageToLoad = dialog.getData('pageToLoad');
+                            $message.load(pageToLoad);
+
+                            return $message;
+                        },
+                        data: {
+                            'pageToLoad': 'dialogs/licenses.html'
+                        }
+                    });">Licenses
+            </button>
+        </div>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-md-12" style="padding: 0">
+        <div class="header text-center">
+            <h4 style="padding-top: 30px;">Made by <b>Daniel Verhoef</b> <br>and<br><b>Rico de Jong</b></h4>
+            <h5>Versie <span id="version"></span></h5>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    $('#version').html("<b>" + version + "</b>  ");
+</script>
+</html>

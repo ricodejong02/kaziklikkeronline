@@ -1,0 +1,56 @@
+<script>
+    $('#googlesignin').click(function () {
+        signInGoogle();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+    $('#facebooksignin').click(function () {
+        signInFacebook();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+    $('#twitter').click(function () {
+        signInTwitter();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+    $('#github').click(function () {
+        signInGitHub();
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+    $('#anonymous').click(function () {
+        firebase.auth().signInAnonymously().catch(function(error) {
+            // Handle Errors here.
+            var errorCode = error.code;
+            var errorMessage = error.message;
+            setMoney(200);
+        });
+
+        Dialog.setClosable(true);
+        Dialog.close();
+    }).tooltip();
+</script>
+<style>
+    div.bootstrap-dialog-close-button{
+        visibility: collapse !important;
+    }
+</style>
+
+<fieldset>
+    <!-- Form Name -->
+    <h3 style="color: black">Sign In/Up now!</h3>
+    <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
+        <button id="googlesignin" name="forpass" class="btn btn-block btn-primary" title="Use Google login so KaziKlikker can link its data to your account">Use Google</button>
+    </div>
+    <div class="col-md-6" style="margin-bottom: 10px; margin-top: 10px;">
+        <button id="facebooksignin" name="forpass" class="btn btn-block btn-primary" title="Use Facebook login so KaziKlikker can link its data to your account">Use Facebook</button>
+    </div>
+    <div class="col-md-6" style="margin-top: 10px;">
+        <button id="twitter" name="forpass" class="btn btn-block btn-primary" title="Use Twitter login so KaziKlikker can link its data to your account">Use Twitter</button>
+    </div>
+    <div class="col-md-6" style="margin-top: 10px;">
+        <button id="anonymous" name="forpass" class="btn btn-block btn-primary" title="Use anonymous access for a device based sign-in method">Sign in anonymous</button>
+    </div>
+
+</fieldset>

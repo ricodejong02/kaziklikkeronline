@@ -1,4 +1,6 @@
-var money = 200;
+const version = "0.1.0";
+
+var money;
 var mps = 0;
 var clickingPower = 1;
 var clickingPowerPrice = 500;
@@ -8,15 +10,115 @@ var timerEnabled = false;
 var recharge = 120;
 var bankRecharge = 120;
 var antiCheat = 0;
-
+var currentUser;
+var signedIn = false;
+var deviceId;
+var bankGraph = {
+    datasets: [{
+        label: "Interest",
+        data: [
+            {x: 0, y: 0}
+        ]
+    }]
+};
 var Data;
+var Dialog;
 
+function loadDialog(path, isClosable) {
+    BootstrapDialog.show({
+        message: function (dialog) {
+            var $message = $('<div></div>');
+            var pageToLoad = dialog.getData('pageToLoad');
+            dialog.setClosable(isClosable);
+            $message.load(pageToLoad);
+            Dialog = dialog;
+            return $message;
+        },
+        data: {
+            'pageToLoad': path
+        }
+    });
+}
+function sign_out() {
+    firebase.auth().signOut().then(function() {
+        console.log('Signed Out');
+        location.reload()
+    }, function(error) {
+        console.error('Sign Out Error', error);
+    });
+}
+function signInGoogle() {
+    var provider = new firebase.auth.GoogleAuthProvider();
+    provider.addScope('https://www.googleapis.com/auth/plus.login');
+    provider.setCustomParameters({
+        'login_hint': 'user@example.com'
+    });
+    auth(provider);
+}
+function signInFacebook() {
+    var provider = new firebase.auth.FacebookAuthProvider();
+    provider.addScope("email");
+    provider.addScope("public_profile");
+    provider.addScope("user_about_me");
+    auth(provider);
+}
+function signInTwitter() {
+    var provider = new firebase.auth.TwitterAuthProvider();
+    auth(provider);
+}
+function signInGitHub() {
+    var provider = new firebase.auth.GithubAuthProvider();
+    provider.addScope("user");
+    auth(provider);
+}
+function initChat(user) {
+    var chatRef = firebase.database().ref("chat");
+    var chat = new FirechatUI(chatRef, document.getElementById("firechat-wrapper"));
+    chat.setUser(user.uid, user.displayName);
+}
+
+function auth(provider) {
+    firebase.auth().onAuthStateChanged(function (user) {
+        if (user) {
+            currentUser = user;
+            initChat(currentUser);
+            if(currentUser.displayName == null){
+                $("#welcomeMessage").text("Hello, Anonymous person!");
+            }
+            else{
+                $("#welcomeMessage").text("Hello, " + currentUser.displayName + "!");
+            }
+            if (!signedIn) {
+                console.log("Loading...");
+                save();
+                Load();
+                signedIn = true;
+            }
+        } else {
+            firebase.auth().signInWithRedirect(provider).then(function (result) {
+                console.log(deviceId);
+                // This gives you a Google Access Token. You can use it to access the Google API.
+                var token = result.credential.accessToken;
+                // The signed-in user info.
+                currentUser = result.user;
+            }).catch(function (error) {
+                // Handle Errors here.
+                var errorCode = error.code;
+                var errorMessage = error.message;
+                // The email of the user's account used.
+                var email = error.email;
+                // The firebase.auth.AuthCredential type that was used.
+                var credential = error.credential;
+                // ...
+            });
+        }
+    });
+}
 /**
  * @return {string}
  */
 function NiceNumber(num) {
     num = parseFloat(num);
-    console.log(num);
     if (num < 1e+3)
         return num.toString();
     if (num >= 1e+3 && num < 1e+6)
@@ -34,13 +136,13 @@ function NiceNumber(num) {
     if (num >= 1e+21 && num < 1e+24)
         return (num / 1e+21).toFixed(2).toString() + "Sx";
     if (num >= 1e+24 && num < 1e+27)
-        return (num / 1e+24).toFixed(2).toString() + "Sp";     
+        return (num / 1e+24).toFixed(2).toString() + "Sp";
     if (num >= 1e+27 && num < 1e+30)
-        return (num / 1e+27).toFixed(2).toString() + "Oc";  
+        return (num / 1e+27).toFixed(2).toString() + "Oc";
     if (num >= 1e+30 && num < 1e+33)
-        return (num / 1e+30).toFixed(2).toString() + "No";  
+        return (num / 1e+30).toFixed(2).toString() + "No";
     if (num >= 1e+33 && num < 1e+36)
-        return (num / 1e+33).toFixed(2).toString() + "De";  
+        return (num / 1e+33).toFixed(2).toString() + "De";
     else
         return "ERR";
 }
@@ -52,46 +154,37 @@ function animateText(element, newText) {
 }
 function setClickingPowerPrice(price) {
     clickingPowerPrice = price;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
-function setMoney(_money) {
-    setMoney(_money, false)
-}
-function setMoney(_money, animate) {
-    money = _money;
-    checkMoney();
-    if (animate && $('#animateText').is(':checked'))
-        animateText($('#moneyLbl'), "Geld: " + money);
-    else
-        $('#moneyLbl').text("Geld: " + NiceNumber(money));
-    //$('#moneyLbl').prop('title', money.toString()).tooltip();
-    // document.getElementById('moneyLbl').innerHTML = "Geld: " + money;
-    localStorage.setItem("money", money);
+function setMoney(_money, animate, uid) {
+    if (uid == currentUser.uid && !isNaN(_money)) {
+        money = _money;
+        checkMoney();
+
+        $('#moneyLbl').text("Money: " + NiceNumber(money));
+        //$('#moneyLbl').prop('title', money.toString()).tooltip();
+        // document.getElementById('moneyLbl').innerHTML = "Money: " + money;
+    }
 }
 
 function setMps(_mps) {
     mps = _mps;
-    //$('#MPSLbl').prop('title', mps.toString());
-
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + NiceNumber(mps);
-    localStorage.setItem("mps", mps);
+    // console.log("setMps: " + mps + " is now: " + _mps);
+    document.getElementById('MPSLbl').innerHTML = "Money/second: " + NiceNumber(mps);
 }
 
 function setClickingPower(_clickingPower) {
     clickingPower = _clickingPower;
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    localStorage.setItem("clickingPower", clickingPower);
-    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop meer klikkracht (" + NiceNumber(clickingPowerPrice) + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 }
 
 function setBankMoney(_bankMoney) {
     bankMoney = _bankMoney;
-    document.getElementById('bankMoneyLbl').innerHTML = "Geld op bank: " + NiceNumber(bankMoney);
-    localStorage.setItem("bankMoney", bankMoney);
+    document.getElementById('bankMoneyLbl').innerHTML = "Money on bank: " + NiceNumber(bankMoney);
 }
 
 function clickBtn() {
@@ -104,8 +197,7 @@ function clickBtn() {
         alert("Cheat gedetecteerd, >= 15 kliks per seconde!");
         reset();
     }
-    document.getElementById('MPSLbl').innerHTML = "Geld per seconde: " + mps;
-    setMoney(money += clickingPower, true);
+    setMoney(money += clickingPower, undefined, currentUser.uid);
 }
 
 function checkMoney() {
@@ -120,12 +212,12 @@ function checkMoney() {
 
         if (money >= Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = false;
-            document.getElementById('clickerImg').src = "img/cursor.png";
+            document.getElementById('clickerImg').src = "img/clicker.png";
         }
 
         if (money < Data.clicker.price) {
             document.getElementById('clickerBtn').disabled = true;
-            document.getElementById('clickerImg').src = "img/cursorb.png";
+            document.getElementById('clickerImg').src = "img/clickerb.png";
         }
 
         if (money >= Data.farm.price) {
@@ -265,174 +357,188 @@ function checkMoney() {
     catch (exception) {
     }
 
-    console.log("checkMoney()");
 }
+function openWiki() {
+    BootstrapDialog.show({
+        message: function (dialog) {
+            var $message = $('<div></div>');
+            var pageToLoad = dialog.getData('pageToLoad');
+            $message.load(pageToLoad);
 
+            return $message;
+        },
+        data: {
+            'pageToLoad': 'dialogs/wiki.html'
+        }
+    });
+}
+var i = 0;
 function mpsLoop() {
     antiCheat = 0;
-    $('[datatype=tooltip]').tooltip();
+    setTimeout(function () {
+        // $('[datatype=tooltip]').tooltip();
 
-    setMoney(money += mps);
-    if ((recharge <= 0) == false) {
-        recharge--;
-    }
-    if ((bankRecharge <= 0) == false) {
-        bankRecharge--;
-    }
-    if (bankRecharge == 0) {
-        bankCalculate();
-    }
-    if ($('#animateLogo').is(':checked')) {
-        $('#logoHeader').fadeOut(1000, function () {
-            $('#logoHeader').fadeIn(1000);
-        });
-    }
-    document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
-    document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
-    console.log("mpsLoop()");
-    saveData();
+        setMoney(money += mps, undefined, currentUser.uid);
+        if ((recharge <= 0) == false) {
+            recharge--;
+        }
+        if ((bankRecharge <= 0) == false) {
+            bankRecharge--;
+        }
+        if (bankRecharge == 0) {
+            bankCalculate();
+        }
+        if ($('#animateLogo').is(':checked')) {
+            $('#logoHeader').fadeOut(1000, function () {
+                $('#logoHeader').fadeIn(1000);
+            });
+        }
+        if (Math.floor(((Math.random() * 4  )) + 1) == 1) {
+            setInterest(Math.floor((Math.random() * 9) + 0.1));
+        }
+        bankGraph.datasets[0].data.push({x: i, y: parseFloat(interest)});
+        document.getElementById('countdownLbl').innerHTML = "Recharge: " + recharge;
+        document.getElementById('bankRechargeLbl').innerHTML = "Tijd over: " + bankRecharge;
+        saveData();
+        save();
+        i++;
+    }, 0)
 }
 
 function buyClickingPower() {
     setClickingPower(clickingPower *= 2);
-    setMoney(money -= clickingPowerPrice);
-    clickingPowerPrice *= 2;
+    setMoney(money -= clickingPowerPrice, undefined, currentUser.uid);
+    setClickingPowerPrice(clickingPowerPrice *= 2);
     checkMoney();
-    document.getElementById('clickingPowerLbl').innerHTML = "Klikkracht: " + NiceNumber(clickingPower);
-    document.getElementById('clickingPowerBtn').innerHTML = "Koop klikkracht (" + clickingPowerPrice + ")";
+    document.getElementById('clickingPowerLbl').innerHTML = "Clicking power: " + NiceNumber(clickingPower);
+    document.getElementById('clickingPowerBtn').innerHTML = "Buy Clicking power (" + NiceNumber(clickingPowerPrice) + ")";
 
-    localStorage.setItem("clickingPowerPrice", clickingPowerPrice);
 }
 
 function buyClicker() {
-    setMoney(money -= Data.clicker.price);
+    setMoney(money -= Data.clicker.price, undefined, currentUser.uid);
     setMps(mps + Data.clicker.speed);
     Data.clicker.amount++;
     Data.clicker.price += Data.clicker.increase;
     checkMoney();
-    console.log("buyclicker()");
     updatePrices()
 }
 
 function buyFarm() {
-    setMoney(money -= Data.farm.price);
+    setMoney(money -= Data.farm.price, undefined, currentUser.uid);
     setMps(mps + Data.farm.speed);
     Data.farm.amount++;
     Data.farm.price += Data.farm.increase;
     checkMoney();
-    console.log("buyFarm()");
     updatePrices()
 }
 
 function buyMine() {
-    setMoney(money -= Data.mine.price);
+    setMoney(money -= Data.mine.price, undefined, currentUser.uid);
     setMps(mps + Data.mine.speed);
     Data.mine.amount++;
     Data.mine.price += Data.mine.increase;
     checkMoney();
-    console.log("buyMine()");updatePrices()
+    updatePrices()
 }
 
 function buyVillage() {
-    setMoney(money -= Data.village.price);
+    setMoney(money -= Data.village.price, undefined, currentUser.uid);
     setMps(mps + Data.village.speed);
     Data.village.amount++;
     Data.village.price += Data.village.increase;
     checkMoney();
-    console.log("buyVillage()");
     updatePrices()
 }
 
 function buyCity() {
-    setMoney(money -= Data.city.price);
+    setMoney(money -= Data.city.price, undefined, currentUser.uid);
     setMps(mps + Data.city.speed);
     Data.city.price += Data.city.increase;
     checkMoney();
-    console.log("buyCity()");updatePrices()
+    updatePrices()
 }
 
 function buyCountry() {
-    setMoney(money -= Data.country.price);
+    setMoney(money -= Data.country.price, undefined, currentUser.uid);
     setMps(mps + Data.country.speed);
     Data.country.amount++;
     Data.country.price += Data.country.increase;
     checkMoney();
-    console.log("buyCountry()");updatePrices()
+    updatePrices()
 }
 
 function buyPlanet() {
-    setMoney(money -= Data.planet.price);
+    setMoney(money -= Data.planet.price, undefined, currentUser.uid);
     setMps(mps + Data.planet.speed);
     Data.planet.amount++;
     Data.planet.price += Data.planet.increase;
     checkMoney();
-    console.log("buyPlanet()");updatePrices()
+    updatePrices()
 }
 
 function buyGalaxy() {
-    setMoney(money -= Data.galaxy.price);
+    setMoney(money -= Data.galaxy.price, undefined, currentUser.uid);
     setMps(mps + Data.galaxy.speed);
     Data.galaxy.amount++;
     Data.galaxy.price += Data.galaxy.increase;
     checkMoney();
-    console.log("buyGalaxy()");updatePrices()
+    updatePrices()
 }
 
 function buyUniverse() {
-    setMoney(money -= Data.universe.price);
+    setMoney(money -= Data.universe.price, undefined, currentUser.uid);
     setMps(mps += Data.universe.speed);
     Data.universe.amount++;
     Data.universe.price += Data.universe.increase;
     checkMoney();
-    console.log("buyUniverse()");updatePrices()
+    updatePrices()
 }
 
 function buyProvince() {
-    setMoney(Math.round(money / 3));
+    setMoney(Math.round(money / 3), undefined, currentUser.uid);
     setBankMoney(Math.round(money / 3));
     setMps(mps * 2);
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buyProvince()");
 }
 
 function buySatelite() {
-    setMoney(money * 2);
+    setMoney(money * 2, undefined, currentUser.uid);
     setBankMoney(money / 2);
     setMps(Math.round(mps / 3));
     recharge = 120;
     document.getElementById('provinceBtn').disabled = true;
     document.getElementById('satelliteBtn').disabled = true;
-    console.log("buySatelitte()");updatePrices()
+    updatePrices()
 }
 
 function depositAll() {
     setBankMoney(bankMoney += money);
-    setMoney(0);
-    console.log("depositAll()");
+    setMoney(0, undefined, currentUser.uid);
 }
 
 function withdrawAll() {
-    setMoney(money += bankMoney);
+    setMoney(money += bankMoney, undefined, currentUser.uid);
     setBankMoney(0);
-    console.log("withdrawAll()");
 }
 
 function deposit10K() {
     setBankMoney(bankMoney += 10000);
-    setMoney(money -= 10000);
-    console.log("deposit10K()");
+    setMoney(money -= 10000, undefined, currentUser.uid);
 }
 
 function withdraw10K() {
-    setMoney(money += 10000);
+    setMoney(money += 10000, undefined, currentUser.uid);
     setBankMoney(bankMoney -= 10000);
-    console.log("withdraw10K()");
 }
 
 function bankCalculate() {
     bankRecharge = 120;
     setBankMoney(Math.round(bankMoney * interest));
-    console.log("bankCalculate()");
+}
+function setInterest(_interest) {
+    interest = _interest / 100 + 1;
+    $('#interestLbl').text('Rente: ' + _interest + '%');
 }

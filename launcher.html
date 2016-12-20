@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="nl">
+
+<head>
+    <title>Kaziklikker online</title>
+    <script src="js/jquery-3.1.1.min.js"></script>
+    <meta charset="UTF-8">
+    <link rel="icon" type="image/png" href="favicon.png" />
+    <meta name="description" content="Rico de Jong">
+    <meta name="keywords" content="Rico, de, Jong, kaziklikker, kaziclicker, ccraft, home">
+    <meta name="author" content="Rico de Jong">
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/loadingoverlay.min.js"></script>
+    <script src="js/loadingoverlay_progress.min.js"></script>
+    <script src="js/bootstrap-dialog.min.js"></script>
+    <link rel="stylesheet" href="css/bootstrap.min.css">
+    <link rel="stylesheet" href="css/bootstrap.css">
+    <link rel="stylesheet" href="css/stylesheet.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap3-dialog/1.34.7/css/bootstrap-dialog.min.css">
+    <script>
+        (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){
+                (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),
+            m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)
+        })(window,document,'script','https://www.google-analytics.com/analytics.js','ga');
+
+        ga('create', 'UA-74770080-9', 'auto');
+        ga('send', 'pageview');
+
+        $(document).ready(function () {
+            $.loadingOverlay("show");
+        })
+    </script>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+</head>
+<body>
+<div class="container-fluid">
+    <div class="header">
+        <img src="logo.svg" id="logoHeader" width="512" />
+    </div>
+    <div class="row">
+        <div class="col-md-12 text-center">
+            <h1 style="font-weight:300;"><span style="font-weight: 500">KaziKlikker Online</span> is de online klikker game!</h1>
+            <h3 style="font-weight:300;"><span style="font-weight: 500">KaziKlikker Online</span> is 100% open source!</h3>
+            <br>
+            <a class="btn btn-primary" style="font-size: 30px;" href="kaziklikkeronline.html">Neem nu deel aan de Alpha!</a>
+            <a class="btn btn-primary" style="font-size: 30px;" href="index.html">Of bekijk de code!</a>
+            <br>
+            <button id="licenses" class="btn btn-default btn-lg" onclick="BootstrapDialog.show({
+                        message: function (dialog) {
+                            var $message = $('<div></div>');
+                            var pageToLoad = dialog.getData('pageToLoad');
+                            $message.load(pageToLoad);
+
+                            return $message;
+                        },
+                        data: {
+                            'pageToLoad': 'dialogs/licenses.html'
+                        }
+                    });">Licenses
+            </button>
+        </div>
+    </div>
+</div>
+</body>
+</html>
